@@ -85,3 +85,31 @@ Problemas detectados en la versión actual (el propio doc los lista): mezcla 4º
    - B) Construir un HTML nuevo con LANDINGS_FACTORY (tokens metapro, macroestructura no usada: Split Studio, Narrative Workflow y diagnostic-funnel ya están gastadas), publicado en lp.metapro.academy, con los CTA apuntando al checkout de GHL. Más diseño, más control, pero el pago sigue viviendo en GHL.
 6. QA: sin scroll horizontal a 320/375/414/768/1440, ningún CTA a dos líneas en móvil, todas las imágenes cargan, checkout de principio a fin, UTMs llegan al CRM, disclaimer y "entradas no reembolsables" visibles, ninguna cifra sin fuente.
 7. Publicar, redirigir `/summit` (o renombrar el paso), actualizar `/summit-gracias` y registrar la versión final en el KB (Inventario de pruebas → Oferta).
+
+## 7. Análisis visual (capturas aportadas el 07/09/2026: hero, por qué no faltar, beneficios, programa, ponentes)
+
+### Sistema visual real
+- Paleta: navy profundo (hero y bandas oscuras), navy medio (secciones), negro puro en "Ponentes", oro/tostado `#BA9349`–`#C9A063` como único acento, blanco para texto.
+- Tipografía: display serif de alto contraste en cursiva y mayúsculas para todos los títulos; subtítulos serif bold en oro; cuerpo sans grotesca; leads en sans bold oro.
+- Componentes: barra superior informativa (aniversario / lugar y fechas), logo + "SUMMIT'26", composición recortada de 8 ponentes con Ángel en el centro y línea de suelo dorada, botón oro con texto blanco y microcopy de escasez, filetes horizontales oro y gris alternados, iconos lineales dentro de cuadrado con borde oro, tarjetas 2×2 con relleno tostado sólido y radio grande, carrusel de un ponente por vista.
+- Layout: contenedor ~1200 px, títulos alineados a la izquierda, párrafos a todo el ancho, mucho aire vertical, sin masthead sticky ni CTA intermedio entre el hero y (presumiblemente) los precios.
+
+### Lo que funciona y se conserva
+1. Hero: barra de datos arriba, logo de edición, subtítulo, composición de ponentes, claim + CTA con escasez. Es la pieza más fuerte de la página.
+2. Paleta navy + oro: reconocible y coherente con Freedom y el sistema de landings.
+3. Filetes finos en oro como separadores y los iconos lineales en cuadrado con borde: ligeros y premium.
+4. Bloque de autoridad de Ángel con sellos Forbes y TED.
+
+### Fallos a corregir en la nueva versión
+1. Logo del hero sobre un rectángulo navy más claro que el fondo: se ve la caja de la imagen. Usar PNG transparente o igualar el fondo.
+2. Títulos en serif cursiva y mayúsculas en todas las secciones: pesados, difíciles de leer y contrarios a la regla de la casa "sin cursivas en titulares". Reservar la cursiva al h1 o eliminarla.
+3. Fondos incoherentes: hero navy, secciones navy medio, "Beneficios" partido en dos tonos, "Ponentes" en negro puro. Fijar dos tonos (navy y navy profundo) alternados y una sola banda clara para la autoridad.
+4. Medida de lectura de ~1150 px en "Por qué no puedes faltar": líneas demasiado largas. Limitar a ~70 caracteres.
+5. Tarjetas de programa con relleno tostado sólido: título blanco cursivo sobre tostado no cumple contraste AA y el bloque pesa demasiado. Pasar a tarjeta oscura con borde oro y título en oro.
+6. Ponentes en carrusel de uno en uno: baja densidad, foto en blanco y negro frente a color en el hero, y el texto de Ángel queda junto a la foto de otro ponente. Sustituir por rejilla de 8 profesores + fila de invitados, todas en color y mismo encuadre. Marco Ferreiro es un resto de 2025.
+7. Icono y texto de "grabaciones" en Beneficios: en 2026 no se graba. Eliminar.
+8. Sin CTA entre el hero y los precios: añadir CTA tras Programa y tras Ponentes, y barra CTA fija en móvil.
+9. Tono del copy actual ("queremos vivirlo contigo", "será brutal"): por debajo del posicionamiento premium. El copy nuevo del doc ya lo corrige.
+
+### Pendiente de ver
+Resto de ponentes, "Una cita para celebrar", tarjetas de precios, lista de beneficios por entrada, urgencia, horarios, FAQ, cierre, galerías, footer, la página tras el CTA (checkout) y la versión móvil del hero y de los precios.
