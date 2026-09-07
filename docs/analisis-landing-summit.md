@@ -113,3 +113,48 @@ Problemas detectados en la versión actual (el propio doc los lista): mezcla 4º
 
 ### Pendiente de ver
 Resto de ponentes, "Una cita para celebrar", tarjetas de precios, lista de beneficios por entrada, urgencia, horarios, FAQ, cierre, galerías, footer, la página tras el CTA (checkout) y la versión móvil del hero y de los precios.
+
+## 8. Análisis visual, segunda tanda (precios, horarios + FAQ, cierre + comunidad, otras ediciones + footer)
+
+### Precios
+- Dos tarjetas (General / VIP) con cabecera de color, precio tachado en rojo, banda "OFERTA EARLY BIRD" en condensada, 9 filas de beneficios con check verde / aspa roja y botón "COMPRAR MI ENTRADA".
+- Fallos: aparece un tercer oro (amarillo en General, tostado en VIP) y la VIP no se distingue como opción recomendada; el tachado rojo y los iconos verde/rojo rompen la paleta y leen a outlet; la primera fila de General es un aspa roja (empieza en negativo); hay una línea violeta perdida bajo "Asientos reservados"; no figura la fecha límite del early bird; sigue "grabaciones durante un año", que en 2026 desaparece.
+- La lista de 2026 ya viene separada por modalidad (General 4 puntos, VIP 7). Diseño propuesto: dos tarjetas con el mismo oro, VIP con borde oro y etiqueta "Recomendada", precio oficial en gris tachado sin rojo, early bird en oro con "hasta el 1 de octubre", solo lo que incluye cada una (sin aspas), botón oro en ambas y microcopy "Entradas no reembolsables" bajo el botón.
+
+### Horarios y FAQ
+- "¡No esperes más y reserva tu entrada!" es texto, no botón: urgencia sin CTA.
+- Tres versiones distintas del horario en la misma página (bloque Horarios: fin 19:00 · FAQ: sábado hasta 20 h, domingo 18/19 h · copy nuevo: fin 20:00). Errata "chekin".
+- FAQ numerada en desorden (5, 1, 2, 3, 4), todas las respuestas abiertas (sin acordeón), "¿Se grabará?" responde que sí (contradice 2026) y la respuesta de "un solo día" es coloquial.
+- El bloque de horarios y el footer usan una segunda sans (Poppins) distinta a la del resto: dos familias sans en la misma página.
+
+### Cierre y comunidad
+- El cierre en caja con borde oro, titular oro + blanco y CTA idéntico al hero es el mejor componente de la segunda mitad. Se conserva.
+- Tras el cierre hay una banda vacía de ~80 px con cambio de tono: espacio muerto.
+- "Comunidad" muestra 6 vídeos-testimonio reales (alumnos con acreditación en photocall MetaPro) sin nombre ni rol y después del CTA final: la prueba social llega cuando el visitante ya ha decidido. Debe subir antes de los precios y llevar nombre + perfil.
+
+### Otras ediciones y footer
+- "Otras ediciones" muestra tres vídeos de Freedom (Bilbao, Málaga, Madrid '25), no del Summit. Existe vídeo del Summit 2025 en el inventario: es el que debe ir aquí.
+- Footer: logo, ©2026, "prohibida la entrada a menores", disclaimer y banda oro con el aviso de riesgo. Sobra la nota "* Datos extraídos de un grupo de inversores… 6 meses": es un resto de Freedom que no referencia nada en esta página. Falta enlace visible a aviso legal / privacidad / cookies (solo "este link" sin estilo).
+
+### Inconsistencias transversales confirmadas
+1. Tres estilos de título: serif cursiva mayúsculas (secciones), serif cursiva frase ("Comunidad:", "Preguntas frecuentes"), serif redonda mayúsculas (cierre).
+2. Tres tonos de oro y dos familias sans.
+3. Restos de 2025 y de Freedom: Marco Ferreiro, vídeos Freedom, nota de 6 meses, grabaciones, 4º aniversario.
+4. Ningún CTA entre el hero y los precios; ninguna prueba social antes de los precios; sin masthead ni barra fija.
+
+## 9. Orden de secciones propuesto para Summit'26
+
+1. Masthead sticky (logo Summit'26 + fechas + CTA "Reservar entrada").
+2. Hero (conservado): barra de datos, logo, subtítulo, ponentes, claim nuevo + CTA.
+3. Este año: más estrategia, más IA y más patrimonio (introducción de la nueva visión).
+4. Tu patrimonio es mucho más que tu dinero: cuatro capitales (2×2, iconos lineales en cuadrado con borde oro, numerales I–IV).
+5. Qué vas a trabajar en Summit'26 (4 ejes) + CTA.
+6. Programa especial 5º aniversario (4 tarjetas oscuras con borde oro).
+7. Ponentes: rejilla de 8 profesores + fila de invitados, color, mismo encuadre. Banda clara de autoridad para Ángel (Forbes, TED).
+8. La gran cita anual: galería Summit'25 + vídeo Summit 2025 + testimonios con nombre (la prueba, antes del precio).
+9. Entradas General / VIP (rediseñadas) + horarios en una sola versión + "no reembolsables".
+10. FAQ en acordeón, sin numerar, con la respuesta honesta sobre grabaciones.
+11. Cierre en caja con borde oro + CTA.
+12. Comunidad MetaPro: 4 vídeos (Workshop BCN, Dubái'25, Croacia'26, Dubái'26 si se aporta).
+13. Footer con legal completo y enlaces a aviso, privacidad y cookies.
+14. Barra CTA fija en móvil.
