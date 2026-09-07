@@ -52,3 +52,12 @@ Convenciones de toda la página:
 - QA propia: sin scroll horizontal a 320/375/414/768/1440, ningún CTA a dos líneas en móvil, consola sin errores, sin cursivas en titulares, sin colores ni fuentes literales fuera de tokens, una sola banda marfil, cierre en banda profunda.
 - Provisional hasta recibir material: hero en HTML (sin la imagen del diseñador), botones de compra enlazando a la landing actual `evento.metapro.academy/summit`, sección de ponentes sin fotos ni nombres, Comunidad con 3 vídeos (falta Dubái'26), galería con fotos genéricas de eventos.
 - Aviso: la colección "Inventario de pruebas" del KB está archivada desde el 19/08; `obtener_pruebas` devuelve inventario vacío. Los datos de esta landing salen del doc definitivo aprobado por Ángel.
+
+## Imágenes ajustadas (07/09/2026, v2 del borrador)
+
+- Hero: foto de escenario MetaPro (Ángel ante el público, rótulo M dorado) con degradado a navy + logotipo oficial Summit'26 (asset del inventario, fundido con `mix-blend-mode` y máscara radial para eliminar la caja de fondo).
+- Tira de prensa bajo el hero (La Vanguardia, ABC, El País, Forbes, El Español, Expansión, Negocios, elEconomista), asset del inventario.
+- Banda marfil: tarjeta del fundador (foto de Ángel con el libro, asset de Freedom) + fila de 7 retratos del claustro e invitado (Carmen Blanco, Xavi Molleví, David Bello, Jesús de Pablos, Joan Caules, Pablo Ríos, Éric Sánchez) sin nombres, según instrucción.
+- Galería "Otras ediciones": 6 fotos de eventos MetaPro sin marca Freedom visible, todas por debajo de 700 KB.
+- Todos los assets se sirven desde el CDN de GHL (`storage.googleapis.com/msgsndr/...`), el mismo almacén que usa el inventario.
+- Pendiente de calidad: los retratos de Joan Caules, Pablo Ríos y Éric Sánchez están en PNG de 2–2,5 MB; conviene reexportarlos en JPEG en la mediateca de GHL. Falta el retrato de Olga Vázquez.
