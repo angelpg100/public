@@ -44,3 +44,11 @@ Convenciones de toda la página:
 - "Doctor longevidad": nombre o se omite de la lista interna.
 - Confirmar 500 plazas y early bird hasta el 1 de octubre como datos reales.
 - Corregir ya el hero móvil de producción (4º aniversario, 15-16 nov) o esperar a la nueva landing.
+
+## Estado de construcción (07/09/2026, noche)
+
+- Vía elegida: HTML nuevo con LANDINGS_FACTORY. Slug `summit26`. Borrador privado: https://wixyn-landings-factory.vercel.app/borradores/metapro/summit26
+- Código versionado en `landing/summit26.html`.
+- QA propia: sin scroll horizontal a 320/375/414/768/1440, ningún CTA a dos líneas en móvil, consola sin errores, sin cursivas en titulares, sin colores ni fuentes literales fuera de tokens, una sola banda marfil, cierre en banda profunda.
+- Provisional hasta recibir material: hero en HTML (sin la imagen del diseñador), botones de compra enlazando a la landing actual `evento.metapro.academy/summit`, sección de ponentes sin fotos ni nombres, Comunidad con 3 vídeos (falta Dubái'26), galería con fotos genéricas de eventos.
+- Aviso: la colección "Inventario de pruebas" del KB está archivada desde el 19/08; `obtener_pruebas` devuelve inventario vacío. Los datos de esta landing salen del doc definitivo aprobado por Ángel.
