@@ -193,3 +193,16 @@ Resto de ponentes, "Una cita para celebrar", tarjetas de precios, lista de benef
   4. Texto alternativo obligatorio: "MetaPro Summit'26, 14 y 15 de noviembre, Palacio de la Prensa, Madrid".
   5. El h1 de la página existe igualmente en HTML (oculto visualmente si hace falta) para SEO y accesibilidad.
   6. Cualquier cambio de ponentes, fecha o claim exige un nuevo arte final: fijar la lista de 9 ponentes antes de cerrar el hero.
+
+## 12. Versión móvil de la landing actual (capturas iPhone, 07/09/2026)
+
+### Error en producción
+- **El hero móvil dice "Celebramos el 4º aniversario" y "15 y 16. NOV"** mientras el hero de escritorio dice 5º aniversario y 14-15 de noviembre. Es la imagen de Summit'25 con el logo cambiado a '26. Está publicado ahora mismo y es la fuente del "15 y 16" que copió el diseñador. Corregir hoy en GHL: el hero móvil es un asset distinto al de escritorio (mostrar/ocultar por dispositivo), así que la nueva landing necesitará también dos imágenes.
+
+### Observaciones
+1. El CTA del hero entra en el primer viewport en móvil: correcto. Pero no existe ninguna barra CTA fija; tras el hero, el usuario no vuelve a ver un botón hasta los precios, muchas pantallas más abajo.
+2. Hero móvil montado por bloques de imagen (barra superior, logo, ponentes) con navys distintos: se ven las costuras, sobre todo la banda más clara detrás de los ponentes. Los rostros quedan diminutos con 8 personas en 390 px de ancho. El nuevo hero vertical del diseñador ya lo resuelve.
+3. Escala tipográfica excesiva en móvil: cuerpo de ~18-19 px, títulos de ~40 px y separaciones muy generosas. "¿Por qué no puedes faltar?" ocupa unas tres pantallas; el programa, una pantalla entera por tarjeta. La página completa supera las 15 pantallas. Para 2026: cuerpo 16-17 px, títulos 28-32 px y espaciados a la mitad.
+4. "Beneficios": la rejilla 2×2 lleva un separador vertical y otro horizontal que forman una cruz; sobra. Los leads usan una tercera sans (grotesca condensada) distinta a la del cuerpo y a Poppins.
+5. "Programa": cuatro tarjetas tostadas macizas a pantalla completa cada una. En móvil el efecto de muro es mayor que en escritorio; con tarjetas oscuras de borde oro se aligera y mejora el contraste del título.
+6. Nada roto en el layout: sin scroll horizontal, sin textos cortados, los CTA no parten a dos líneas.
