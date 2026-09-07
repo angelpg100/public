@@ -158,3 +158,27 @@ Resto de ponentes, "Una cita para celebrar", tarjetas de precios, lista de benef
 12. Comunidad MetaPro: 4 vídeos (Workshop BCN, Dubái'25, Croacia'26, Dubái'26 si se aporta).
 13. Footer con legal completo y enlaces a aviso, privacidad y cookies.
 14. Barra CTA fija en móvil.
+
+## 10. Revisión de los heros nuevos del diseñador (móvil y escritorio)
+
+### Bloqueante
+- **Fechas:** los diseños dicen "15 y 16. NOV". El copy aprobado, el inventario del KB y la landing actual dicen **14 y 15 de noviembre**. En 2026 el 14 es sábado y el 15 domingo; 15-16 sería domingo-lunes y el copy habla de "cena-cóctel el sábado". Hay que fijar la fecha oficial antes de seguir.
+
+### Copy
+- El claim sigue siendo el de 2025 ("Dos días que transformarán tu futuro financiero. ¡Queremos vivirlo contigo!"). El aprobado para 2026 es "2 días para seguir mejorando como inversor".
+- Subtítulo y etiqueta de aniversario correctos.
+
+### Composición de ponentes
+- Ahora son 9 personas; el copy lista 8 profesores. Confirmar quién es la novena y que la selección coincide con la lista final.
+- Tratamiento fotográfico desigual: temperaturas de color distintas (chaqueta roja, fondos cálidos y fríos), escalas incoherentes (la persona de camisa rosa parece lejana; la de camisa celeste, más cercana que la fila delantera), alturas de cabeza dispares y halo en los recortes de pelo. Pedir una gradación común (sombras frías hacia navy, saturación contenida), escala por filas (trasera menor, delantera mayor) y cabezas alineadas por fila.
+
+### Mejoras conseguidas respecto al hero actual
+- Logo sin caja de fondo.
+- Fecha en recuadro con borde: más visible.
+- Claim en serif redonda, no cursiva; cursiva solo en subtítulo y fecha. Es la dirección tipográfica a extender al resto de la página.
+- CTA tostado con texto navy: mejor contraste que el blanco anterior.
+- Versión móvil bien resuelta: apilado claro y CTA a todo el ancho.
+
+### Para la construcción
+- Si el hero se entrega como una sola imagen, el texto no es seleccionable, no indexa, no escala por breakpoints y no se puede cambiar sin volver al diseñador. Pedir capas: fondo con focos (JPG), composición de ponentes (PNG transparente, en dos tamaños), logo Summit'26 (SVG o PNG), y el texto se construye en HTML.
+- En móvil el CTA queda al final del hero; asegurar que entra en el primer viewport o cubrirlo con la barra fija.
