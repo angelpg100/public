@@ -182,3 +182,14 @@ Resto de ponentes, "Una cita para celebrar", tarjetas de precios, lista de benef
 ### Para la construcción
 - Si el hero se entrega como una sola imagen, el texto no es seleccionable, no indexa, no escala por breakpoints y no se puede cambiar sin volver al diseñador. Pedir capas: fondo con focos (JPG), composición de ponentes (PNG transparente, en dos tamaños), logo Summit'26 (SVG o PNG), y el texto se construye en HTML.
 - En móvil el CTA queda al final del hero; asegurar que entra en el primer viewport o cubrirlo con la barra fija.
+
+## 11. Decisiones cerradas (07/09/2026)
+
+- **Fechas oficiales: 14 y 15 de noviembre de 2026** (sábado y domingo). Los heros del diseñador con "15 y 16" deben corregirse antes de cualquier uso.
+- **El hero se entrega como imagen única.** Consecuencias y requisitos para el encargo:
+  1. Dos artes finales: escritorio (mín. 1920×1350) y móvil (mín. 1080×2160), ambos con la fecha corregida y el claim aprobado "2 días para seguir mejorando como inversor".
+  2. El botón "Reserva tu entrada" NO debe ir dentro de la imagen: se construye en HTML sobre o bajo la imagen para que sea clicable, medible y editable. Si el diseñador lo deja pintado, se cubre con un enlace transparente, pero es peor solución.
+  3. Exportar en JPG calidad 80–85 (o WebP), con el navy de fondo idéntico al de la página (`#0A1240` aprox.) para que la imagen no muestre bordes.
+  4. Texto alternativo obligatorio: "MetaPro Summit'26, 14 y 15 de noviembre, Palacio de la Prensa, Madrid".
+  5. El h1 de la página existe igualmente en HTML (oculto visualmente si hace falta) para SEO y accesibilidad.
+  6. Cualquier cambio de ponentes, fecha o claim exige un nuevo arte final: fijar la lista de 9 ponentes antes de cerrar el hero.
