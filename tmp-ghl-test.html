@@ -1,0 +1,304 @@
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style>
+:root{--bg:#000000;--panel:#0B0B0B;--panel2:#141414;--ink:#F1F2F4;--ink2:#C3C6CC;--muted:#8E97A8;
+--hair:rgba(255,255,255,.14);--acc:#C9A25A;--acc2:#E9CF8F;--onacc:#1A1206;--glow:rgba(201,162,90,.18)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:Poppins,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{background:radial-gradient(900px 520px at 85% -10%,var(--glow),transparent 60%),var(--bg);min-height:100vh}
+b,strong{font-weight:600}
+.wrap{max-width:660px;margin:0 auto;padding:20px 18px 56px}
+.logos{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:6px 0 4px;border-bottom:1px solid var(--hair)}
+.logos img{height:20px;width:auto;max-width:none;object-fit:contain}
+.logos img.fp{height:44px}
+.mast{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:15px;color:var(--ink2);padding:16px 0 14px;border-bottom:1px solid var(--hair)}
+.lab{font-size:15px;font-weight:600;color:var(--acc2)}
+.kick{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:9px 18px;border-radius:999px;border:1px solid var(--acc);background:var(--glow);font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.1em;color:var(--acc2)}
+.kick i{width:8px;height:8px;border-radius:50%;background:var(--acc)}
+h1{font-family:Poppins,sans-serif;font-weight:400;font-size:46px;line-height:1.08;letter-spacing:-.015em;margin:18px 0 0}
+h1 b{font-weight:700;display:block}
+.deck{font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1.15;letter-spacing:.02em;margin-top:14px}
+.acc{color:var(--acc2);font-weight:600}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.cols>div{background:var(--panel);border:1px solid var(--hair);border-radius:18px;padding:18px}
+.cols p{font-size:17px;line-height:1.5;color:var(--ink2);margin-top:8px}
+.cols p b{color:var(--ink)}
+.animals{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0 0}
+.animals div{text-align:center;padding:16px 0 12px;background:var(--panel);border:1px solid var(--hair);border-radius:16px}
+.animals small{display:block;font-size:14px;font-weight:500;color:var(--ink2);margin-top:8px}
+.btn{display:flex;justify-content:space-between;align-items:center;width:100%;border:0;border-radius:999px;padding:21px 28px;font:400 22px 'Bebas Neue',sans-serif;letter-spacing:.09em;text-transform:uppercase;cursor:pointer;background:linear-gradient(90deg,var(--acc),var(--acc2));color:var(--onacc);margin-top:28px;box-shadow:0 10px 30px var(--glow)}
+.btn span{font-size:22px;letter-spacing:0}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--hair);justify-content:center;font-size:20px;padding:17px;box-shadow:none}
+.btn.ghost:hover{border-color:var(--acc)}
+.note{font-size:14px;line-height:1.6;color:var(--muted);margin-top:24px}
+.top{display:flex;align-items:center;justify-content:space-between;padding:16px 0 14px}
+.back{background:none;border:0;color:var(--ink2);font:500 16px Poppins,sans-serif;cursor:pointer}
+.count{font-size:15px;font-weight:600;letter-spacing:.12em;color:var(--acc)}
+.bar{height:4px;border-radius:4px;background:var(--hair);margin:0 0 26px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));width:0;transition:width .35s}
+.q{font-size:29px;line-height:1.25;font-weight:400;letter-spacing:-.01em;margin:22px 0 24px}
+.q b{font-weight:700}
+.opt{display:flex;gap:14px;width:100%;text-align:left;background:var(--panel);border:1px solid var(--hair);color:var(--ink);
+border-radius:16px;padding:19px;margin-bottom:12px;font:400 19px/1.45 Poppins,sans-serif;cursor:pointer;transition:.15s}
+.opt em{font-style:normal;font-size:14px;font-weight:600;letter-spacing:.1em;color:var(--acc);padding-top:3px;min-width:26px}
+.opt:hover{border-color:var(--acc);background:var(--panel2)}
+.opt.sel{background:linear-gradient(90deg,var(--acc),var(--acc2));color:var(--onacc);border-color:transparent}
+.opt.sel em{color:var(--onacc)}
+.pct{font-family:'Bebas Neue',sans-serif;font-size:110px;font-weight:400;line-height:.9;color:var(--acc)}
+.level{font-size:24px;font-weight:600;line-height:1.3}
+.sub{font-size:18px;color:var(--ink2);margin-top:4px;line-height:1.55}
+.sub b{color:var(--ink)}
+.box{border-top:1px solid var(--hair);padding-top:22px;margin-top:28px}
+.box h3{font-size:24px;font-weight:400;letter-spacing:-.01em;margin-bottom:16px;color:var(--ink)}
+#ctaBox{background:var(--panel);border:1px solid var(--acc);border-radius:22px;padding:24px 20px}
+.row{display:flex;align-items:center;gap:10px;margin:14px 0;font-size:17px;font-weight:500}
+.row .e{font-size:26px;width:40px;text-align:center}
+.row .n{width:84px}
+.row .t{flex:1;height:10px;background:var(--panel);border:1px solid var(--hair);border-radius:10px;overflow:hidden}
+.row .t i{display:block;height:100%}
+.row .v{width:50px;text-align:right;font-weight:600}
+.row.h .n,.row.h .v{font-weight:700;color:var(--acc)}
+.dom{display:flex;gap:18px;align-items:flex-start}
+.dom .e{font-size:54px;line-height:1}
+.dom h4{font-family:Poppins,sans-serif;font-weight:700;font-size:40px;line-height:1.05;letter-spacing:-.02em;color:var(--acc2)}
+.dom p{font-size:18px;color:var(--ink2);line-height:1.55;margin-top:8px}
+.dom p b{color:var(--ink)}
+ol.tips{list-style:none;counter-reset:t}
+ol.tips li{counter-increment:t;display:flex;gap:14px;font-size:19px;line-height:1.5;padding:14px 0;border-bottom:1px solid var(--hair)}
+ol.tips li::before{content:"0" counter(t);font-size:14px;font-weight:600;letter-spacing:.1em;color:var(--acc);padding-top:4px}
+ol.tips li:last-child{border-bottom:0}
+.hidden{display:none}
+.part{font-size:16px;font-weight:600;color:var(--acc2);margin-top:22px}
+.hint{font-size:16px;color:var(--ink2);margin:-10px 0 20px}
+.lik{display:grid;gap:10px}
+.lik .opt{align-items:center}
+.lik .opt em{min-width:22px}
+.vs{text-align:center;font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--muted);margin:2px 0 12px}
+.cons{display:inline-block;font-size:14px;font-weight:500;padding:8px 14px;border-radius:999px;border:1px solid var(--hair);margin-top:16px;color:var(--ink2)}
+.cons.ok{background:var(--acc);color:var(--onacc);border-color:var(--acc)}
+details{margin-top:24px;border-top:1px solid var(--hair);padding-top:16px}
+summary{font-size:17px;font-weight:600;cursor:pointer;color:var(--ink2)}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:15px;color:var(--ink2)}
+td,th{padding:9px 4px;border-bottom:1px solid var(--hair);text-align:right}
+td:first-child,th:first-child{text-align:left}
+td b{color:var(--ink)}
+.sty{line-height:1}
+.mono{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--acc);font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--acc)}
+.sty .mono{width:64px;height:64px;font-size:36px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:var(--onacc);border:0}
+.kick{margin-top:24px}
+.kick i{animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 10px var(--acc)}50%{opacity:.15;box-shadow:none}}
+#intro h1{margin-top:22px}
+.pick{font-size:24px;font-weight:600;letter-spacing:-.01em;margin:30px 0 14px}
+.card{background:var(--panel);border:1px solid var(--hair);border-radius:18px;padding:20px;margin-bottom:14px}
+.card .lab{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:30px;line-height:1;letter-spacing:.05em;text-transform:uppercase;color:var(--acc2);font-size:23px}
+.card p{font-size:17px;line-height:1.5;color:var(--ink2);margin:8px 0 16px}
+.card p b{color:var(--ink)}
+.sbtn{display:inline-flex;align-items:center;gap:14px;width:260px;height:54px;justify-content:center;border:0;border-radius:999px;font:400 20px/1 'Bebas Neue',sans-serif;letter-spacing:.08em;cursor:pointer;background:linear-gradient(90deg,var(--acc),var(--acc2));color:var(--onacc);box-shadow:0 8px 24px var(--glow)}
+.sbtn span{font-size:20px;letter-spacing:0}
+.sbtn.alt,.btn.alt{background:transparent;color:var(--acc2);border:2px solid var(--acc);box-shadow:none}
+.btn.alt{justify-content:center;margin-top:28px}
+.box h3{color:var(--acc)}
+.hola{font-size:22px;font-weight:600;color:var(--acc2);margin-top:26px}
+.inp{width:100%;margin-top:18px;font:400 20px Poppins,sans-serif;padding:16px 18px;border-radius:14px;border:1.5px solid var(--hair);background:var(--panel);color:var(--ink)}
+.inp:focus{outline:none;border-color:var(--acc)}
+@media (max-width:420px){h1{font-size:40px}.cols{grid-template-columns:1fr}.logos img{height:20px}.logos img.fp{height:40px}.q{font-size:26px}}
+</style>
+<div class="wrap">
+<div class="logos" style="border-bottom:0"><img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_400/u_https://assets.cdn.filesafe.space/kfKaFrSWBIS0536cPtFb/media/6ad8885d3cacdd91170973c3.png" alt="MetaPro"></div>
+<section id="intro">
+<h1>Tu primera clase, <b>adaptada a ti</b></h1>
+<p class="sub" style="margin-top:14px">Haz el test para que podamos prepararte el material de aprendizaje.</p>
+<h2 class="pick">Elige uno de los dos test</h2>
+<div class="card">
+<div class="lab">Test rápido</div>
+<p>Suficiente para adaptarte la clase.</p>
+<button class="sbtn" onclick="start('q')">Test rápido · 2 min <span>→</span></button>
+</div>
+<div class="card">
+<div class="lab">Test completo</div>
+<p>Más preciso: nos da más información para ajustar tu formación.</p>
+<button class="sbtn alt" onclick="start('f')">Test completo · 7 min <span>→</span></button>
+</div>
+<p class="note">Test orientativo de preferencias de aprendizaje, basado en el modelo de cuatro estilos de Kolb y Honey-Mumford (adaptado al español por Alonso, Gallego y Honey). Las preguntas son propias de MetaPro. No mide capacidad ni inteligencia: indica cómo prefieres procesar lo que aprendes.</p>
+</section>
+<section id="quiz" class="hidden">
+<div class="top"><button class="back" id="backBtn" onclick="back()">← Atrás</button><span class="count" id="count"></span></div>
+<div class="bar"><i id="prog"></i></div>
+<div class="part" id="part"></div>
+<div class="q" id="qtext"></div>
+<div id="opts"></div>
+</section>
+<section id="nombre" class="hidden">
+<h1 style="font-size:38px;margin-top:34px">Ya tenemos <b>tu resultado</b></h1>
+<p class="sub" style="margin-top:14px">Déjanos tu nombre para dirigirnos a ti.</p>
+<input id="nm" class="inp" type="text" placeholder="Tu nombre" autocomplete="given-name">
+<button class="sbtn" style="margin-top:16px" onclick="saveName()">Ver mi resultado <span>→</span></button>
+<p class="note" id="nmsg"></p>
+</section>
+<section id="result" class="hidden">
+<p class="hola" id="hola"></p><div class="box" style="border:0;margin-top:14px;padding-top:0"><h3>01 — Tu estilo dominante</h3></div>
+<div class="dom" id="hero"></div>
+<div id="consBox"></div>
+<div class="box"><h3>02 — Tu perfil completo</h3><div id="mix"></div></div>
+<div class="box" id="howBox"></div>
+<div class="box" id="adaptBox"></div>
+<details><summary>Detalle de la puntuación</summary><div id="detail"></div></details>
+<div class="box" id="ctaBox"><h3>05 — Tu primera clase</h3><p class="sub" id="claseTxt">Tu primera clase ya está preparada en el formato que mejor encaja con tu estilo.</p><a class="btn" id="claseBtn" href="#" style="text-decoration:none">Quiero mi clase <span>→</span></a></div>
+<button class="btn alt" id="fullBtn" onclick="start('f')">Hacer el test completo · 7 min</button>
+<button class="btn ghost" style="margin-top:12px" onclick="restart()">Repetir el test</button>
+<p class="note">Test orientativo de preferencias. La investigación no ha demostrado que adaptar la enseñanza a un estilo mejore por sí solo el aprendizaje; su valor está en conocerte y en combinar formatos. Por eso MetaPro usa tu perfil como punto de partida, junto con tu nivel y tu progreso.</p>
+</section>
+</div>
+<script>
+const S={
+A:{n:"Activo",e:'<span class="mono">A</span>',t:"Aprendes haciendo",
+d:"Te motiva lo nuevo, te lanzas a probar y aprendes de la experiencia directa. Las sesiones largas de teoría se te hacen cuesta arriba.",
+best:["Retos, simulaciones y prácticas en directo.","Probar con importes pequeños y aprender del resultado.","Sesiones dinámicas, cortas y con participación."],
+risk:"Actuar antes de tener un plan o sin medir el riesgo.",
+adapt:["Clases cortas que terminan siempre con un reto práctico.","Simulador para practicar sin riesgo real.","Una checklist de riesgo obligatoria antes de ejecutar."]},
+R:{n:"Reflexivo",e:'<span class="mono">R</span>',t:"Aprendes observando y analizando",
+d:"Prefieres reunir datos, ver cómo lo hacen otros y pensarlo con calma antes de decidir. Decides bien, pero no te gusta que te metan prisa.",
+best:["Casos reales, ejemplos y backtests comentados.","Grabaciones y resúmenes para repasar a tu ritmo.","Tiempo para analizar antes de pasar a la acción."],
+risk:"Esperar a tener toda la información y no llegar a practicar.",
+adapt:["Casos y backtests explicados paso a paso.","Material para revisar después de cada clase.","Fechas concretas para pasar de analizar a ejecutar."]},
+T:{n:"Teórico",e:'<span class="mono">T</span>',t:"Aprendes entendiendo el porqué",
+d:"Necesitas el modelo completo, la lógica y el orden. Si algo no encaja o no se explica bien, no te convence.",
+best:["Fundamentos explicados en orden, de lo básico a lo avanzado.","Modelos y marcos que explican el sistema completo.","Lecturas y explicaciones rigurosas."],
+risk:"Quedarte en la teoría y retrasar la aplicación.",
+adapt:["Ruta estructurada por niveles, con los fundamentos primero.","Explicación del porqué de cada estrategia.","Un paso práctico al final de cada módulo para aplicarlo."]},
+P:{n:"Pragmático",e:'<span class="mono">P</span>',t:"Aprendes aplicando lo que funciona",
+d:"Buscas lo útil: técnicas probadas, pasos claros y algo que puedas usar mañana. La teoría sin aplicación te desconecta.",
+best:["Plantillas, checklists y protocolos paso a paso.","Ejemplos aplicados a carteras reales.","Ir directo a la técnica que funciona."],
+risk:"Aplicar estrategias sin entenderlas cuando cambia el mercado.",
+adapt:["Protocolos y plantillas listos para usar.","Un porqué breve de cada estrategia, para saber adaptarla.","Seguimiento de tu aplicación real en la cartera."]}
+};
+// Parte 1: 24 afirmaciones (6 por estilo)
+const L=[
+["A","Me entusiasma probar herramientas o plataformas nuevas aunque todavía no las domine."],
+["R","Antes de decidir, sigo buscando información aunque eso me haga perder tiempo o alguna oportunidad."],
+["T","No aplico una estrategia hasta entender su lógica, aunque otros ya estén ganando con ella."],
+["P","Lo que aprendo tengo que poder aplicarlo enseguida en mi cartera o en mi vida."],
+["A","Aprendo más haciendo y equivocándome que leyendo sobre algo."],
+["R","Prefiero observar cómo lo hacen otros antes de intentarlo yo."],
+["T","Me gustan los modelos que explican cómo funciona algo en su conjunto."],
+["P","Me gustan las plantillas, las checklists y los pasos concretos."],
+["A","En las clases disfruto más con los ejercicios y los retos que con las explicaciones."],
+["R","Después de una clase necesito tiempo para pensar lo que he oído antes de hacer nada con ello."],
+["T","Si una explicación tiene cabos sueltos, me cuesta seguir aunque el resto me resulte útil."],
+["P","Si una formación no me da resultados prácticos, la considero tiempo perdido, por muy interesante que sea."],
+["A","Cuando algo me interesa, me lanzo y voy ajustando sobre la marcha."],
+["R","Antes de elegir comparo las opciones con calma, aunque tarde más que los demás."],
+["T","Me desconcierta que una clase salte de un tema a otro sin una estructura clara."],
+["P","Si una idea no tiene una utilidad clara, pierdo el interés."],
+["A","Me aburro rápido cuando en una clase no hay nada que probar o que me resulte nuevo."],
+["R","En un grupo, suelo escuchar más que hablar hasta tener clara mi opinión."],
+["T","Valoro más un razonamiento lógico que una opinión o una intuición."],
+["P","Prefiero que me enseñen directamente la técnica que funciona, sin repasar todas las alternativas."],
+["A","Me motivan los cambios y las situaciones nuevas."],
+["R","Prefiero retrasar una decisión antes que tomarla sin haber analizado los datos."],
+["T","Disfruto entendiendo los principios de fondo, aunque no tengan una aplicación inmediata."],
+["P","Cuando veo un ejemplo práctico, enseguida pienso cómo usarlo en mi caso."]
+];
+const QK=[4,12,8,5,9,13,2,6,14,3,7,19];
+const LQ=QK.map(k=>L[k]);
+const LS=["Nada de acuerdo","Poco de acuerdo","Ni sí ni no","Bastante de acuerdo","Totalmente de acuerdo"];
+// Parte 2: 12 elecciones forzadas (cada pareja de estilos, dos veces)
+const F=[
+["Te presentan una plataforma nueva.",["A","La pruebo ya con una cantidad pequeña."],["R","Observo cómo funciona y leo opiniones antes de tocar nada."]],
+["Al empezar una formación.",["A","Quiero empezar a probar cosas cuanto antes, aunque todavía no lo entienda todo."],["T","Quiero que primero me expliquen el modelo completo."]],
+["Sales de un evento con 20 ideas.",["A","Pruebo varias esa misma semana, a ver qué pasa."],["P","Me quedo con la que tiene una aplicación clara en mi cartera."]],
+["Ante una estrategia nueva.",["R","Me tomo mi tiempo para observar y comparar distintos puntos de vista antes de decidir."],["T","Si no entiendo la lógica que hay detrás, no la uso."]],
+["Te dan una herramienta nueva.",["R","Prefiero observarla un tiempo y pensar cómo encaja antes de usarla."],["P","Quiero saber para qué me sirve y aplicarla mañana."]],
+["Lo que más te molesta de una formación.",["T","Que den recetas sin explicar el porqué."],["P","Mucha teoría sin saber qué hacer con ella."]],
+["En un ejercicio en grupo.",["A","Me ofrezco el primero para hacerlo."],["R","Prefiero ver cómo lo resuelven otros y luego opinar."]],
+["Ante una herramienta de IA nueva.",["A","Empiezo a hacerle preguntas y voy descubriendo."],["T","Primero quiero entender cómo funciona por dentro y en qué se basa."]],
+["Lo que más te motiva de una clase.",["A","Que sea dinámica y con retos."],["P","Salir con algo que pueda usar al día siguiente."]],
+["Para estudiar una inversión.",["R","Reviso datos, históricos y distintas opiniones."],["T","Busco el modelo que explica por qué debería funcionar."]],
+["Cuando tienes que decidir.",["R","Me tomo mi tiempo, aunque se me pase alguna oportunidad."],["P","Elijo la opción que funciona, aunque no sea perfecta."]],
+["Un buen profesor, para ti.",["T","Te explica los fundamentos para que entiendas el sistema completo."],["P","Te da un método que funciona, paso a paso."]]
+];
+let MODE="f",LL=L,FF=F,N=L.length+F.length;
+let i=0,ans=[],flip=[],ord=[];
+const shuf=a=>{a=a.slice();for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a};
+const $=id=>document.getElementById(id);
+function show(id){["intro","quiz","nombre","result"].forEach(s=>$(s).classList.toggle("hidden",s!==id));window.scrollTo(0,0)}
+let TEST=false;
+function start(m){MODE=m||"f";LL=MODE==="q"?LQ:L;FF=MODE==="q"?[]:F;N=LL.length+FF.length;i=0;ans=[];flip=FF.map(()=>Math.random()<.5);ord=shuf(LL.map((_,k)=>k));BUSY=false;show("quiz");render()}
+function restart(){show("intro")}
+function back(){if(i>0){i--;render()}}
+let BUSY=false;
+function next(v){if(BUSY)return;BUSY=true;ans[i]=v;setTimeout(()=>{BUSY=false;i++; if(i<N)render(); else finish()},200)}
+function render(){
+$("count").textContent=String(i+1).padStart(2,"0")+" / "+N;
+$("prog").style.width=(i/N*100)+"%";
+$("backBtn").style.visibility=i?"visible":"hidden";
+const o=$("opts"); o.innerHTML="";
+if(i<LL.length){
+$("part").textContent="Parte 1 — ¿Cuánto encaja contigo?";
+$("qtext").textContent=LL[ord[i]][1];
+o.className="lik";
+LS.forEach((t,k)=>{const b=document.createElement("button");b.className="opt"+(ans[i]===k+1?" sel":"");
+b.innerHTML="<em>"+(k+1)+"</em><span>"+t+"</span>";b.onclick=()=>{b.classList.add("sel");next(k+1)};o.appendChild(b)});
+} else {
+const j=i-LL.length, f=FF[j], pair=flip[j]?[f[2],f[1]]:[f[1],f[2]];
+$("part").textContent="Parte 2 — Elige una";
+$("qtext").textContent=f[0];
+o.className="";
+pair.forEach((p,k)=>{
+if(k===1){const v=document.createElement("div");v.className="vs";v.textContent="O";o.appendChild(v)}
+const b=document.createElement("button");b.className="opt"+(ans[i]===p[0]?" sel":"");
+b.innerHTML="<em>"+"AB"[k]+"</em><span></span>";b.querySelector("span").textContent=p[1];
+b.onclick=()=>{b.classList.add("sel");next(p[0])};o.appendChild(b)});
+}
+}
+function score(a){
+const lk={A:0,R:0,T:0,P:0}, fc={A:0,R:0,T:0,P:0};
+ord.forEach((li,k)=>lk[LL[li][0]]+=(+a[k]||3));
+FF.forEach((q,k)=>{const w=a[LL.length+k];if(w in fc)fc[w]++});
+const res={};
+for(const s of "ARTP"){
+const nI=LL.filter(x=>x[0]===s).length, l=(lk[s]-nI)/(nI*4)*100, f=FF.length?fc[s]/6*100:0;
+res[s]={raw:lk[s],l:Math.round(l),fw:fc[s],f:Math.round(f),c:Math.round(l)};
+}
+const by=k=>Object.keys(res).sort((x,y)=>res[y][k]-res[x][k]);
+const ol=by("l"), of=by("f");
+let oc=ol.slice(); if(FF.length && res[oc[0]].l-res[oc[1]].l<=5 && res[oc[1]].fw>res[oc[0]].fw){[oc[0],oc[1]]=[oc[1],oc[0]]}
+const top2=a=>a.slice(0,2);
+const cons = !FF.length ? "rapido" : ol[0]===of[0] ? "alta" : (top2(ol).includes(of[0])&&top2(of).includes(ol[0]) ? "media" : "baja");
+return {res,order:oc,cons,ol,of};
+}
+function finish(){if(!NAME){show("nombre");setTimeout(()=>$("nm").focus(),200);return}finishReal()}
+function finishReal(){
+$("prog").style.width="100%";
+const {res,order,cons}=score(ans);
+const d=order[0], s2=order[1], st=S[d];
+const mixed = res[d].c-res[s2].c<=8;
+const flat = res[d].c-res[order[3]].c<=10;
+show("result");
+$("hero").innerHTML=`<div class="sty">${st.e}</div><div><h4>${flat?"Perfil equilibrado":st.n+(mixed?" · "+S[s2].n:"")}</h4><p>${flat?"<b>Usas los cuatro estilos casi por igual.</b> Te adaptas bien a distintos formatos. Lo que sigue se basa en el que puntúa un poco más alto: "+st.n.toLowerCase()+". ":""}<b>${mixed&&!flat?"Perfil mixto. ":""}${st.t}.</b> ${st.d}${mixed?" Tu segundo estilo, "+S[s2].n.toLowerCase()+", está casi al mismo nivel: "+S[s2].t.toLowerCase()+".":""}</p></div>`;
+const ct={alta:"Respuestas muy coherentes",media:"Respuestas bastante coherentes",baja:"Respuestas poco coherentes entre las dos partes: repite el test con calma",rapido:"Resultado del test rápido · el completo lo afina más"};
+$("consBox").innerHTML=`<span class="cons ${cons==="alta"?"ok":""}">${ct[cons]}</span>`;
+$("mix").innerHTML=order.map(k=>`<div class="row${k===d?" h":""}"><div class="e">${S[k].e}</div><div class="n" style="width:104px">${S[k].n}</div><div class="t"><i style="width:${res[k].c}%;background:${k===d?"#C9A25A":"#6E5630"}"></i></div><div class="v">${res[k].c}</div></div>`).join("");
+$("howBox").innerHTML=`<h3>03 — Cómo aprendes mejor</h3><ol class="tips">${st.best.map(t=>`<li>${t}</li>`).join("")}</ol><p class="sub" style="margin-top:14px"><b>Lo que debes vigilar:</b> ${st.risk}</p>`;
+$("adaptBox").innerHTML=`<h3>04 — Así adaptaremos tu formación</h3><ol class="tips">${st.adapt.map(t=>`<li>${t}</li>`).join("")}</ol>`;
+$("fullBtn").style.display=MODE==="q"?"":"none";
+$("detail").innerHTML=`<table><tr><th>Estilo</th><th>Afirmaciones</th><th>Elecciones</th><th>Puntuación</th></tr>${"ARTP".split("").map(k=>`<tr><td>${S[k].e} ${S[k].n}</td><td>${res[k].raw}/${MODE==="q"?15:30}</td><td>${MODE==="q"?"—":res[k].fw+"/6"}</td><td><b>${res[k].c}</b></td></tr>`).join("")}</table><p class="note">${MODE==="q"?"Test rápido: 3 frases por estilo, de 1 a 5. Puntuación sobre 100.":""}</p><p class="note" style="${MODE==="q"?"display:none":""}">Afirmaciones: 6 por estilo, de 1 a 5. Elecciones: cada estilo aparece en 6 situaciones. Puntuación sobre 100: la de las afirmaciones, que miden cada estilo por separado. Las elecciones, que comparan unos estilos con otros, sirven para comprobar la coherencia y deshacer empates.</p>`;
+}
+// --- datos del contacto, nombre y envío a GoHighLevel ---
+const WEBHOOK_URL="";   // webhook entrante del workflow de GoHighLevel
+const CLASE_URL="https://empieza.metapro.academy/tu-primera-clase";
+const CLASE_LISTA=true; // true cuando la clase esté publicada
+const QP=new URLSearchParams(location.search);
+const CID=QP.get("cid")||"",ORIGEN=(QP.get("origen")||"").toLowerCase();
+let NAME="";try{NAME=localStorage.getItem("mp-nombre")||""}catch(e){}
+let LAST=null;
+function saveName(){const n=$("nm").value.trim();if(n.length<2){$("nmsg").textContent="Escribe tu nombre para continuar.";return}
+NAME=n;try{localStorage.setItem("mp-nombre",n)}catch(e){}finishReal()}
+const _fr=finishReal;finishReal=function(){_fr();const {res,order}=score(ans);const d=order[0];
+$("hola").textContent=NAME+", este es tu resultado";
+const est={A:"activo",R:"reflexivo",T:"teorico",P:"pragmatico"}[d];
+const url=CLASE_URL+"?estilo="+est+(CID?"&cid="+encodeURIComponent(CID):"")+(ORIGEN?"&origen="+encodeURIComponent(ORIGEN):"")+(QP.get("tel")?"&tel="+encodeURIComponent(QP.get("tel")):"")+"&n="+encodeURIComponent(NAME);
+if(CLASE_LISTA){$("claseBtn").href=url}else{$("claseBtn").removeAttribute("href");$("claseBtn").style.opacity=".55";$("claseBtn").innerHTML="Tu clase estará lista muy pronto";$("claseTxt").textContent="Estamos preparando tu clase en el formato que mejor encaja con tu estilo. Te avisaremos por WhatsApp en cuanto esté lista."}
+const payload={evento:"aprendizaje_completado",cid:CID,origen:ORIGEN,nombre:NAME,estilo:S[d].n,estilo_clave:est,segundo:S[order[1]].n,modo:MODE==="q"?"rapido":"completo",puntuaciones:Object.fromEntries("ARTP".split("").map(k=>[S[k].n,res[k].c])),url_clase:url,fecha:new Date().toISOString()};
+if(WEBHOOK_URL){try{fetch(WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),keepalive:true})}catch(e){}}
+window.__payload=payload};
+</script>
