@@ -415,24 +415,27 @@ body .elementor .e-con,body .elementor .e-con-inner,body .elementor .elementor-w
   .dia{min-width:0}
 }
 
-/* ---------- MINIFORMULARIO VALIDAR DATOS ---------- */
-.valida{max-width:560px;margin:26px auto 22px;text-align:left;background:var(--carbon-2);border:1px solid var(--linea-oro);border-radius:var(--radius);padding:24px 22px 20px}
-.v-lab{display:block;font-size:1.08rem;font-weight:500;color:var(--oro-claro);margin:0 0 8px}
-.v-in{width:100%;box-sizing:border-box;font-family:inherit;font-size:1.2rem;color:#fff;background:#000;border:1px solid rgba(201,162,90,.45);border-radius:12px;padding:15px 16px;margin:0 0 18px;outline:none}
+/* ---------- MINIFORMULARIO VALIDAR DATOS (compacto) ---------- */
+.valida{max-width:560px;margin:16px auto 14px;text-align:left;background:var(--carbon-2);border:1px solid var(--linea-oro);border-radius:14px;padding:14px 14px 12px}
+.v-lab{display:block;font-size:.95rem;font-weight:500;color:var(--oro-claro);margin:0 0 4px;line-height:1.2}
+.v-in{width:100%;box-sizing:border-box;font-family:inherit;font-size:17px;line-height:1.2;color:#fff;background:#000;border:1px solid rgba(201,162,90,.45);border-radius:10px;padding:10px 12px;margin:0 0 10px;outline:none}
 .v-in:focus{border-color:var(--oro);box-shadow:0 0 0 3px rgba(201,162,90,.22)}
-.v-telrow{display:flex;gap:10px}
-.v-pfx{flex:0 0 132px;width:132px;padding-right:8px}
+.v-telrow{display:flex;gap:8px}
+.v-pfx{flex:0 0 112px;width:112px;padding-right:6px}
 .v-num{flex:1;min-width:0}
-.v-msg{min-height:0;margin:-8px 0 12px;color:#FF8A84;font-size:1rem}
+.v-msg{margin:-4px 0 8px;color:#FF8A84;font-size:1rem;line-height:1.3}
 .v-msg:empty{display:none}
-.v-btn{width:100%;color:#0b0b0b;background:linear-gradient(135deg,var(--oro-claro) 0%,var(--oro) 50%,var(--oro-claro) 100%);box-shadow:0 12px 30px rgba(201,162,90,.25)}
+.v-btn{width:100%;padding:13px 20px;font-size:1.2rem;color:#0b0b0b;background:linear-gradient(135deg,var(--oro-claro) 0%,var(--oro) 50%,var(--oro-claro) 100%);box-shadow:0 8px 22px rgba(201,162,90,.22)}
 .v-btn[disabled]{opacity:.6;cursor:wait}
 .valida.ok .v-btn{display:none}
-.v-ok{margin:4px 0 0;text-align:center;font-family:'Bebas Neue',sans-serif;letter-spacing:.08em;font-size:1.7rem;color:#8BE98B}
+.v-ok{margin:2px 0 0;text-align:center;font-family:'Bebas Neue',sans-serif;letter-spacing:.08em;font-size:1.5rem;line-height:1.2;color:#8BE98B}
 .valida.ok .v-in{border-color:rgba(139,233,139,.55)}
+.hero .js-whatsapp.btn-lg{padding:15px 24px}
 @media (max-width:680px){
-  .valida{padding:20px 16px 16px;margin:20px auto 18px}
-  .v-pfx{flex-basis:112px;width:112px}
+  .hero{padding-bottom:22px}
+  .hero .progreso{margin-top:12px}
+  .valida{margin:14px auto 12px;padding:12px 12px 10px}
+  .v-pfx{flex-basis:104px;width:104px}
 }
 </style>
 </head>
@@ -1008,6 +1011,8 @@ body .elementor .e-con,body .elementor .e-con-inner,body .elementor .elementor-w
   var GRUPO='https://sndflw.pro/i/Eq9fjLH7oXJ0W6cvfuom';
   var PFX=[["+34","ES",9],["+52","MX",10],["+57","CO",10],["+54","AR",10],["+56","CL",9],["+51","PE",9],["+598","UY",8],["+507","PA",8],["+506","CR",8],["+1","DO/US",10],["+593","EC",9],["+58","VE",10],["+502","GT",8],["+591","BO",8],["+595","PY",9],["+503","SV",8],["+504","HN",8],["+505","NI",8],["+33","FR",9],["+41","CH",9],["+44","UK",10],["+49","DE",11],["+351","PT",9],["+39","IT",10],["+32","BE",9],["+31","NL",9]];
   var q=new URLSearchParams(location.search), cid=q.get('cid')||'';
+  /* ?e= estilo de aprendizaje actual de la ficha: se reenvía tal cual para que el workflow de datos no lo deje vacío. */
+  var ESTILO=(q.get('e')||'').trim(); if(ESTILO.indexOf('{{')>=0) ESTILO='';
   var $=function(id){return document.getElementById(id)};
   var form=$('valida'); if(!form) return;
   var sel=$('v-pfx'), tel=$('v-tel'), nom=$('v-nombre'), msg=$('v-msg'), btn=$('v-btn'), ok=$('v-ok');
@@ -1027,7 +1032,7 @@ body .elementor .e-con,body .elementor .e-con-inner,body .elementor .elementor-w
   }
   function enviar(evento,tag,beacon){
     var r=telefono();
-    var body=JSON.stringify({contact_id:cid,nombre:nom.value.trim(),telefono:r.num||'',evento:evento,origen:'vip-bbdd',tag:tag});
+    var body=JSON.stringify({contact_id:cid,nombre:nom.value.trim(),telefono:r.num||'',evento:evento,origen:'vip-bbdd',tag:tag,estilo:ESTILO});
     return fetch(HOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:body,keepalive:true}).catch(function(){});
   }
   function validar(){
