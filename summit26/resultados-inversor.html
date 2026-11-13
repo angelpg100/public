@@ -1,0 +1,160 @@
+<!-- MetaPro · Pantalla en directo · Test Perfil Inversor · Summit'26 · /resultados-inversor
+     Sin píxel propio (no es captación). Datos: Apps Script, source=summit26, refresco 5 s.
+     Teclas: 1/2/3 o flechas = vista · R = rotación automática · F = pantalla completa
+     Parámetros opcionales: ?rotar=15 (segundos) · ?vista=2 · ?desde=AAAA-MM-DDTHH:MM -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+#mpLive{--fondo:#FFFFFF;--panel:#F5F2EC;--track:#ECE8E0;--oro:#A9832F;--oro2:#C9A45C;--texto:#16171A;--soft:#3A3B40;--muted:#5E5F65;--line:rgba(169,131,47,.35);--rojo:#E5484D}
+html,body{margin:0!important;padding:0!important;background:#fff!important;overflow:hidden!important}
+#mpLive{position:fixed;inset:0;z-index:2147483000;background:var(--fondo);font-family:Poppins,sans-serif;color:var(--texto);overflow:hidden}
+#mpLive *{box-sizing:border-box;margin:0;padding:0}
+#mpLive.idle,#mpLive.idle *{cursor:none}
+#mpLive .stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;background:var(--fondo)}
+#mpLive .in{position:absolute;inset:0;padding:44px 150px 90px;display:flex;flex-direction:column}
+#mpLive .top{display:flex;flex-direction:column;align-items:center;text-align:center}
+#mpLive .hdr{display:flex;align-items:center;justify-content:center;gap:36px;margin-bottom:14px}
+#mpLive .slogo{height:66px;width:auto;display:block}
+#mpLive .live{display:flex;align-items:center;gap:12px;font-family:"Bebas Neue";font-size:40px;letter-spacing:.18em;color:var(--rojo);padding-left:36px;border-left:2px solid var(--line)}
+#mpLive .live i{width:20px;height:20px;border-radius:50%;background:#ff5a5f;animation:mpP 1.2s infinite}
+#mpLive .live.off{color:var(--muted)}#mpLive .live.off i{background:var(--muted);animation:none}
+@keyframes mpP{50%{opacity:.25}}
+#mpLive .ey{font-family:"Bebas Neue";letter-spacing:.22em;color:var(--oro);font-size:44px;line-height:1}
+#mpLive h1{font-family:"Bebas Neue";font-weight:400;font-size:132px;line-height:.95;margin-top:10px;color:var(--texto)}
+#mpLive .views{flex:1;position:relative;margin-top:26px}
+#mpLive .view{position:absolute;inset:0;opacity:0;transition:opacity .6s;pointer-events:none}
+#mpLive .view.on{opacity:1}
+/* vista 1 */
+#mpLive .v1{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+#mpLive .count{text-align:center}
+#mpLive .count b{display:block;font-family:"Bebas Neue";font-weight:400;font-size:330px;line-height:.85;color:var(--oro)}
+#mpLive .count span{display:block;font-size:40px;font-weight:500;color:var(--soft);line-height:1.2;margin-top:10px}
+#mpLive .join{background:var(--panel);border:2px solid var(--line);border-radius:28px;padding:44px;display:flex;gap:40px;align-items:center}
+#mpLive .wa{flex:none;background:#25D366;border-radius:24px;padding:30px;display:grid;place-items:center}
+#mpLive .join p{font-size:38px;color:var(--soft);line-height:1.3}
+#mpLive .join p b{color:var(--texto);display:block;font-size:52px;line-height:1.1;margin-bottom:14px;font-weight:700}
+/* vista 2 */
+#mpLive .acols{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:34px;align-items:end;height:100%;margin:0 auto;width:1440px}
+#mpLive .acol{display:flex;flex-direction:column;height:100%;text-align:center}
+#mpLive .acol .up{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-height:0}
+#mpLive .acol .lab{height:250px;display:flex;flex-direction:column;align-items:center}
+#mpLive .acol .pc{font-family:"Bebas Neue";font-size:84px;line-height:1;color:var(--texto)}
+#mpLive .acol .np{font-size:26px;font-weight:500;color:var(--muted);margin-bottom:10px}
+#mpLive .acol .b{width:100%;background:linear-gradient(180deg,var(--oro2),var(--oro));border-radius:14px 14px 0 0;height:0;min-height:6px;transition:height .8s cubic-bezier(.2,.8,.2,1)}
+#mpLive .acol .em{font-size:76px;height:86px;line-height:86px;margin-top:12px;display:flex;align-items:center;justify-content:center}
+#mpLive .acol .nm{font-family:"Bebas Neue";font-size:58px;line-height:1;margin-top:6px;color:var(--texto)}
+#mpLive .acol .sb{font-size:30px;font-weight:700;color:var(--soft);line-height:1.15;margin-top:6px}
+/* vista 3 */
+#mpLive .v3{display:grid;grid-template-columns:.75fr 1.4fr;gap:50px;align-items:center;height:100%}
+#mpLive .avg{text-align:center}
+#mpLive .avg .lb{font-family:"Bebas Neue";letter-spacing:.15em;color:var(--oro);font-size:40px}
+#mpLive .avg b{display:block;font-family:"Bebas Neue";font-weight:400;font-size:310px;line-height:.9}
+#mpLive .avg .t{font-family:"Bebas Neue";font-size:66px;line-height:1}
+#mpLive .cols{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;align-items:end;height:560px}
+#mpLive .col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+#mpLive .col .v{font-family:"Bebas Neue";font-size:66px;line-height:1;margin-bottom:8px}
+#mpLive .col .b{width:100%;border-radius:12px 12px 0 0;height:0;min-height:6px;transition:height .8s cubic-bezier(.2,.8,.2,1)}
+#mpLive .col .n{font-family:"Bebas Neue";font-size:36px;margin-top:14px;text-align:center;line-height:1;white-space:nowrap}
+#mpLive .col .r{font-size:24px;font-weight:500;color:var(--muted)}
+/* estado vacío */
+#mpLive .wait{position:absolute;left:0;right:0;bottom:-6px;text-align:center;font-size:34px;font-weight:600;color:var(--muted);display:none}
+#mpLive.empty .wait{display:block}
+#mpLive.empty .v1 .wait{display:none}
+/* controles */
+#mpLive .foot{position:absolute;right:26px;bottom:22px;display:flex;gap:10px;align-items:center;transition:opacity .4s}
+#mpLive.idle .foot{opacity:0}
+#mpLive .foot button{background:var(--oro2);border:1px solid var(--oro);color:#fff;border-radius:99px;padding:9px 22px;font-family:Poppins;font-size:20px;cursor:pointer}
+#mpLive .foot button.on{background:var(--oro)}
+#mpLive .foot button.rot{background:#fff;color:var(--oro)}
+#mpLive .foot button.rot.on{background:var(--texto);color:#fff;border-color:var(--texto)}
+#mpLive .upd{position:absolute;left:26px;bottom:26px;font-size:18px;color:var(--muted)}
+</style>
+<div id="mpLive" class="empty">
+<div class="stage" id="mpStage">
+ <div class="in">
+  <div class="top">
+   <div class="hdr"><img class="slogo" src="https://assets.cdn.filesafe.space/kfKaFrSWBIS0536cPtFb/media/67e423fe8f002b1c17507ebf.png" alt="MetaPro"><div class="live" id="mpLiveTag"><i></i><span>En directo</span></div></div>
+   <p class="ey">Vuestro perfil de inversor</p><h1 id="mpTitle">¿Cuántos estáis respondiendo?</h1>
+  </div>
+  <div class="views">
+   <section class="view v1 on" data-v="1">
+     <div class="count"><b id="mpCnt">0</b><span id="mpCntL">personas han completado el test</span></div>
+     <div class="join"><div class="wa"><svg viewBox="0 0 32 32" width="110" height="110" fill="#06210f"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.4.7 4.7 1.9 6.7L3 29l6.9-2.2c1.9 1 4 1.6 6.1 1.6 7 0 12.7-5.7 12.7-12.7S23 3 16 3zm0 23.1c-1.900 0-3.8-.5-5.4-1.5l-.4-.2-4.1 1.3 1.3-4-.3-.4c-1.1-1.7-1.6-3.6-1.6-5.6C5.5 9.8 10.2 5.200 16 5.200s10.5 4.600 10.5 10.400S21.8 26.1 16 26.1zm5.8-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.6-.9-.8-1.6-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.7 5 .8.3 1.4.5 1.9.7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg></div><p><b>Solicita tu acceso al test</b>Utiliza el enlace que os acabamos de enviar por WhatsApp. Son 3 minutos.</p></div>
+   </section>
+   <section class="view" data-v="2"><div class="acols" id="mpBars"></div><p class="wait">Esperando las primeras respuestas</p></section>
+   <section class="view v3" data-v="3">
+     <div class="avg"><p class="lb">Índice medio de la sala</p><b id="mpAvg">0</b><div class="t" id="mpAvgT"></div></div>
+     <div class="cols" id="mpCols"></div><p class="wait">Esperando las primeras respuestas</p>
+   </section>
+  </div>
+ </div>
+ <div class="upd" id="mpUpd"></div>
+ <div class="foot"><button data-v="1" class="on">1 · Participación</button><button data-v="2">2 · Animales</button><button data-v="3">3 · Índice</button><button class="rot" id="mpRot">Rotar (R)</button></div>
+</div>
+</div>
+<script>
+(function(){
+var API="https://script.google.com/macros/s/AKfycbzY3Ln5Sx2CK78abJJdLz88IfTir4BxWsO0mrMcc6PCNx9cE3n8p5UPEcs7wKQDXvbYCw/exec";
+var SRC="summit26", REFRESCO=5000;
+var Q=new URLSearchParams(location.search);
+var DESDE=Q.get("desde")?new Date(Q.get("desde")).getTime():0;
+var ROT_S=parseInt(Q.get("rotar")||"15",10)||15;
+var root=document.getElementById("mpLive"),stage=document.getElementById("mpStage");
+function $(id){return document.getElementById(id)}
+/* encaje 16:9 en cualquier pantalla */
+function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform="translate(-50%,-50%) scale("+s+")"}
+addEventListener("resize",fit);fit();
+var A=[["V","🦤","Avestruz","Evitación"],["R","🐿️","Ardilla","Parálisis"],["O","🐑","Oveja","Comportamiento gregario"],["T","🐂","Toro","Exceso de confianza"],["H","🦅","Halcón","Inversor con sistema"]];
+var T=[["Reactivo","0-19","#E5484D"],["Intuitivo","20-39","#F08A24"],["En consolidación","40-59","#D9A920"],["Disciplinado","60-79","#6FA82E"],["Metódico","80-100","#2FB36B"]];
+var OST="<svg viewBox='0 0 120 120' width='1em' height='1em' style='vertical-align:-.12em'><path d='M47 78 L44 108 L38 110' stroke='#C99A6B' stroke-width='4' fill='none' stroke-linecap='round'/><path d='M60 78 L66 106 L72 108' stroke='#C99A6B' stroke-width='4' fill='none' stroke-linecap='round'/><ellipse cx='54' cy='64' rx='27' ry='19' fill='#3A3B40' stroke='#3A3B40'/><path d='M30 58 C18 54 14 62 16 70 C24 66 28 70 34 72 Z' fill='#FFFFFF' stroke='#9a9a9a' stroke-width='1'/><path d='M44 46 C48 40 52 36 52 30 C50 24 52 16 57 14' stroke='#E2B68A' stroke-width='8' fill='none' stroke-linecap='round'/><ellipse cx='58' cy='14' rx='7' ry='6' fill='#E2B68A'/><path d='M64 13 L74 15 L64 17 Z' fill='#E9A23B'/></svg>";
+$("mpBars").innerHTML=A.map(function(a){return '<div class="acol"><div class="up"><div class="pc" id="mpP'+a[0]+'">0%</div><div class="np" id="mpN'+a[0]+'">0 personas</div><div class="b" id="mpB'+a[0]+'"></div></div><div class="lab"><div class="em">'+(a[0]==="V"?OST:a[1])+'</div><div class="nm">'+a[2]+'</div><div class="sb">'+a[3]+'</div></div></div>'}).join("");
+$("mpCols").innerHTML=T.map(function(t,i){return '<div class="col"><div class="v" id="mpCV'+i+'" style="color:'+t[2]+'">0</div><div class="b" id="mpCB'+i+'" style="background:'+t[2]+'"></div><div class="n" style="color:'+t[2]+'">'+t[0]+'</div><div class="r">'+t[1]+'</div></div>'}).join("");
+var TITLES={1:"¿Cuántos estáis respondiendo?",2:"Así decidís al invertir",3:"Vuestra disciplina al invertir"};
+var cur=1;
+function view(v){v=+v;if(v<1)v=3;if(v>3)v=1;cur=v;
+ document.querySelectorAll("#mpLive .view").forEach(function(s){s.classList.toggle("on",+s.dataset.v===v)});
+ document.querySelectorAll("#mpLive .foot button[data-v]").forEach(function(b){b.classList.toggle("on",+b.dataset.v===v)});
+ $("mpTitle").textContent=TITLES[v]}
+/* rotación automática */
+var rotT=null;
+function setRot(on){clearInterval(rotT);rotT=null;if(on){rotT=setInterval(function(){view(cur+1)},ROT_S*1000)}$("mpRot").classList.toggle("on",!!on);$("mpRot").textContent=on?"Rotando cada "+ROT_S+" s (R)":"Rotar (R)"}
+document.querySelectorAll("#mpLive .foot button[data-v]").forEach(function(b){b.onclick=function(){view(b.dataset.v);if(rotT)setRot(true)}});
+$("mpRot").onclick=function(){setRot(!rotT)};
+document.addEventListener("keydown",function(e){
+ if(e.key==="1"||e.key==="2"||e.key==="3"){view(e.key);if(rotT)setRot(true)}
+ else if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" "){e.preventDefault();view(cur+1);if(rotT)setRot(true)}
+ else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();view(cur-1);if(rotT)setRot(true)}
+ else if(e.key==="r"||e.key==="R"){setRot(!rotT)}
+ else if(e.key==="f"||e.key==="F"){if(!document.fullscreenElement){document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}else{document.exitFullscreen()}}
+});
+/* ocultar cursor y controles en reposo */
+var idleT;function wake(){root.classList.remove("idle");clearTimeout(idleT);idleT=setTimeout(function(){root.classList.add("idle")},3000)}
+addEventListener("mousemove",wake);wake();
+/* pintar */
+var NAME={V:"Avestruz",R:"Ardilla",O:"Oveja",T:"Toro",H:"Halcón"};
+function paint(d){
+ var n=d.total||0,av=d.indiceMedio||0,an=d.animales||{},tr=d.tramos||{};
+ root.classList.toggle("empty",n===0);
+ $("mpCnt").textContent=n;$("mpCntL").textContent=n===1?"persona ha completado el test":"personas han completado el test";
+ var c={},mx=1;Object.keys(NAME).forEach(function(k){c[k]=an[NAME[k]]||0;if(c[k]>mx)mx=c[k]});
+ A.forEach(function(a){var k=a[0];$("mpB"+k).style.height=(c[k]/mx*68)+"%";$("mpP"+k).textContent=n?Math.round(c[k]/n*100)+"%":"0%";$("mpN"+k).textContent=c[k]+(c[k]===1?" persona":" personas")});
+ var tc=T.map(function(t){return tr[t[0]]||0}),tm=Math.max.apply(null,tc.concat([1]));
+ tc.forEach(function(v,i){$("mpCB"+i).style.height=(v/tm*72)+"%";$("mpCV"+i).textContent=v});
+ var lim=[0,20,40,60,80],ti=0;for(var i=0;i<5;i++){if(av>=lim[i])ti=i}
+ $("mpAvg").textContent=n?av:"0";$("mpAvg").style.color=n?T[ti][2]:"var(--muted)";$("mpAvgT").textContent=n?T[ti][0]:"";$("mpAvgT").style.color=T[ti][2];
+}
+paint({});
+var fails=0;
+function poll(){
+ var u=API+"?source="+encodeURIComponent(SRC)+(DESDE?"&desde="+DESDE:"")+"&t="+Date.now();
+ fetch(u,{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){
+  fails=0;paint(d);$("mpLiveTag").classList.remove("off");$("mpLiveTag").querySelector("span").textContent="En directo";
+  var t=d.actualizado?new Date(d.actualizado):new Date();$("mpUpd").textContent="Actualizado "+t.toLocaleTimeString("es-ES",{timeZone:"Europe/Madrid"});
+ }).catch(function(e){fails++;if(fails>=3){$("mpLiveTag").classList.add("off");$("mpLiveTag").querySelector("span").textContent="Reconectando"}console.warn("sin datos",e)})
+}
+poll();setInterval(poll,REFRESCO);
+var v0=parseInt(Q.get("vista")||"1",10);if(v0>=1&&v0<=3)view(v0);
+if(Q.get("rotar"))setRot(true);
+})();
+</script>
