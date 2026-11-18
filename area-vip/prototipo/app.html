@@ -1,0 +1,377 @@
+<title>Área VIP · Blanco y oro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Diseño elegido: «Blanco y oro». Fondo blanco, titulares en dorado, negro para el texto y el bloque de «Hoy».
+   Ordenador: menú lateral blanco. Móvil: cabecera con logo + barra inferior de 3 opciones (Hoy, Clases, Recursos). */
+:root{
+  color-scheme:light;
+  --bg:#FFFFFF; --surf:#FFFFFF; --surf2:#FAF7F2; --line:#ECE6DB; --chip:#F6F0E5; --hl:#F6E3BF;
+  --ink:#141414; --muted:#6E675E; --head:#A97A2E; --acc:#C9974A; --acc-hi:#D9A564;
+  --hero:#111111; --hero-ink:#F4EEE3; --hero-mute:#B5AB9C;
+  --ok:#1E6B3A; --ok-bg:#E3F1E7; --pend:#8A5A12; --pend-bg:#FBEAD1; --live:#C2372B;
+  --page:#ECE8E1;
+  --font:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif; --label:'Bebas Neue',Impact,'Arial Narrow',sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--font);font-size:15.5px;line-height:1.5}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+img{max-width:100%;display:block}
+.lab{font-family:var(--label);letter-spacing:.06em;text-transform:uppercase;line-height:1.1}
+.d{background:linear-gradient(transparent 60%,var(--hl) 60%)}
+h1,h2,h3{margin:0;text-wrap:balance}
+.h1{font-size:30px;font-weight:400;line-height:1.12;color:var(--head);letter-spacing:-.01em}
+.h1 b,.h2 b{font-weight:700}
+.h2{font-size:21px;font-weight:400;line-height:1.2;color:var(--head)}
+.h3{font-size:16px;font-weight:600;line-height:1.3}
+.eb{font-size:14px;color:var(--muted)}
+.muted{color:var(--muted)}
+
+/* barra del prototipo */
+.pbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:#1B1A18;color:#EFE6D3;font-size:13px;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;
+  padding-block:8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:50;background:#1B1A18}
+.pbar b{color:#fff;font-weight:600}
+.seg{display:inline-flex;border:1px solid #4E4839;border-radius:999px;overflow:hidden}
+.seg button{background:transparent;border:0;padding:4px 12px;color:#E6D7B8;font-size:13px}
+.seg button[aria-pressed="true"]{background:var(--acc);color:#141414;font-weight:600}
+.stage{display:flex;justify-content:center;padding-block:20px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.device{width:100%;max-width:1280px;background:var(--bg);border-radius:18px;overflow:hidden;box-shadow:0 20px 60px -30px rgba(40,30,10,.45);container-type:inline-size;container-name:app}
+.stage.phone .device{max-width:390px;height:min(844px,calc(100vh - 110px));border:10px solid #161513;border-radius:44px;overflow:auto;scrollbar-width:none}
+@media (max-width:700px){ .stage{padding:0} .device{border-radius:0;box-shadow:none} .pbar .only-pc{display:none} }
+
+/* ---------- estructura ---------- */
+.app{display:grid;grid-template-columns:272px minmax(0,1fr);min-height:780px}
+.side{border-right:1px solid var(--line);padding:22px 14px;display:flex;flex-direction:column;gap:6px;background:var(--bg)}
+.side .logo{padding:2px 10px 14px}
+.side .logo img{width:168px}
+.nh{color:var(--head);font-size:15px;padding:14px 10px 6px}
+.ni{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:transparent;border:0;border-radius:12px;padding:8px 10px}
+.ni:hover{background:var(--surf2)}
+.ni[aria-current="page"]{background:var(--chip)}
+.ni .ic{width:30px;height:30px;flex:none;display:grid;place-items:center;border-radius:9px;background:var(--surf2);border:1px solid var(--line);color:var(--head);font-family:var(--label);font-size:17px}
+.ni[aria-current="page"] .ic{background:var(--acc);border-color:var(--acc);color:#141414}
+.ni .ic svg{width:17px;height:17px}
+.ni .t{min-width:0;flex:1}
+.ni .t b{display:block;font-weight:500;font-size:14.5px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ni .t span{display:block;font-size:12px;color:var(--muted)}
+.ni.lk .t b{color:var(--muted)}
+.ni .mini{height:3px;border-radius:3px;background:var(--chip);margin-top:5px;overflow:hidden}.ni .mini i{display:block;height:100%;background:var(--acc)}
+.side .foot{margin-top:auto;padding-top:16px;display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--line)}
+.main{min-width:0;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 32px;border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0;z-index:5}
+.top .lg{display:none;height:30px;width:auto}
+.crumb{color:var(--muted);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.crumb b{color:var(--ink);font-weight:600}
+.av{width:38px;height:38px;border-radius:50%;background:var(--acc);color:#141414;display:grid;place-items:center;font-weight:700;border:0;position:relative;flex:none}
+.av .dot{position:absolute;top:-1px;right:-1px;width:11px;height:11px;border-radius:50%;background:var(--live);border:2px solid var(--bg)}
+.content{padding:28px 32px 48px;display:flex;flex-direction:column;gap:26px;max-width:1040px;width:100%}
+.bnav{display:none}
+
+/* ---------- piezas ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:11px 20px;font-weight:600;font-size:14.5px;border:1px solid transparent;text-decoration:none;line-height:1.2}
+.btn-acc{background:var(--acc);color:#141414}.btn-acc:hover{background:var(--acc-hi)}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-line{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600;white-space:nowrap}
+.p-live{background:var(--live);color:#fff}.p-ok{background:var(--ok-bg);color:var(--ok)}.p-pend{background:var(--pend-bg);color:var(--pend)}.p-lock{background:var(--chip);color:var(--muted)}.p-vip{background:var(--acc);color:#141414}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:18px;padding:18px}
+.progress{height:6px;border-radius:6px;background:var(--chip);overflow:hidden}.progress i{display:block;height:100%;border-radius:6px;background:var(--acc)}
+.sec{display:flex;flex-direction:column;gap:12px}
+
+/* hoy */
+.today{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);border-radius:20px;overflow:hidden;background:var(--hero);color:var(--hero-ink)}
+.today{align-items:center}
+.today .th img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.today .in{padding:22px;display:flex;flex-direction:column;gap:14px}
+.today h3{color:#fff;font-size:21px;font-weight:600;line-height:1.25}
+.slots{display:flex;flex-direction:column;gap:8px}
+.slot{display:grid;grid-template-columns:62px minmax(0,1fr);gap:12px;align-items:center;border:1px solid #2E2B26;border-radius:14px;padding:10px 12px}
+.slot .hr{font-family:var(--label);font-size:26px;line-height:1;color:var(--acc-hi);letter-spacing:.02em}
+.slot .k{font-family:var(--label);letter-spacing:.06em;font-size:14px;color:var(--hero-mute);display:flex;gap:8px;align-items:center}
+.slot .v{font-size:16px;color:#fff;font-weight:600;line-height:1.3;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.slot.vip{border-color:#5A4523;background:#1C1710}
+.slot.vip .k{color:var(--acc-hi)}
+
+/* tests */
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tst{background:var(--surf);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px;text-align:left}
+.tst.pend{border-color:#EBCB95;background:#FFFBF3}
+.tst b{font-size:15px;line-height:1.3}
+.tst .muted{font-size:13px;line-height:1.4}
+.tst .btn{align-self:flex-start;padding:8px 14px;font-size:13.5px;margin-top:auto}
+
+/* días */
+.days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.dc{background:var(--surf);border:1px solid var(--line);border-radius:16px;padding:0;overflow:hidden;text-align:left;display:flex;flex-direction:column}
+.dc:hover{border-color:var(--acc)}
+.dc .im{position:relative}
+.dc .im img{aspect-ratio:16/9;width:100%;object-fit:cover}
+.dc.lk .im img{filter:grayscale(1) brightness(.75)}
+.lo{position:absolute;inset:0;display:grid;place-items:center}
+.lo span{width:40px;height:40px;border-radius:50%;background:rgba(17,17,17,.72);display:grid;place-items:center;color:#F2D29A}
+.dc .cp{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px}
+.dc .cp .lab{color:var(--head);font-size:13.5px}
+.dc .cp b{font-size:14px;line-height:1.3;font-weight:600}
+.dc.lk .cp b{color:var(--muted)}
+
+/* día */
+.dhead{display:flex;gap:20px;align-items:center}
+.dhead img{width:190px;border-radius:14px;flex:none}
+.dhead .t{min-width:0;flex:1;display:flex;flex-direction:column;gap:8px}
+.dhead .lab{color:var(--head);font-size:15px}
+.dhead h1{font-size:28px;font-weight:700;line-height:1.15}
+.pr{display:flex;gap:12px;align-items:center}.pr .progress{flex:1;max-width:320px}.pr span{font-size:13px;color:var(--muted)}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;background:none;border:0;border-bottom:3px solid transparent;padding:12px 14px;color:var(--muted);font-weight:500}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--acc);font-weight:600}
+.tab .n{font-size:12px;color:var(--head);margin-left:4px}
+.player{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:22px;align-items:start}
+.screen{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:16px;overflow:hidden;background:radial-gradient(120% 120% at 20% 20%,#2D2618,#0E0D0B);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;gap:6px}
+.screen .pl{position:absolute;right:20px;top:50%;transform:translateY(-50%);width:60px;height:60px;border-radius:50%;background:var(--acc);display:grid;place-items:center;border:0}
+.screen .lab{color:var(--acc-hi);font-size:14px}
+.screen b{font-size:21px;line-height:1.25;max-width:76%}
+.screen .note{position:absolute;left:20px;top:16px;font-size:12px;color:#BFB4A2}
+.ctrl{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+.chh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+.chs{display:flex;flex-direction:column;gap:6px}
+.ch{display:flex;gap:12px;align-items:center;text-align:left;width:100%;background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:9px 12px}
+.ch:hover{border-color:var(--acc)}
+.ch[aria-current="true"]{border-color:var(--acc);background:#FFFBF3}
+.ch .ck{width:26px;height:26px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:12px;border:1.5px solid var(--line);color:var(--muted)}
+.ch.seen .ck{background:var(--ok);border-color:var(--ok);color:#fff}
+.ch[aria-current="true"] .ck{background:var(--ink);border-color:var(--ink);color:var(--acc-hi)}
+.ch .t{flex:1;min-width:0;font-size:14px;line-height:1.35}
+.ch .t span{display:block;font-family:var(--label);letter-spacing:.05em;font-size:13px;color:var(--head)}
+.ch .du{font-size:12.5px;color:var(--muted);flex:none}
+.subseg{display:inline-flex;background:var(--chip);border-radius:999px;padding:4px;gap:4px;align-self:flex-start}
+.subseg button{border:0;background:transparent;border-radius:999px;padding:7px 16px;font-size:14px;font-weight:500;color:var(--muted)}
+.subseg button[aria-pressed="true"]{background:var(--surf);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.audio{display:flex;gap:14px;align-items:center;background:var(--hero);color:var(--hero-ink);border-radius:16px;padding:14px 16px}
+.audio .pb{width:50px;height:50px;border-radius:50%;background:var(--acc);border:0;display:grid;place-items:center;flex:none}
+.audio .w{flex:1;min-width:0}
+.wave{height:26px;display:flex;align-items:center;gap:2px;margin-top:6px}.wave i{flex:1;background:#4A4336;border-radius:2px}.wave i.on{background:var(--acc)}
+.igrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.idea{background:var(--surf);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.idea .n{font-family:var(--label);font-size:40px;line-height:.9;color:var(--acc)}
+.idea h3{font-size:17px;font-weight:700;line-height:1.3}
+.idea p{margin:0;font-size:14.5px;color:var(--muted)}
+.idea p strong,.idea p b{color:var(--ink)}
+.tips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tip{display:flex;gap:12px;align-items:flex-start;padding:16px;border-radius:16px;background:var(--surf2)}
+.tip .ti{width:38px;height:38px;border-radius:12px;background:var(--chip);color:var(--head);display:grid;place-items:center;flex:none}
+.tip h3{font-size:15.5px;font-weight:700;margin-bottom:3px}
+.tip p{margin:0;font-size:14.5px;color:var(--muted)}
+.check{display:flex;flex-direction:column;gap:8px;list-style:none;margin:0;padding:0}
+.check label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.check input{width:20px;height:20px;accent-color:var(--acc);margin-top:2px;flex:none}
+.tpick{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tp{text-align:left;background:var(--surf);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.tp[aria-pressed="true"]{border-color:var(--acc);background:#FFFBF3}
+.tp .lab{color:var(--head);font-size:14px}
+.tp b{font-size:15px;line-height:1.3}
+.tp .f{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px}
+.q{display:flex;flex-direction:column;gap:14px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--surf);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+.opt:hover{border-color:var(--acc)}
+.opt.good{border-color:var(--ok);background:var(--ok-bg)}.opt.bad{border-color:#C9584C;background:#FBEAE7}
+.qbar{display:flex;gap:6px}.qbar i{flex:1;height:6px;border-radius:6px;background:var(--chip)}.qbar i.on{background:var(--acc)}
+.why{background:var(--surf2);border-radius:12px;padding:12px 14px;font-size:14.5px}
+.done{text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;padding:30px 18px}
+.dlg{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.sub{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.res{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surf);font-size:14px;text-decoration:none;color:inherit}
+.res:hover{border-color:var(--acc)}
+.res .k{font-family:var(--label);letter-spacing:.05em;font-size:13.5px;color:var(--head);flex:none}
+.rday{display:flex;flex-direction:column;gap:10px}
+.rband{display:flex;gap:14px;align-items:center;border-radius:18px;padding:12px;background:var(--surf2);border:1px solid var(--line)}
+.rband img{width:110px;border-radius:10px;flex:none}
+.rband .dn{font-family:var(--label);font-size:32px;line-height:.9;color:var(--head)}
+.rband b{display:block;font-size:17px;line-height:1.25;font-weight:700}
+.rlock{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--muted);padding:2px 4px}
+.lockbox{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding:36px 20px}
+.lockbox .lab{color:var(--head);font-size:16px}
+
+/* ---------- móvil (el contenedor manda) ---------- */
+@container app (max-width: 880px){
+  .app{grid-template-columns:1fr;min-height:0}
+  .side{display:none}
+  .top{padding:12px 18px}
+  .top .lg{display:block}
+  .crumb{display:none}
+  .content{padding:18px 18px 28px;gap:22px}
+  .h1{font-size:26px}
+  .today{grid-template-columns:1fr}
+  .tgrid{gap:10px}
+  .days{display:flex;flex-direction:column;gap:10px}
+  .dc{flex-direction:row;align-items:center;padding:10px;gap:12px}
+  .dc .im{width:100px;flex:none}.dc .im img{border-radius:10px}
+  .dc .cp{padding:0;flex:1;min-width:0}
+  .lo span{width:32px;height:32px}
+  .dhead{flex-direction:column;align-items:stretch;gap:12px}
+  .dhead img{width:100%}
+  .dhead h1{font-size:22px}
+  .player,.dlg,.igrid,.tips,.tpick{grid-template-columns:1fr}
+  .tabs{margin:0 -18px;padding:0 18px}
+  .tab{padding:10px 10px;font-size:14px}
+  .screen{padding:14px}.screen b{font-size:16px;max-width:80%}.screen .pl{width:46px;height:46px;top:14px;transform:none}.screen .note{display:none}
+  .rband img{width:80px}.rband .dn{font-size:28px}.rband b{font-size:15.5px}
+  .bnav{display:grid;grid-template-columns:repeat(3,1fr);position:sticky;bottom:0;margin-top:auto;background:var(--bg);border-top:1px solid var(--line);padding:6px 6px calc(10px + env(safe-area-inset-bottom,0px));z-index:6}
+  .bnav button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11.5px;color:var(--muted);padding:6px 0}
+  .bnav button svg{width:22px;height:22px}
+  .bnav button[aria-current="page"]{color:var(--head);font-weight:600}
+}
+@media (prefers-reduced-motion:no-preference){ .ch,.dc,.opt,.tp,.res{transition:border-color .15s,background .15s} }
+</style>
+
+<div class="pbar" role="region" aria-label="Prototipo">
+  <span><b>Área VIP · Blanco y oro</b> · prototipo con el contenido real de los Días 1 y 2 · progreso de ejemplo</span>
+  <span class="only-pc">Ver en <span class="seg" id="seg-dev"><button data-v="pc" aria-pressed="true">Ordenador</button><button data-v="phone" aria-pressed="false">Móvil</button></span></span>
+</div>
+<div class="stage" id="stage"><div class="device" id="device"><div class="app" id="app"></div></div></div>
+
+<script>
+const DATA=/*__DATA__*/null;
+const TH=/*__THUMBS__*/null;
+const LOGO=/*__LOGO__*/'';
+const TODAY=3;  /* simulamos el miércoles 18 por la mañana */
+const ST={view:'hoy',day:2,tab:'clase',rep:'clase',test:'clase',vid:{'2-clase':4},seen:{},quiz:{},check:{},tests:{estilo:true,inversor:false}};
+(function(){ const k1=DATA.kit[1]; ['clase','vip'].forEach(s=>k1[s].videos.forEach((_,i)=>ST.seen['1-'+s+'-'+i]=1));
+  ST.quiz['1-clase']={i:0,score:5,ans:null,done:true}; ST.quiz['1-vip']={i:0,score:4,ans:null,done:true}; [0,1,2,3].forEach(i=>ST.seen['2-clase-'+i]=1); })();
+
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const D=i=>DATA.dias[i], K=i=>DATA.kit[i]||null, st=i=>i<TODAY?'ok':i===TODAY?'hoy':'lock';
+const PLAY='<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" fill="#141414"/></svg>';
+const LOCK=(s=16)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.5 10.5V8a4.5 4.5 0 0 1 9 0v2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="4.5" y="10.5" width="15" height="10.5" rx="3" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="15.2" r="1.5" fill="currentColor"/></svg>`;
+const LOCK_BIG=`<svg width="116" height="116" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="56" fill="#F6F0E5"/><circle cx="60" cy="60" r="44" fill="none" stroke="#ECE6DB" stroke-width="1.5" stroke-dasharray="3 5"/><path d="M45 55V46a15 15 0 0 1 30 0v9" fill="none" stroke="#141414" stroke-width="4" stroke-linecap="round"/><rect x="36" y="54" width="48" height="36" rx="9" fill="#C9974A"/><rect x="36" y="54" width="48" height="8" rx="4" fill="#D9A564"/><circle cx="60" cy="71" r="5" fill="#141414"/><path d="M60 74v7" stroke="#141414" stroke-width="4" stroke-linecap="round"/></svg>`;
+const SHIELD='<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l8 4v5c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const IC={hoy:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 11l8-7 8 7v9H4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+  clases:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg>',
+  rec:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h8l4 4v14H6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v6m-3-3l3 3 3-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+  test:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M9 9h6M9 13h6M9 17h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+  brain:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+  adm:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h12m-5-5l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'};
+const TESTS={estilo:{t:'Cómo aprendes',min:'2 min',hecho:'Tu estilo es <b>Activo</b>: te enseñamos primero los vídeos y la práctica.',pend:'Ordena el contenido de cada día según tu forma de aprender.'},
+             inversor:{t:'Tu perfil inversor',min:'3 min',hecho:'Tu perfil es <b>Halcón</b>.',pend:'Descubre qué tipo de inversor eres y qué estrategias encajan contigo.'}};
+function lead(html){ const m=html.match(/^\s*<(strong|b)>(.*?)<\/\1>\s*:?\s*(.*)$/s); if(m){ let b=m[3].replace(/^[:;,.\s]+/,''); b=b.replace(/^([a-záéíóúñ])/,c=>c.toUpperCase()); return {t:m[2].replace(/[:.]$/,''),b}; } const m2=html.match(/<(strong|b)>(.*?)<\/\1>/s); return {t:m2?m2[2]:'',b:html}; }
+function prog(i){ const k=K(i); if(!k) return {pct:0,seen:0,total:0,t:0,nt:0}; let seen=0,total=0,t=0,nt=0;
+  ['clase','vip'].forEach(s=>{ if(!k[s]) return; k[s].videos.forEach((_,j)=>{ total++; if(ST.seen[i+'-'+s+'-'+j]) seen++; }); if(k[s].quiz.length){ nt++; if((ST.quiz[i+'-'+s]||{}).done) t++; } });
+  return {pct:Math.round(100*(seen+3*t)/Math.max(1,total+3*nt)),seen,total,t,nt}; }
+function go(v,day,tab){ ST.view=v; if(day) ST.day=day; if(tab) ST.tab=tab; render(); const d=document.getElementById('device'); d.scrollTop=0; window.scrollTo(0,0); }
+const openDay=i=> st(i)==='lock' ? `go('dia',${i})` : `go('dia',${i},'clase')`;
+
+/* ---------- menú lateral (ordenador) ---------- */
+function side(){
+  let h=`<aside class="side"><div class="logo"><img src="${LOGO}" alt="MetaPro Academy"></div>`;
+  h+=item('hoy',IC.hoy,'Hoy','Miércoles 18 de noviembre',ST.view==='hoy');
+  h+=`<div class="nh lab">Clases</div>`;
+  [1,2,3,4,5].forEach(i=>{ const s=st(i), p=prog(i);
+    h+=`<button class="ni ${s==='lock'?'lk':''}" ${ST.view==='dia'&&ST.day===i?'aria-current="page"':''} onclick="${openDay(i)}"><span class="ic">${s==='lock'?LOCK(15):i}</span><span class="t"><b>${esc(D(i).title)}</b><span>${s==='hoy'?'Hoy · 19:00':D(i).short+' '+D(i).num+(s==='ok'?' · '+p.pct+' %':'')}</span>${s==='ok'?`<div class="mini"><i style="width:${p.pct}%"></i></div>`:''}</span>${s==='hoy'?'<span class="pill p-live">Hoy</span>':s==='ok'&&p.pct===100?'<span class="pill p-ok">✓</span>':''}</button>`; });
+  h+=`<div class="nh lab">Tus tests</div>`;
+  Object.keys(TESTS).forEach(k=>{ const ok=ST.tests[k]; h+=`<button class="ni" onclick="go('perfil')"><span class="ic">${IC.test}</span><span class="t"><b>${TESTS[k].t}</b><span>${TESTS[k].min}</span></span>${ok?'<span class="pill p-ok">✓</span>':'<span class="pill p-pend">Pendiente</span>'}</button>`; });
+  h+=`<div class="nh lab">Material</div>`+item('recursos',IC.rec,'Recursos','Guías y enlaces por día',ST.view==='recursos');
+  h+=`<div class="foot">${item('brain',IC.brain,'MetaPro Brain','Tu copiloto con IA',ST.view==='brain')}${item('admision',IC.adm,'Proceso de admisión','Sigue con nosotros',ST.view==='admision')}</div></aside>`;
+  return h;
+}
+function item(v,ic,t,sub,cur){ return `<button class="ni" ${cur?'aria-current="page"':''} onclick="go('${v}')"><span class="ic">${ic}</span><span class="t"><b>${t}</b><span>${sub}</span></span></button>`; }
+function topBar(){
+  const c= ST.view==='dia' ? `Clases › <b>Día ${ST.day}</b>` : ({hoy:'<b>Hoy</b>',clases:'<b>Clases</b>',recursos:'<b>Recursos</b>',perfil:'<b>Mi perfil</b>',brain:'<b>MetaPro Brain</b>',admision:'<b>Proceso de admisión</b>'}[ST.view]||'');
+  const pend=Object.values(ST.tests).some(x=>!x);
+  return `<div class="top"><img class="lg" src="${LOGO}" alt="MetaPro Academy"><div class="crumb">${c}</div><button class="av" aria-label="Mi perfil y tests" onclick="go('perfil')">L${pend?'<span class="dot"></span>':''}</button></div>`;
+}
+function bnav(){ const cur= ST.view==='recursos'?'recursos': (ST.view==='dia'||ST.view==='clases')?'clases':'hoy';
+  return `<nav class="bnav" aria-label="Menú">${[['hoy','Hoy','hoy'],['clases','Clases','clases'],['recursos','Recursos','rec']].map(([v,t,ic])=>`<button ${cur===v?'aria-current="page"':''} onclick="go('${v}')">${IC[ic]}${t}</button>`).join('')}</nav>`; }
+
+/* ---------- Hoy ---------- */
+function todayCard(){ const t=D(TODAY); return `<section class="today" aria-label="Hoy"><div class="th"><img src="${TH['dia'+TODAY]}" alt=""></div><div class="in">
+  <span class="pill p-live" style="align-self:flex-start">● Hoy · Día ${TODAY}</span><h3>${esc(t.title)}</h3>
+  <div class="slots"><div class="slot"><span class="hr">19:00</span><span class="v">Clase en directo</span></div>
+  <div class="slot vip"><span class="hr">20:30</span><span class="v">Sesión VIP · ${esc(t.vip)} <span class="pill p-vip">Solo VIP</span></span></div></div>
+  <button class="btn btn-acc" disabled>Entrar al directo · se abre a las 18:50</button>
+  <span style="font-size:12.5px;color:var(--hero-mute)">En tu zona horaria (Ciudad de México): 12:00 h y 13:30 h</span></div></section>`; }
+function testsBlock(){ return `<div class="sec"><h2 class="h2">Tus <b>tests</b></h2><div class="tgrid">${Object.keys(TESTS).map(k=>{ const ok=ST.tests[k], T=TESTS[k];
+  return `<div class="tst ${ok?'':'pend'}">${ok?'<span class="pill p-ok" style="align-self:flex-start">✓ Hecho</span>':'<span class="pill p-pend" style="align-self:flex-start">Pendiente</span>'}<b>${T.t}</b><span class="muted">${ok?T.hecho:T.pend}</span><button class="btn ${ok?'btn-line':'btn-ink'}" onclick="ST.tests['${k}']=${!ok};render()">${ok?'Repetir':'Hacer · '+T.min}</button></div>`; }).join('')}</div></div>`; }
+function dayCards(){ return `<div class="days">${[1,2,3,4,5].map(i=>{ const s=st(i), p=prog(i);
+  return `<button class="dc ${s==='lock'?'lk':''}" onclick="${openDay(i)}"><div class="im"><img src="${TH['dia'+i]}" alt="">${s==='lock'?`<span class="lo"><span>${LOCK(18)}</span></span>`:''}</div><div class="cp"><span class="lab">Día ${i} · ${D(i).short} ${D(i).num}</span><b>${esc(D(i).title)}</b>${s==='ok'?`<span class="progress"><i style="width:${p.pct}%"></i></span>`:s==='hoy'?'<span class="pill p-live" style="align-self:flex-start">Hoy</span>':`<span class="pill p-lock" style="align-self:flex-start">${LOCK(12)} Se abre el ${D(i).wd}</span>`}</div></button>`; }).join('')}</div>`; }
+function vHoy(){
+  const v2=K(2).clase.videos[ST.vid['2-clase']||0];
+  return `<div><div class="eb">Miércoles 18 de noviembre</div><h1 class="h1">Hola, <b>Laura</b></h1></div>${todayCard()}${testsBlock()}
+   <div class="sec"><h2 class="h2">Continúa donde <b>lo dejaste</b></h2><button class="dc" style="flex-direction:row;align-items:center;padding:10px;gap:14px;max-width:560px" onclick="go('dia',2,'clase')"><div class="im" style="width:120px;flex:none"><img src="${TH.dia2}" alt="" style="border-radius:10px"></div><div class="cp" style="padding:0"><span class="lab">Día 2 · vídeo ${(ST.vid['2-clase']||0)+1} de ${K(2).clase.videos.length}</span><b>${esc(v2.t)}</b></div></button></div>
+   <div class="sec"><h2 class="h2">Tu <b>semana</b></h2>${dayCards()}</div>`;
+}
+function vClases(){ return `<div><h1 class="h1">Tus <b>clases</b></h1><p class="muted" style="margin:4px 0 0">Cinco días de Finanzas Pro. Cada día se abre a las 19:00 (España).</p></div>${dayCards()}`; }
+
+/* ---------- Día ---------- */
+function vDia(){
+  const i=ST.day, d=D(i), s=st(i), k=K(i), p=prog(i);
+  let h=`<div class="dhead"><img src="${TH['dia'+i]}" alt="" style="${s==='lock'?'filter:grayscale(1)':''}"><div class="t"><span class="lab">Día ${i} · ${esc(d.long)}</span><h1>${esc(d.title)}</h1>
+    ${k?`<div class="pr"><div class="progress"><i style="width:${p.pct}%"></i></div><span>${p.seen}/${p.total} vídeos · ${p.t}/${p.nt} tests</span></div>`:s==='hoy'?'<span class="pill p-live" style="align-self:flex-start">● Hoy a las 19:00 (España)</span>':`<span class="pill p-lock" style="align-self:flex-start">${LOCK(12)} Se abre el ${d.wd} ${d.num}</span>`}</div></div>`;
+  if(s==='lock') return h+`<div class="card lockbox">${LOCK_BIG}<span class="lab">Día ${i} · ${esc(d.long)}</span><h2 class="h2"><b>Este día se abre el ${d.wd}</b></h2><p class="muted" style="margin:0;max-width:44ch">Clase en directo a las 19:00 (España)${d.vip?' y sesión VIP «'+esc(d.vip)+'» al acabar':''}. Te avisamos por WhatsApp.</p><button class="btn btn-line" onclick="go('hoy')">Volver a hoy</button></div>`;
+  if(!k) return h+`<div class="today" style="grid-template-columns:1fr"><div class="in"><div class="slots"><div class="slot"><span class="hr">19:00</span><span class="v">Clase en directo</span></div><div class="slot vip"><span class="hr">20:30</span><span class="v">Sesión VIP · ${esc(d.vip)} <span class="pill p-vip">Solo VIP</span></span></div></div><button class="btn btn-acc" style="align-self:flex-start" disabled>Entrar al directo · se abre a las 18:50</button></div></div>
+     <div class="card"><p style="margin:0"><b>Después de la clase</b> tendrás aquí <span class="d">la clase en vídeos cortos, la sesión VIP, el repaso en 4 minutos, los tests y las descargas</span>.</p></div>`;
+  const T=[['clase','Clase en directo',k.clase.videos.length],['vip','Sesión VIP',k.vip?k.vip.videos.length:0],['repaso','Repaso',''],['tests','Tests',2],['descargas','Descargas','']];
+  h+=`<div class="tabs" role="tablist">${T.map(([id,t,n])=>`<button class="tab" role="tab" aria-selected="${ST.tab===id}" onclick="ST.tab='${id}';render()">${t}${n?`<span class="n">${n}</span>`:''}</button>`).join('')}</div>`;
+  return h+({clase:()=>vVideos(i,'clase'),vip:()=>vVideos(i,'vip'),repaso:()=>vRepaso(i),tests:()=>vTests(i),descargas:()=>vDesc(i)}[ST.tab])();
+}
+function vVideos(i,sec){
+  const k=K(i)[sec], key=i+'-'+sec, cur=ST.vid[key]||0, v=k.videos[cur], n=k.videos.filter((_,j)=>ST.seen[key+'-'+j]).length;
+  return `<div class="player"><div class="sec"><div class="screen"><span class="note">Vista previa · en la página real aquí se reproduce el vídeo</span><span class="lab">${esc(v.kind)} · ${esc(v.d)}</span><b>${esc(v.t)}</b><button class="pl" aria-label="Reproducir" onclick="ST.seen['${key}-${cur}']=1;render()">${PLAY}</button></div>
+    <div class="ctrl"><span class="muted" style="font-size:14px">Vídeo ${cur+1} de ${k.videos.length}</span><span style="display:flex;gap:8px">${cur>0?`<button class="btn btn-line" onclick="ST.vid['${key}']=${cur-1};render()">← Anterior</button>`:''}${cur<k.videos.length-1?`<button class="btn btn-ink" onclick="ST.seen['${key}-${cur}']=1;ST.vid['${key}']=${cur+1};render()">Siguiente →</button>`:''}</span></div>
+    <button class="btn btn-line" style="align-self:flex-start">${sec==='clase'?'Ver la clase completa':'Ver la sesión VIP completa'}</button></div>
+    <div><div class="chh"><span class="h3">${sec==='clase'?'La clase':'La sesión VIP'} en ${k.videos.length} vídeos</span><span class="muted" style="font-size:13px">${n}/${k.videos.length} vistos</span></div>
+    <div class="chs">${k.videos.map((x,j)=>`<button class="ch ${ST.seen[key+'-'+j]?'seen':''}" aria-current="${j===cur}" onclick="ST.vid['${key}']=${j};render()"><span class="ck">${j===cur?'▶':ST.seen[key+'-'+j]?'✓':j+1}</span><span class="t"><span>${esc(x.kind)}</span>${esc(x.t)}</span><span class="du">${esc(x.d)}</span></button>`).join('')}</div></div></div>`;
+}
+function sub(name,val){ const k=K(ST.day); return `<div class="subseg">${['clase','vip'].filter(s=>k[s]).map(s=>`<button aria-pressed="${val===s}" onclick="ST.${name}='${s}';render()">${s==='clase'?'Clase en directo':'Sesión VIP'}</button>`).join('')}</div>`; }
+function vRepaso(i){
+  const s=ST.rep, k=K(i)[s]; const bars=Array.from({length:52},(_,j)=>`<i class="${j<15?'on':''}" style="height:${30+Math.round(60*Math.abs(Math.sin(j*1.7)))}%"></i>`).join('');
+  return `${sub('rep',s)}<div class="audio"><button class="pb" aria-label="Reproducir el audio">${PLAY}</button><div class="w"><div class="lab" style="color:var(--acc-hi);font-size:15px">En 4 minutos · ${s==='clase'?'la clase':'la sesión VIP'}</div><div style="font-size:13.5px">Paloma pregunta, Javier responde · ${esc(k.dur||'')}</div><div class="wave" aria-hidden="true">${bars}</div></div></div>
+   <div class="sec"><h2 class="h2">Ideas <b>clave</b></h2><div class="igrid">${k.ideas.map((x,j)=>{const l=lead(x);return `<article class="idea"><span class="n">${String(j+1).padStart(2,'0')}</span><h3>${l.t}</h3><p>${l.b}</p></article>`}).join('')}</div></div>
+   <div class="sec"><h2 class="h2">A tener <b>en cuenta</b></h2><div class="tips">${k.nota.map(x=>{const l=lead(x);return `<div class="tip"><span class="ti">${SHIELD}</span><div><h3>${l.t}</h3><p>${l.b}</p></div></div>`}).join('')}</div></div>
+   ${(k.checklist||[]).length?`<div class="card sec"><h2 class="h2">Checklist de <b>la práctica</b></h2><ul class="check">${k.checklist.map((x,j)=>{const id='ck-'+i+'-'+s+'-'+j;return `<li><label for="${id}"><input type="checkbox" id="${id}" ${ST.check[id]?'checked':''} onchange="ST.check['${id}']=this.checked">${esc(x)}</label></li>`}).join('')}</ul></div>`:''}`;
+}
+function vTests(i){
+  const k=K(i), s=ST.test, key=i+'-'+s, Q=k[s].quiz, T=ST.quiz[key]||(ST.quiz[key]={i:0,score:0,ans:null,done:false});
+  let h=`<div class="tpick">${['clase','vip'].filter(x=>k[x]&&k[x].quiz.length).map(x=>{ const q=ST.quiz[i+'-'+x], n=k[x].quiz.length;
+    const pill= q&&q.done?`<span class="pill p-ok">✓ ${q.score} de ${n}</span>`: q&&(q.i>0||q.ans!==null)?`<span class="pill p-pend">En curso · ${q.i+1} de ${n}</span>`:'<span class="pill p-lock">Pendiente</span>';
+    return `<button class="tp" aria-pressed="${s===x}" onclick="ST.test='${x}';render()"><span class="lab">${x==='clase'?'Test 1 · Clase en directo':'Test 2 · Sesión VIP'}</span><b>${esc(x==='clase'?D(i).title:D(i).vip)}</b><span class="f"><span class="muted">${n} preguntas</span>${pill}</span></button>`; }).join('')}</div>`;
+  if(T.done) return h+`<div class="card done"><span style="font-size:40px">${T.score>=Q.length-1?'🏆':'✓'}</span><h2 class="h2"><b>${T.score} de ${Q.length}</b> respuestas correctas</h2><p class="muted" style="margin:0">${s==='clase'?'Test de la clase en directo':'Test de la sesión VIP'} del Día ${i}.</p><button class="btn btn-line" onclick="ST.quiz['${key}']={i:0,score:0,ans:null,done:false};render()">Repetir el test</button></div>`;
+  const q=Q[T.i];
+  return h+`<div class="card q"><div class="qbar">${Q.map((_,j)=>`<i class="${j<T.i||(j===T.i&&T.ans!==null)?'on':''}"></i>`).join('')}</div><span class="lab" style="color:var(--head);font-size:14px">${s==='clase'?'Clase en directo':'Sesión VIP'} · pregunta ${T.i+1} de ${Q.length}</span><h3 class="h3" style="font-size:18px">${esc(q.q)}</h3>
+   <div class="opts">${q.o.map((o,j)=>{let c=''; if(T.ans!==null){ if(j===q.c)c='good'; else if(j===T.ans)c='bad'; } return `<button class="opt ${c}" ${T.ans!==null?'disabled':''} onclick="ans('${key}',${j})">${esc(o)}</button>`}).join('')}</div>
+   ${T.ans!==null?`<div class="why"><b>${T.ans===q.c?'Correcto.':'No es esa.'}</b> ${esc(q.why)}</div><button class="btn btn-ink" style="align-self:flex-start" onclick="nextQ('${key}',${Q.length})">${T.i<Q.length-1?'Siguiente pregunta':'Ver resultado'}</button>`:''}</div>`;
+}
+function ans(key,j){ const [i,s]=key.split('-'), T=ST.quiz[key], q=K(+i)[s].quiz[T.i]; T.ans=j; if(j===q.c) T.score++; render(); }
+function nextQ(key,n){ const T=ST.quiz[key]; if(T.i<n-1){T.i++;T.ans=null;} else T.done=true; render(); }
+function lists(i){ const k=K(i), ds=[], en=[]; ['clase','vip'].forEach(s=>{ if(!k[s]) return; (k[s].descargas||[]).forEach(x=>{ if(!ds.some(y=>y.u===x.u)) ds.push(x); }); (k[s].enlaces||[]).forEach(x=>{ if(!en.some(y=>y.u===x.u)) en.push(x); }); }); return {ds,en}; }
+function vDesc(i){ const {ds,en}=lists(i);
+  return `<div class="dlg"><div class="sec"><span class="sub">Guías en PDF</span>${ds.map(x=>`<a class="res" href="#" onclick="return false"><span>${esc(x.t)}</span><span class="k">PDF ↓</span></a>`).join('')||'<p class="muted" style="margin:0">Este día no tiene guías.</p>'}</div>
+   <div class="sec"><span class="sub">Enlaces oficiales</span><p class="muted" style="margin:0;font-size:13.5px">Usa siempre estos enlaces. No busques las aplicaciones en Google: hay copias falsas.</p>${en.map(x=>`<a class="res" href="#" onclick="return false"><span>${esc(x.t)}</span><span class="k">Abrir ↗</span></a>`).join('')}</div></div>`; }
+
+/* ---------- Recursos, perfil y otras ---------- */
+function vRecursos(){
+  let h=`<div><h1 class="h1">Tus <b>recursos</b></h1><p class="muted" style="margin:4px 0 0">Las guías y los enlaces de cada clase, día a día.</p></div>`;
+  [1,2,3,4,5].forEach(i=>{ const s=st(i);
+    h+=`<section class="rday"><div class="rband"><img src="${TH['dia'+i]}" alt="" style="${s==='lock'?'filter:grayscale(1)':''}"><div><span class="dn">Día ${i}</span><b>${esc(D(i).title)}</b><span class="eb" style="font-size:13px">${esc(D(i).long)}</span></div></div>`;
+    h+= K(i) ? vDesc(i) : `<div class="rlock">${LOCK(16)}<span>${s==='hoy'?'Se publican hoy, después de la clase.':'Se publican el '+D(i).wd+' '+D(i).num+', después de la clase.'}</span></div>`;
+    h+=`</section>`; });
+  return h;
+}
+function vPerfil(){ return `<div><h1 class="h1">Mi <b>perfil</b></h1></div>${testsBlock()}
+  <div class="sec"><button class="res" onclick="go('brain')"><span>MetaPro Brain · tu copiloto con IA</span><span class="k">Abrir ↗</span></button><button class="res" onclick="go('admision')"><span>Proceso de admisión a la academia</span><span class="k">Ver →</span></button></div>
+  <div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span>Has entrado con <b>+52 55 •••• 4821</b></span><button class="btn btn-line">Salir</button></div>`; }
+function vBrain(){ return `<div><h1 class="h1">MetaPro <b>Brain</b></h1></div><div class="card sec" style="max-width:640px"><p style="margin:0">Tu copiloto con inteligencia artificial, con el método de MetaPro. Pregúntale sobre pools, préstamos o tu cartera.</p><p class="muted" style="margin:0;font-size:14px">En la página real se abrirá aquí, dentro del Área VIP.</p><button class="btn btn-acc" style="align-self:flex-start">Abrir MetaPro Brain</button></div>`; }
+function vAdmision(){ return `<div class="today" style="grid-template-columns:1fr"><div class="in" style="padding:30px"><span class="lab" style="color:var(--acc-hi);font-size:15px">Siguiente paso</span><h3 style="font-size:24px">Proceso de admisión a la academia</h3><p style="margin:0">Si quieres seguir formándote con nosotros, solicita tu plaza. Revisaremos tu caso contigo.</p><button class="btn btn-acc" style="align-self:flex-start">Solicitar mi plaza</button></div></div>`; }
+
+function render(){
+  const v=ST.view, body=({hoy:vHoy,clases:vClases,dia:vDia,recursos:vRecursos,perfil:vPerfil,brain:vBrain,admision:vAdmision}[v]||vHoy)();
+  document.getElementById('app').innerHTML=side()+`<div class="main">${topBar()}<div class="content">${body}</div>${bnav()}</div>`;
+}
+document.getElementById('seg-dev').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return;
+  document.querySelectorAll('#seg-dev button').forEach(x=>x.setAttribute('aria-pressed',x===b)); document.getElementById('stage').classList.toggle('phone',b.dataset.v==='phone'); });
+render();
+</script>
