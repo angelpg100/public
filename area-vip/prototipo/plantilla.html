@@ -226,12 +226,16 @@ const DATA=/*__DATA__*/null;
 const TH=/*__THUMBS__*/null;
 const LOGO=/*__LOGO__*/'';
 const TODAY=3;               /* simulamos el miércoles 18 por la mañana */
-const ST={view:'inicio',day:3,tab:'clase',rep:'clase',test:'clase',vid:{},seen:{},quiz:{},entry:'inicio',fut:'lock',check:{}};
+const ST={view:'inicio',day:3,tab:'clase',rep:'clase',test:'clase',vid:{},seen:{},quiz:{},entry:'inicio',fut:'lock',check:{},tests:{estilo:true,inversor:false}};
 /* progreso de ejemplo: Día 1 completo, Día 2 a medias */
 (function(){ const k1=DATA.kit[1]; ['clase','vip'].forEach(s=>k1[s].videos.forEach((_,i)=>ST.seen['1-'+s+'-'+i]=1)); ST.quiz['1-clase']={i:k1.clase.quiz.length,score:5,done:true}; ST.quiz['1-vip']={i:k1.vip.quiz.length,score:4,done:true};
   [0,1,2,3].forEach(i=>ST.seen['2-clase-'+i]=1); ST.vid['2-clase']=4; })();
 
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* candado ilustrado, de línea: sustituye al emoji */
+const LOCK=(s=16)=>`<svg class="lock" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.5 10.5V8a4.5 4.5 0 0 1 9 0v2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="4.5" y="10.5" width="15" height="10.5" rx="3" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="15.2" r="1.5" fill="currentColor"/><path d="M12 16.5v1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`;
+const LOCK_BIG=()=>`<svg class="lock-ill" width="120" height="120" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="56" fill="#F1E9DC"/><circle cx="60" cy="60" r="44" fill="none" stroke="#E6DCCB" stroke-width="1.5" stroke-dasharray="3 5"/><path d="M45 55V46a15 15 0 0 1 30 0v9" fill="none" stroke="#141414" stroke-width="4" stroke-linecap="round"/><rect x="36" y="54" width="48" height="36" rx="9" fill="#C9974A"/><rect x="36" y="54" width="48" height="8" rx="4" fill="#D9A564"/><circle cx="60" cy="71" r="5" fill="#141414"/><path d="M60 74v7" stroke="#141414" stroke-width="4" stroke-linecap="round"/></svg>`;
+const TESTS={estilo:{t:'Cómo aprendes',d:'2 minutos · ordena tu contenido',ok:'Activo'},inversor:{t:'Perfil inversor',d:'3 minutos · tu tipo de inversor',ok:'Halcón'}};
 const PLAY='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" fill="#141414"/></svg>';
 const D=i=>DATA.dias[i], K=i=>DATA.kit[i]||null;
 function dayStatus(i){ return i<TODAY?'ok':(i===TODAY?'hoy':'lock'); }
@@ -247,13 +251,15 @@ function side(){
   h+=ni('inicio',0,'⌂','Inicio','Tu semana de un vistazo','');
   h+=`<div class="h lab">Tu semana</div>`;
   visibleDays().forEach(i=>{ const s=dayStatus(i), p=dayProgress(i);
-    const st= s==='ok' ? `<span class="st st-ok">✓</span>` : s==='hoy' ? `<span class="st st-hoy">Hoy</span>` : `<span class="st st-lock">🔒</span>`;
+    const st= s==='ok' ? `<span class="st st-ok">✓</span>` : s==='hoy' ? `<span class="st st-hoy">Hoy</span>` : `<span class="st st-lock">${LOCK(15)}</span>`;
     h+=`<button class="ni ${s==='lock'?'locked':''}" ${ST.view==='dia'&&ST.day===i?'aria-current="page"':''} onclick="go('dia',${i},'clase')"><span class="ic">${i}</span><span class="t"><b>${esc(D(i).title)}</b><span>${D(i).short} ${D(i).num}${s==='ok'?' · '+p.pct+' %':''}</span>${s==='ok'?`<div class="mini"><i style="width:${p.pct}%"></i></div>`:''}</span>${st}</button>`; });
+  h+=`<div class="h lab">Tus tests</div>`;
+  Object.keys(TESTS).forEach(k=>{ const T=TESTS[k], ok=ST.tests[k];
+    h+=`<button class="ni" ${ST.view==='perfil'&&ST.focus===k?'aria-current="page"':''} onclick="ST.focus='${k}';go('perfil')"><span class="ic">${k==='estilo'?'◐':'◆'}</span><span class="t"><b>${T.t}</b><span>${ok?'Resultado: '+T.ok:T.d}</span></span>${ok?'<span class="st st-ok">✓</span>':'<span class="st st-pend">Pendiente</span>'}</button>`; });
   h+=`<div class="h lab">Tu material</div>`;
   h+=ni('recursos',0,'⇩','Recursos','Guías y enlaces de la semana','');
   h+=ni('brain',0,'✦','MetaPro Brain','Tu copiloto con IA','');
-  h+=ni('perfil',0,'◉','Mi perfil','Tests y preferencias','');
-  h+=`</nav><div class="foot"><a class="btn btn-wa" href="#" onclick="return false">Grupo VIP de WhatsApp</a><button class="btn btn-line" onclick="go('admision')">Proceso de admisión</button></div></aside>`;
+  h+=`</nav><div class="foot"><button class="btn btn-line" onclick="go('admision')">Proceso de admisión</button></div></aside>`;
   return h;
 }
 function ni(view,day,ic,t,sub){ return `<button class="ni" ${ST.view===view?'aria-current="page"':''} onclick="go('${view}')"><span class="ic">${ic}</span><span class="t"><b>${t}</b><span>${sub}</span></span></button>`; }
@@ -278,21 +284,21 @@ function vInicio(){
   h+=`<div class="row2"><div style="display:flex;flex-direction:column;gap:10px"><h3>Continúa donde lo dejaste</h3>
      <button class="cont" onclick="ST.vid['2-clase']=4;go('dia',2,'clase')"><img src="${TH.dia2}" alt=""><span class="t"><span class="lab eyebrow">Día 2 · vídeo 5 de ${K(2).clase.videos.length}</span><b>${esc(v2.t)}</b><span class="muted" style="font-size:13px">${esc(v2.d)}</span></span></button></div>
      <div style="display:flex;flex-direction:column;gap:10px"><h3>Tu progreso</h3><div class="card" style="display:flex;flex-direction:column;gap:12px">${[1,2].map(i=>{const p=dayProgress(i);return `<div><div style="display:flex;justify-content:space-between;font-size:14px"><span>Día ${i} · ${esc(D(i).title)}</span><b>${p.pct} %</b></div><div class="bar" style="margin-top:6px"><i style="width:${p.pct}%"></i></div><span class="muted" style="font-size:12.5px">${p.seen} de ${p.total} vídeos · ${p.tests} de ${p.ntests} tests</span></div>`}).join('')}<p class="ex" style="margin:0">Progreso de ejemplo para el prototipo.</p></div></div></div>`;
-  h+=`<div style="display:flex;flex-direction:column;gap:12px"><h3>Tu semana de Finanzas Pro</h3><div class="week">${visibleDays().map(i=>{const s=dayStatus(i);return `<button class="wk ${s==='lock'?'locked':''}" onclick="go('dia',${i},'clase')"><div class="im"><img src="${TH['dia'+i]}" alt="">${s==='lock'?'<span class="lk">🔒</span>':''}</div><div class="cp"><span>${s==='ok'?'<span class="pill pill-ok">✓ Visto</span>':s==='hoy'?'<span class="pill pill-live">Hoy</span>':`<span class="pill pill-lock">${D(i).short} ${D(i).num}</span>`}</span><b>Día ${i} · ${esc(D(i).title)}</b></div></button>`}).join('')}</div></div>`;
-  h+=`<div class="card pend"><div><div class="lab eyebrow">Pendiente</div><b>Test de tu perfil inversor</b> <span class="muted">· 3 minutos</span></div><button class="btn btn-dark" onclick="go('perfil')">Hacerlo</button></div>`;
+  h+=`<div style="display:flex;flex-direction:column;gap:12px"><h3>Tu semana de Finanzas Pro</h3><div class="week">${visibleDays().map(i=>{const s=dayStatus(i);return `<button class="wk ${s==='lock'?'locked':''}" onclick="go('dia',${i},'clase')"><div class="im"><img src="${TH['dia'+i]}" alt="">${s==='lock'?`<span class="lk"><span class="lkc">${LOCK(22)}</span><span>Se abre el ${D(i).wd}</span></span>`:''}</div><div class="cp"><span>${s==='ok'?'<span class="pill pill-ok">✓ Visto</span>':s==='hoy'?'<span class="pill pill-live">Hoy</span>':`<span class="pill pill-lock">${D(i).short} ${D(i).num}</span>`}</span><b>Día ${i} · ${esc(D(i).title)}</b></div></button>`}).join('')}</div></div>`;
+  h+=vTestsCard();
   return h;
 }
 
 /* ---------- Día ---------- */
 function vDia(){
   const i=ST.day, d=D(i), s=dayStatus(i), k=K(i), p=dayProgress(i);
-  let h=`<div class="daychips">${visibleDays().map(j=>`<button class="dc ${dayStatus(j)==='lock'?'locked':''}" aria-current="${j===i}" onclick="go('dia',${j},ST.tab)">${dayStatus(j)==='ok'?'✓ ':dayStatus(j)==='lock'?'🔒 ':''}Día ${j}</button>`).join('')}</div>`;
+  let h=`<div class="daychips">${visibleDays().map(j=>`<button class="dc ${dayStatus(j)==='lock'?'locked':''}" aria-current="${j===i}" onclick="go('dia',${j},ST.tab)">${dayStatus(j)==='ok'?'✓ ':dayStatus(j)==='lock'?LOCK(13)+' ':''}Día ${j}</button>`).join('')}</div>`;
   h+=`<div class="dayhead"><img src="${TH['dia'+i]}" alt=""><div class="t"><div class="lab eyebrow">Día ${i} · ${esc(d.long)}</div><h1 style="font-size:28px"><b>${esc(d.title)}</b></h1>
-     ${s==='ok'&&k?`<div style="display:flex;gap:12px;align-items:center"><div class="bar" style="flex:1;max-width:320px"><i style="width:${p.pct}%"></i></div><span class="muted" style="font-size:13px">${p.seen}/${p.total} vídeos · ${p.tests}/${p.ntests} tests</span></div>`:s==='hoy'?'<span><span class="pill pill-live">● Hoy a las 19:00 (España)</span></span>':'<span><span class="pill pill-lock">🔒 Se abre el '+d.wd+' '+d.num+'</span></span>'}</div></div>`;
-  if(s==='lock') return h+`<div class="card lockbox"><div class="big">🔒</div><h2>Este día se abre el <b>${d.wd} ${d.num}</b></h2><p class="muted" style="margin:0;max-width:46ch">Clase en directo a las 19:00 (España)${d.vip?' y sesión VIP «'+esc(d.vip)+'» al acabar':''}. Te avisaremos por WhatsApp.</p></div>`;
+     ${s==='ok'&&k?`<div style="display:flex;gap:12px;align-items:center"><div class="bar" style="flex:1;max-width:320px"><i style="width:${p.pct}%"></i></div><span class="muted" style="font-size:13px">${p.seen}/${p.total} vídeos · ${p.tests}/${p.ntests} tests</span></div>`:s==='hoy'?'<span><span class="pill pill-live">● Hoy a las 19:00 (España)</span></span>':'<span><span class="pill pill-lock">'+LOCK(13)+' Se abre el '+d.wd+' '+d.num+'</span></span>'}</div></div>`;
+  if(s==='lock') return h+`<div class="card lockbox">${LOCK_BIG()}<h2>Este día se abre el <b>${d.wd} ${d.num}</b></h2><p class="muted" style="margin:0;max-width:46ch">Clase en directo a las 19:00 (España)${d.vip?' y sesión VIP «'+esc(d.vip)+'» al acabar':''}. Te avisaremos por WhatsApp.</p></div>`;
   if(!k) return h+`<div class="grid2"><div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="lab eyebrow">19:00 · Clase en directo</div><h3>${esc(d.title)}</h3><button class="btn btn-gold" disabled>Entrar al directo · se abre a las 18:50</button></div><div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="lab eyebrow">20:30 · Sesión VIP por Zoom</div><h3>${esc(d.vip)}</h3><button class="btn btn-dark" disabled>Entrar en la sesión VIP · al acabar la clase</button></div></div>
      <div class="card"><p style="margin:0"><b>Después de la clase</b>, aquí tendrás las pestañas del día: <span class="d">la clase en vídeos cortos, la sesión VIP, el repaso en 4 minutos, el test y las descargas</span>.</p></div>`;
-  const tabs=[['clase','Clase en directo',k.clase.videos.length],['vip','Sesión VIP',k.vip?k.vip.videos.length:0],['repaso','Repaso',''],['test','Test',''],['descargas','Descargas','']];
+  const tabs=[['clase','Clase en directo',k.clase.videos.length],['vip','Sesión VIP',k.vip?k.vip.videos.length:0],['repaso','Repaso',''],['test','Tests',2],['descargas','Descargas','']];
   h+=`<div class="tabs" role="tablist">${tabs.map(([id,t,n])=>`<button class="tab" role="tab" aria-selected="${ST.tab===id}" onclick="ST.tab='${id}';render()">${t}${n?`<span class="n">${n}</span>`:''}</button>`).join('')}</div>`;
   if(ST.tab==='clase'||ST.tab==='vip') h+=vVideos(i,ST.tab);
   else if(ST.tab==='repaso') h+=vRepaso(i);
@@ -309,23 +315,34 @@ function vVideos(i,sec){
      <div><div class="chap-h"><h3>${sec==='clase'?'La clase':'La sesión VIP'} en ${k.videos.length} vídeos</h3><span class="muted" style="font-size:13px">${n}/${k.videos.length} vistos</span></div><div class="chap">${k.videos.map((x,j)=>`<button class="ch ${ST.seen[key+'-'+j]?'seen':''}" aria-current="${j===cur}" onclick="ST.vid['${key}']=${j};render()"><span class="ck">${j===cur?'▶':ST.seen[key+'-'+j]?'✓':j+1}</span><span class="t"><span>${esc(x.kind)}</span>${esc(x.t)}</span><span class="du">${esc(x.d)}</span></button>`).join('')}</div></div></div>`;
 }
 function segSub(name,val){ const k=K(ST.day); return `<div class="subseg">${['clase','vip'].filter(s=>k[s]).map(s=>`<button aria-pressed="${val===s}" onclick="ST.${name}='${s}';render()">${s==='clase'?'Clase':'Sesión VIP'}</button>`).join('')}</div>`; }
+function splitLead(html){ /* separa el primer <strong>/<b> como titular */
+  const m=html.match(/^\s*(?:<(strong|b)>)(.*?)<\/\1>\s*:?\s*(.*)$/s); if(m) return {t:m[2].replace(/:$/,''),b:m[3].replace(/^[:\s]+/,'')};
+  const m2=html.match(/<(strong|b)>(.*?)<\/\1>/s); return m2?{t:m2[2],b:html.replace(m2[0],'<b>'+m2[2]+'</b>')}:{t:'',b:html}; }
 function vRepaso(i){
   const s=ST.rep, k=K(i)[s];
   const bars=Array.from({length:48},(_,j)=>`<i class="${j<14?'on':''}" style="height:${30+Math.round(60*Math.abs(Math.sin(j*1.7)))}%"></i>`).join('');
+  const ideas=(k.ideas||[]).map(splitLead), notas=(k.nota||[]).map(splitLead);
   return `${segSub('rep',s)}<div class="audio"><button class="pb" aria-label="Reproducir audio">${PLAY}</button><div class="w"><div class="lab" style="color:var(--gold-hi)">En 4 minutos · ${s==='clase'?'la clase':'la sesión VIP'}</div><div style="font-size:14px">Paloma pregunta, Javier responde · ${esc(k.dur||'')}</div><div class="wave" aria-hidden="true">${bars}</div></div></div>
-   <div class="grid2"><div class="card"><h3 style="margin-bottom:14px">Ideas clave</h3><ol class="ideas">${(k.ideas||[]).map(x=>`<li>${x}</li>`).join('')}</ol></div>
-   <div class="card"><h3 style="margin-bottom:14px">A tener en cuenta</h3><ul class="notes">${(k.nota||[]).map(x=>`<li>${x}</li>`).join('')}</ul></div></div>
+   <section class="kideas"><div class="khead"><span class="lab eyebrow">Ideas clave</span><h2>Lo que te tienes que llevar <b>${s==='clase'?'de la clase':'de la sesión VIP'}</b></h2></div>
+     <div class="igrid">${ideas.map((x,j)=>`<article class="idea"><span class="inum">${String(j+1).padStart(2,'0')}</span><h3>${x.t}</h3><p>${x.b}</p></article>`).join('')}</div></section>
+   <section class="tips"><div class="khead"><span class="lab eyebrow">A tener en cuenta</span><h2>Antes de <b>ponerlo en práctica</b></h2></div>
+     <div class="tgrid">${notas.map(x=>`<div class="tip"><span class="tic">${TIP}</span><div><h3>${x.t}</h3><p>${x.b}</p></div></div>`).join('')}</div></section>
    ${(k.checklist||[]).length?`<div class="card"><h3 style="margin-bottom:12px">Checklist de la práctica</h3><ul class="check">${k.checklist.map((x,j)=>{const id='ck-'+i+'-'+s+'-'+j;return `<li><label for="${id}"><input type="checkbox" id="${id}" ${ST.check[id]?'checked':''} onchange="ST.check['${id}']=this.checked">${esc(x)}</label></li>`}).join('')}</ul></div>`:''}`;
 }
+const TIP='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l8 4v5c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 function vTest(i){
   const s=ST.test, k=K(i)[s], key=i+'-'+s, Q=k.quiz||[]; const T=ST.quiz[key]||(ST.quiz[key]={i:0,score:0,ans:null,done:false});
-  let h=segSub('test',s);
+  let h=testPick(i);
   if(T.done) return h+`<div class="card lockbox"><div class="big">${T.score>=Q.length-1?'🏆':'✓'}</div><h2><b>${T.score} de ${Q.length}</b> respuestas correctas</h2><p class="muted" style="margin:0">Test ${s==='clase'?'de la clase':'de la sesión VIP'} del Día ${i} completado.</p><button class="btn btn-line" onclick="ST.quiz['${key}']={i:0,score:0,ans:null,done:false};render()">Repetir el test</button></div>`;
   const q=Q[T.i];
   h+=`<div class="card q"><div class="qbar">${Q.map((_,j)=>`<i class="${j<T.i||(j===T.i&&T.ans!==null)?'done':''}"></i>`).join('')}</div><div class="lab eyebrow">Pregunta ${T.i+1} de ${Q.length}</div><h3>${esc(q.q)}</h3><div class="opts">${q.o.map((o,j)=>{let c=''; if(T.ans!==null){ if(j===q.c)c='good'; else if(j===T.ans)c='bad'; } return `<button class="opt ${c}" ${T.ans!==null?'disabled':''} onclick="answer('${key}',${j})">${esc(o)}</button>`}).join('')}</div>
    ${T.ans!==null?`<div class="why"><b>${T.ans===q.c?'Correcto.':'No es esa.'}</b> ${esc(q.why)}</div><button class="btn btn-dark" style="align-self:flex-start" onclick="nextQ('${key}',${Q.length})">${T.i<Q.length-1?'Siguiente pregunta':'Ver resultado'}</button>`:''}</div>`;
   return h;
 }
+function testPick(i){ const k=K(i);
+  return `<div class="tpick">${['clase','vip'].filter(s=>k[s]&&(k[s].quiz||[]).length).map(s=>{ const T=ST.quiz[i+'-'+s], n=k[s].quiz.length;
+    const st= T&&T.done ? `<span class="pill pill-ok">✓ ${T.score} de ${n}</span>` : T&&(T.i>0||T.ans!==null) ? `<span class="pill pill-soft">En curso · ${T.i+1} de ${n}</span>` : `<span class="pill pill-lock">Pendiente</span>`;
+    return `<button class="tp" aria-pressed="${ST.test===s}" onclick="ST.test='${s}';render()"><span class="lab eyebrow">${s==='clase'?'Test 1 · La clase en directo':'Test 2 · La sesión VIP'}</span><b>${esc(s==='clase'?D(i).title:D(i).vip)}</b><span class="tpf"><span class="muted">${n} preguntas</span>${st}</span></button>`; }).join('')}</div>`; }
 function answer(key,j){ const [i,s]=key.split('-'); const q=K(+i)[s].quiz[ST.quiz[key].i]; ST.quiz[key].ans=j; if(j===q.c) ST.quiz[key].score++; render(); }
 function nextQ(key,n){ const T=ST.quiz[key]; if(T.i<n-1){T.i++;T.ans=null;} else T.done=true; render(); }
 function vDescargas(i){
@@ -336,15 +353,23 @@ function vDescargas(i){
 
 /* ---------- otras pantallas ---------- */
 function vRecursos(){
-  let h=`<div><h1>Tus <b>recursos</b></h1><p class="muted" style="margin:6px 0 0">Todas las guías y enlaces oficiales de la semana, en un solo sitio.</p></div>`;
-  [1,2].forEach(i=>{ h+=`<section style="display:flex;flex-direction:column;gap:12px"><div class="lab eyebrow">Día ${i} · ${esc(D(i).title)}</div>${vDescargas(i)}</section>`; });
+  let h=`<div><h1>Tus <b>recursos</b></h1><p class="muted" style="margin:6px 0 0">Las guías y los enlaces oficiales de cada clase, día a día.</p></div>`;
+  h+=`<div class="daychips rs">${visibleDays().map(j=>`<a class="dc ${dayStatus(j)==='lock'?'locked':''}" href="#rs-${j}">${dayStatus(j)==='lock'?LOCK(13)+' ':''}Día ${j}</a>`).join('')}</div>`;
+  visibleDays().forEach(i=>{ const s=dayStatus(i);
+    h+=`<section class="rday" id="rs-${i}"><div class="rhead"><img src="${TH['dia'+i]}" alt="" class="${s==='lock'?'gray':''}"><div><div class="lab eyebrow">Día ${i} · ${esc(D(i).long)}</div><h2><b>${esc(D(i).title)}</b></h2></div></div>`;
+    h+= K(i) ? vDescargas(i) : `<div class="rlock">${LOCK(18)}<span>${s==='hoy'?'Las guías de hoy se publican después de la clase.':'Las guías de este día se publican el '+D(i).wd+' '+D(i).num+', después de la clase.'}</span></div>`;
+    h+=`</section>`; });
   return h;
 }
 function vBrain(){ return `<div><h1>MetaPro <b>Brain</b></h1></div><div class="card" style="display:flex;flex-direction:column;gap:12px;max-width:640px"><p style="margin:0">Tu copiloto con inteligencia artificial, entrenado con el método de MetaPro. Pregúntale sobre pools, préstamos o tu cartera, y te responde con los datos de la academia.</p><p class="muted" style="margin:0;font-size:14px">En la página real se abriría aquí, dentro del Área VIP (pendiente de que el copiloto lo permita).</p><button class="btn btn-gold" style="align-self:flex-start">Abrir MetaPro Brain</button></div>`; }
-function vPerfil(){ return `<div><h1>Mi <b>perfil</b></h1></div><div class="grid2"><div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="lab eyebrow">Cómo aprendes</div><h3>Estilo: Activo <span class="pill pill-ok">✓ Hecho</span></h3><p class="muted" style="margin:0;font-size:14px">Ordenamos el contenido de cada día según tu forma de aprender: tú primero los vídeos.</p><button class="btn btn-line" style="align-self:flex-start">Repetir el test</button></div>
-  <div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="lab eyebrow">Perfil inversor</div><h3>Pendiente</h3><p class="muted" style="margin:0;font-size:14px">3 minutos. Te dice qué tipo de inversor eres y con qué estrategias encajas.</p><button class="btn btn-dark" style="align-self:flex-start">Hacer el test</button></div></div>
+function vTestsCard(){
+  return `<section class="tests"><div class="khead"><span class="lab eyebrow">Tus tests</span><h2>Dos minutos que <b>personalizan tu Área VIP</b></h2></div><div class="grid2">${Object.keys(TESTS).map(k=>{ const T=TESTS[k], ok=ST.tests[k];
+    return `<div class="tcard ${ok?'done':''}"><div class="tchead"><span class="tci">${k==='estilo'?'◐':'◆'}</span>${ok?'<span class="pill pill-ok">✓ Hecho</span>':'<span class="pill pill-pend">Pendiente</span>'}</div><h3>${k==='estilo'?'Test de cómo aprendes':'Test de tu perfil inversor'}</h3>
+      <p class="muted">${k==='estilo'?(ok?'Tu estilo es <b>Activo</b>: te mostramos primero los vídeos y la práctica.':'Ordenamos el contenido de cada día según tu forma de aprender.'):(ok?'Tu perfil es <b>Halcón</b>.':'Descubre qué tipo de inversor eres y qué estrategias encajan contigo.')}</p>
+      <button class="btn ${ok?'btn-line':'btn-dark'}" onclick="ST.tests['${k}']=${!ok};render()">${ok?'Repetir el test':'Hacer el test · '+(k==='estilo'?'2 min':'3 min')}</button></div>`; }).join('')}</div></section>`; }
+function vPerfil(){ return `<div><h1>Mi <b>perfil</b></h1></div>${vTestsCard()}
   <div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span>Has entrado con <b>+52 55 •••• 4821</b></span><button class="btn btn-line">Salir</button></div>`; }
-function vSemana(){ return `<div><h1>Tu <b>semana</b></h1></div><div style="display:flex;flex-direction:column;gap:10px">${visibleDays().map(i=>{const s=dayStatus(i),p=dayProgress(i);return `<button class="cont" onclick="go('dia',${i},'clase')"><img src="${TH['dia'+i]}" alt="" style="${s==='lock'?'filter:grayscale(.85) brightness(.8)':''}"><span class="t"><span class="lab eyebrow">Día ${i} · ${D(i).short} ${D(i).num}</span><b>${esc(D(i).title)}</b>${s==='ok'?`<div class="bar" style="margin-top:6px"><i style="width:${p.pct}%"></i></div>`:s==='hoy'?'<span class="pill pill-live">Hoy</span>':'<span class="pill pill-lock">🔒 Se abre el '+D(i).wd+'</span>'}</span></button>`}).join('')}</div>`; }
+function vSemana(){ return `<div><h1>Tu <b>semana</b></h1></div><div style="display:flex;flex-direction:column;gap:10px">${visibleDays().map(i=>{const s=dayStatus(i),p=dayProgress(i);return `<button class="cont" onclick="go('dia',${i},'clase')"><img src="${TH['dia'+i]}" alt="" style="${s==='lock'?'filter:grayscale(.85) brightness(.8)':''}"><span class="t"><span class="lab eyebrow">Día ${i} · ${D(i).short} ${D(i).num}</span><b>${esc(D(i).title)}</b>${s==='ok'?`<div class="bar" style="margin-top:6px"><i style="width:${p.pct}%"></i></div>`:s==='hoy'?'<span class="pill pill-live">Hoy</span>':'<span class="pill pill-lock">'+LOCK(13)+' Se abre el '+D(i).wd+'</span>'}</span></button>`}).join('')}</div>`; }
 function vAdmision(){ return `<div class="today" style="grid-template-columns:1fr"><div class="bd" style="padding:32px"><div class="lab" style="color:var(--gold-hi)">Siguiente paso</div><h2 style="color:#fff">Proceso de admisión <b>a la academia</b></h2><p style="margin:0">Si quieres seguir formándote con nosotros, solicita tu plaza. Revisaremos tu caso contigo.</p><button class="btn btn-gold" style="align-self:flex-start">Solicitar mi plaza</button></div></div>`; }
 
 function bnav(){ const it=[['inicio','⌂','Inicio'],['semana','▦','Semana'],['recursos','⇩','Recursos'],['brain','✦','Brain'],['perfil','◉','Perfil']];
