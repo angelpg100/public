@@ -1,0 +1,1128 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Área VIP · Finanzas Pro</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg:#F7F3EC; --card:#FFFDF9; --line:#E6DCCB; --ink:#141414; --ink2:#2E2B27; --muted:#55504A;
+  --gold:#C9974A; --gold-hi:#D9A564; --gold-lo:#B8842F; --gold-text:#8A6420;
+  --dark:#111111; --ok:#1E6B3A; --ok-bg:#E8F4EC; --err:#A3261B; --err-bg:#FBEAE7;
+  --navy:#0E1A4A; --b1:#8FD3FF; --b2:#4A6BFF;
+  --serif:'Poppins',system-ui,sans-serif; --label:'Bebas Neue',Impact,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Poppins',system-ui,sans-serif;font-size:20px;line-height:1.55;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2{font-family:'Poppins',sans-serif;font-weight:400;letter-spacing:-.015em;line-height:1.08;margin:0;color:var(--ink)}
+h1 b,h2 b,h1 strong,h2 strong{font-weight:700}
+h3{font-family:'Poppins',sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:0;color:var(--ink)}
+h1{font-size:clamp(2.4rem,5.2vw,3.9rem)}
+h2{font-size:clamp(1.95rem,4.2vw,3rem);line-height:1.12}
+h3{font-size:clamp(1.4rem,2.4vw,1.65rem)}
+strong{font-weight:600;color:var(--ink)}
+.d{color:var(--gold-text);font-weight:600}
+.lead{font-weight:300;font-size:clamp(1.2rem,1.8vw,1.35rem);line-height:1.55;color:var(--ink2)}
+.lead strong{font-weight:600}
+p{margin:0 0 14px}
+.gold{color:var(--gold-text)}
+
+/* ---------- Barra de revisión (solo maqueta) ---------- */
+#review{background:#2a2a2a;color:#ddd;font-size:13px;line-height:1.3;padding:8px 12px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-family:system-ui,sans-serif}
+#review b{color:#D9A564;font-size:12px}
+#review label{display:flex;gap:4px;align-items:center}
+#review select{font-size:13px;padding:3px 4px;border-radius:4px;border:1px solid #555;background:#3a3a3a;color:#eee;max-width:150px}
+
+/* ---------- Cinta (ticker) ---------- */
+.ticker{display:block;overflow:hidden;white-space:nowrap;background:linear-gradient(90deg,#B8842F,#D9A564 50%,#B8842F);color:#141414;padding:11px 0;cursor:pointer;border-bottom:1px solid #8a6420}
+.tk-pista{display:inline-flex;width:max-content;animation:tk var(--tkdur,60s) linear infinite;will-change:transform}
+.tk-grupo{display:inline-flex;align-items:center}
+.tk{font-family:var(--label);font-size:23px;letter-spacing:.08em;text-transform:uppercase;line-height:1.1;padding:0 .7em}
+.tk-sep{font-size:18px;opacity:.6;padding:0 .4em}
+@keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker:hover .tk-pista,.ticker.paused .tk-pista{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.tk-pista{animation-duration:180s!important}}
+@media (min-width:900px){.tk{font-size:25px}}
+
+/* ---------- Cabecera ---------- */
+.top{background:var(--dark);color:#fff}
+.top-in{max-width:860px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.top img{height:40px;width:auto}
+.top .tag{font-size:15px;color:#E9D4AE;text-align:right;line-height:1.25}
+.top .out{background:none;border:1px solid #6b5a3c;color:#E9D4AE;font:inherit;font-size:16px;border-radius:10px;padding:8px 14px;cursor:pointer;min-height:44px}
+
+main{max-width:860px;margin:0 auto;padding:24px 16px 40px;position:relative}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 20px;margin:0 0 18px;box-shadow:0 1px 0 rgba(0,0,0,.02)}
+.sub{color:var(--muted);font-size:19px}
+.small{font-size:17px;color:var(--muted)}
+.eyebrow{font-family:var(--label);font-size:21px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-text);margin-bottom:10px;display:flex;align-items:center;gap:12px;line-height:1.1}
+.eyebrow::before{content:"";width:26px;height:2px;border-radius:2px;background:currentColor;opacity:.7;flex:0 0 26px}
+
+/* Botones */
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:60px;padding:14px 20px;border-radius:14px;font:600 21px/1.2 'Poppins',sans-serif;text-decoration:none;cursor:pointer;border:2px solid transparent;text-align:center;position:relative}
+.btn-gold{background:linear-gradient(180deg,var(--gold-hi),var(--gold-lo));color:#141414;border-color:#A97A2C}
+.btn-dark{background:var(--dark);color:#fff}
+.btn-line{background:#fff;color:var(--ink);border-color:#BFAE90}
+.btn-wa{background:#25D366;color:#fff;border-color:#1EB858}
+.btn-wa svg{width:28px;height:28px;flex:0 0 28px}
+.tagtip{display:flex;gap:14px;align-items:flex-start;background:#EEF8F1;border:2px solid #BFE5CB;border-radius:14px;padding:16px;margin-top:16px;color:#173d26}
+.tagtip .ic{flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;color:#fff;font:700 22px/1 'Poppins'}
+.tagtip p{margin:0 0 6px}.tagtip p:last-child{margin:0}
+.tagtip code{font-family:inherit;font-weight:700;background:#fff;border-radius:6px;padding:1px 6px}
+.btn + .btn{margin-top:12px}
+.btn .pill{position:absolute;top:-11px;right:10px;margin:0}
+.btn:focus-visible,select:focus-visible,input:focus-visible,.thumb:focus-visible{outline:3px solid var(--b2);outline-offset:2px}
+
+/* Pills de revisión */
+.pill{display:inline-block;font:700 13px/1 system-ui,sans-serif;padding:5px 8px;border-radius:6px;vertical-align:middle;margin-left:6px}
+.p-ej{background:#FFF1C9;color:#6B4E00;border:1px solid #E5C76B}
+.p-pend{background:#FBEAE7;color:#A3261B;border:1px solid #E8A69E}
+.demo-tag{position:absolute;top:6px;right:16px;font:600 12px/1.2 system-ui,sans-serif;color:#7a6a4d;background:#EFE5D3;border:1px solid #DCCBAA;border-radius:6px;padding:4px 8px}
+
+/* ---------- Entrada ---------- */
+.entry{max-width:560px;margin:0 auto}
+.entry h1{margin:6px 0 12px}
+.field{margin:18px 0}
+.field label{display:block;font-weight:600;font-size:20px;margin-bottom:8px}
+.field select,.field input{width:100%;min-height:62px;font:500 22px 'Poppins',sans-serif;color:var(--ink);background:#fff;border:2px solid #BFAE90;border-radius:14px;padding:10px 16px}
+.field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,#333 50%),linear-gradient(135deg,#333 50%,transparent 50%);background-position:calc(100% - 26px) 50%,calc(100% - 18px) 50%;background-size:8px 8px;background-repeat:no-repeat}
+.err{background:var(--err-bg);border:2px solid #E3A097;color:var(--err);border-radius:14px;padding:16px 18px;font-weight:500;margin:4px 0 16px}
+.help{margin-top:22px;font-size:19px;color:var(--ink2)}
+.help a{color:var(--gold-text);font-weight:600;word-break:break-word}
+
+/* ---------- Bienvenida ---------- */
+.step-head{display:flex;gap:14px;align-items:center;margin-bottom:10px}
+.num{flex:0 0 52px;width:52px;height:52px;border-radius:50%;background:var(--dark);color:var(--gold-hi);font:400 30px/54px var(--label);text-align:center}
+.num.done{background:var(--ok);color:#fff;font:700 26px/52px 'Poppins'}
+.step h3{margin:0}
+.step-body .btn{margin-top:14px}
+.okline{background:var(--ok-bg);color:var(--ok);border-radius:12px;padding:12px 14px;font-weight:600}
+
+/* ---------- Panel ---------- */
+.hello h1{font-size:clamp(2.6rem,5.6vw,3.9rem)}
+.style-line{display:flex;gap:10px;align-items:center;background:#F1E7D6;border-radius:12px;padding:12px 14px;font-size:18px;color:var(--ink2);margin-top:12px}
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:6px 0 22px}
+.day{background:#fff;border:2px solid #D8CBB4;border-radius:14px;min-height:76px;padding:6px 2px;cursor:pointer;font:600 18px/1.15 'Poppins';color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.day .d{font-size:24px;font-weight:700}
+.day .ck{font-size:15px;color:var(--ok);font-weight:700;height:18px}
+.day.today{background:var(--dark);color:#fff;border-color:var(--dark)}
+.day.today .ck{color:var(--gold-hi)}
+.day.sel:not(.today){border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset}
+.day.future{color:#7d766a}
+.h-sec{margin:34px 0 14px}
+
+/* Tarjetas de clase con miniatura */
+.lesson{padding:0;overflow:hidden}
+.thumb .lplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:84px;height:84px;border-radius:50%;background:rgba(20,20,20,.78);color:#fff;font-size:34px;display:flex;align-items:center;justify-content:center;padding-left:6px;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.thumb.lframe{cursor:default;background:#000}.thumb.lframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.thumb{display:block;position:relative;aspect-ratio:16/9;background:#e9e0d0;cursor:pointer;text-decoration:none;border:0;width:100%;padding:0}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb .lockov{position:absolute;inset:0;background:rgba(247,243,236,.72);display:flex;align-items:center;justify-content:center}
+.thumb .lockov span{background:#141414;color:#fff;font:600 18px 'Poppins';padding:10px 16px;border-radius:30px}
+.lesson .body{padding:18px 20px 20px}
+.lesson .kicker{font-family:var(--label);font-size:21px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-text);margin-bottom:6px;line-height:1.1}
+.lesson h3{font-size:clamp(1.45rem,2.4vw,1.6rem);margin-bottom:8px}
+.lesson .meta{font-size:18px;color:var(--ink2);margin-bottom:4px}
+.lesson .tz{font-size:16px;color:var(--muted);margin-bottom:12px}
+.lesson .btn{margin-top:8px}
+.lesson.vip{border-color:#CDB386}
+.lesson.vip .kicker{color:#7A5718}
+.lesson.novip .body{padding:18px 20px}
+
+.weekgrid{display:grid;grid-template-columns:1fr;gap:14px}
+.wk{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;text-align:left;padding:0;font:inherit;color:inherit;width:100%}
+.wk .pair{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#e9e0d0}
+.wk .pair img{aspect-ratio:16/9;object-fit:cover;width:100%}
+.wk .pair .novipimg{aspect-ratio:16/9;background:#EFE6D6;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--muted);padding:8px;text-align:center}
+.wk .cap{padding:12px 16px 14px}
+.wk .cap b{display:block;font-weight:600;font-size:21px;line-height:1.25}
+.wk .cap span{font-size:16px;color:var(--muted)}
+.wk.sel{border:2px solid var(--gold)}
+.wk.locked .pair{opacity:.55}
+.subsec{margin:26px 0 12px;padding-top:18px;border-top:2px solid var(--line)}
+.subsec .kicker{font-family:var(--label);font-size:22px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-text);line-height:1.1}
+.subsec h3{font-size:clamp(1.4rem,2.4vw,1.6rem);margin-top:4px}
+.testmini{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:14px 0 0;padding:12px 16px;border:1px solid #D9B97E;border-radius:12px;background:#FBF6EC;text-decoration:none;color:var(--ink);font-size:18px}
+.invbtn{background:transparent;color:#F2D29A;border:1.5px solid #C9974A;border-radius:12px;font:600 15px/1.15 'Poppins';padding:8px 12px;margin-right:10px;cursor:pointer;text-align:center}
+.testmini .go{font-weight:600;color:var(--gold-text);white-space:nowrap}
+.strip{display:flex;gap:12px;overflow-x:auto;padding:2px 2px 12px;margin:0 0 18px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.sd{flex:0 0 62%;max-width:300px;scroll-snap-align:start;background:none;border:2px solid transparent;border-radius:12px;padding:0;cursor:pointer;text-align:left;font:inherit;color:inherit;overflow:hidden}
+.sd img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px}
+.sd .lb{display:block;padding:8px 4px 2px;font-size:17px;font-weight:600;color:var(--ink2)}
+.sd .lb.hoy{color:var(--gold-text)}
+.sd.sel{border-color:var(--gold)}
+.sd.sel img{border-radius:10px 10px 0 0}
+.sd.future img{opacity:.6}
+.lesson + .lesson{margin-top:16px}
+.thumb .live{position:absolute;left:14px;bottom:14px;background:#C62828;color:#fff;font:600 17px 'Poppins';padding:7px 14px;border-radius:30px;display:flex;align-items:center;gap:8px}
+.thumb .live:before{content:'';width:9px;height:9px;border-radius:50%;background:#fff}
+@media (min-width:900px){.sd{flex-basis:23%}}
+
+.section-title{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:30px 0 6px}
+
+.order-note{font-size:17px;color:var(--muted);margin-bottom:16px}
+.blk h3{margin-bottom:10px}
+.blk h3 .n{color:var(--gold-text)}
+.sec{margin:30px 0 8px}
+.sec-head{display:flex;gap:16px;align-items:center;border-radius:18px;padding:18px 20px;margin:0 0 16px}
+.sec-head .sec-num{flex:0 0 52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:400 30px/1 var(--label)}
+.sec-head .kicker{font-family:var(--label);font-size:22px;letter-spacing:.08em;text-transform:uppercase;line-height:1.1}
+.sec-head h3{color:inherit;margin:4px 0 0;font-size:clamp(1.35rem,2.4vw,1.6rem);line-height:1.2}
+.sec-clase{background:#E9E4DC;border:2px solid #CFC5B5;border-radius:22px;padding:14px 12px 4px}
+.sec-clase .sec-head{background:#141414;color:#fff}
+.sec-clase .sec-head .kicker{color:var(--gold-hi)}
+.sec-clase .sec-head .sec-num{background:var(--gold);color:#141414}
+.sec-vip{background:#F1E4CC;border:2px solid #D9BC85;border-radius:22px;padding:14px 12px 4px;margin-top:38px}
+.sec-vip .sec-head{background:linear-gradient(180deg,var(--gold-hi),var(--gold-lo));color:#141414}
+.sec-vip .sec-head .kicker{color:#3A2A0E}
+.sec-vip .sec-head .sec-num{background:#141414;color:var(--gold-hi)}
+.sec-clase .blk.alt-a{background:#FFFDF9;border-color:var(--line)}
+.sec-clase .blk.alt-b{background:#F3E9D8;border-color:#D8C7A6}
+.sec-vip .blk.alt-a{background:#FFFDF9;border-color:#E2CFA8}
+.sec-vip .blk.alt-b{background:#FFF4DC;border-color:#DDBE7C}
+.dl.lnk .durl{display:block;font-size:15px;font-weight:500;color:var(--muted);margin-top:2px}
+
+/* Audio */
+.player{display:flex;align-items:center;gap:16px}
+.play{flex:0 0 76px;width:76px;height:76px;border-radius:50%;border:0;background:linear-gradient(180deg,var(--gold-hi),var(--gold-lo));cursor:pointer;display:flex;align-items:center;justify-content:center}
+.play svg{width:32px;height:32px}
+.bar{flex:1;min-width:0}
+.track{height:12px;background:#E8DDCB;border-radius:6px;overflow:hidden;cursor:pointer}
+.fill{height:100%;width:0;background:var(--gold-lo)}
+.times{display:flex;justify-content:space-between;font-size:17px;color:var(--muted);margin-top:6px}
+.speed{margin-top:14px;background:#fff;border:2px solid #BFAE90;border-radius:12px;font:600 17px 'Poppins';padding:8px 14px;min-height:48px;cursor:pointer}
+.voices{font-size:16px;color:var(--muted);margin:10px 0 0}
+
+/* Vídeo */
+.vframe{position:relative;aspect-ratio:16/9;background:#1b1b1b;border-radius:14px;overflow:hidden;margin-bottom:14px}
+.vframe img{width:100%;height:100%;object-fit:cover;opacity:.9}
+.vframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vframe .bigplay{position:absolute;inset:0;margin:auto;width:88px;height:88px;border-radius:50%;background:rgba(201,151,74,.97);border:0;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.vframe .bigplay svg{width:38px;height:38px;margin-left:5px}
+.vframe .poster{position:absolute;inset:0;background:radial-gradient(circle at 85% 10%,rgba(217,165,100,.25),transparent 55%),#111;padding:16px 18px;display:flex;flex-direction:column;justify-content:center;padding-right:96px}
+.vframe .pk{color:#E9C98E;font-family:var(--label);letter-spacing:.14em;text-transform:uppercase;font-size:18px;margin-bottom:6px}
+.vframe .pt{color:#fff;font:600 clamp(19px,4.4vw,32px)/1.2 'Poppins',sans-serif;letter-spacing:-.01em}
+.vframe .bigplay{left:auto;right:16px;top:0;bottom:0;margin:auto 0;width:68px;height:68px}
+@media (min-width:900px){.vframe .poster{padding:24px 28px;padding-right:130px}.vframe .bigplay{width:88px;height:88px;right:26px}}
+.vframe .vcap{position:absolute;left:0;right:0;bottom:0;padding:12px 14px;background:linear-gradient(transparent,rgba(0,0,0,.88));color:#fff;font-size:17px;font-weight:600}
+.vlist{list-style:none;margin:0;padding:0}
+.vlist li{margin:0 0 10px}
+.vitem{width:100%;display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;text-align:left;background:#fff;border:2px solid #E1D5C1;border-radius:14px;padding:12px 14px;min-height:64px;cursor:pointer;font:500 19px/1.3 'Poppins';color:var(--ink)}
+.vitem .pi{width:44px;height:44px;border-radius:50%;background:var(--dark);display:flex;align-items:center;justify-content:center}
+.vitem .pi svg{width:16px;height:16px;margin-left:3px}
+.vitem .dur{font-size:16px;color:var(--muted);font-weight:600;white-space:nowrap}
+@media (max-width:600px){.vitem{grid-template-columns:44px 1fr}.vitem .dur{grid-column:2}}
+.vitem .kind{display:block;font-family:var(--label);font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-text);line-height:1.2}
+.vitem.on{border-color:var(--gold);background:#FBF4E6}
+
+/* Ideas */
+.ideas{margin:0;padding:0;list-style:none;counter-reset:i}
+.ideas li{counter-increment:i;position:relative;padding:0 0 14px 54px;margin-bottom:12px;border-bottom:1px solid var(--line)}
+.ideas li:last-child{border-bottom:0;margin-bottom:0}
+.ideas li::before{content:counter(i);position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--dark);color:var(--gold-hi);font:400 24px/42px var(--label);text-align:center}
+.note{background:#F1E7D6;border-left:6px solid var(--gold);border-radius:10px;padding:16px 16px;margin-top:16px}
+.note h3{margin-bottom:8px}
+.note ul{margin:0;padding-left:22px}
+.note li{margin-bottom:8px}
+
+/* Test */
+.q{font-weight:600;font-size:21px;margin:6px 0 14px}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #CDBFA5;border-radius:14px;padding:14px 16px;min-height:60px;margin:0 0 10px;font:500 19px/1.35 'Poppins';color:var(--ink);cursor:pointer}
+.opt.right{background:var(--ok-bg);border-color:var(--ok);color:#0f3d20}
+.opt.wrong{background:var(--err-bg);border-color:var(--err);color:#5e140d}
+.opt[disabled]{cursor:default}
+.fb{border-radius:12px;padding:14px 16px;margin:6px 0 14px;font-size:19px}
+.fb.ok{background:var(--ok-bg);color:#0f3d20}
+.fb.ko{background:var(--err-bg);color:#5e140d}
+.fb a{font-weight:600}
+.qcount{font-size:16px;color:var(--muted);font-weight:600}
+.qprog{display:flex;gap:6px;margin:6px 0 4px}
+.qprog i{flex:1;height:6px;border-radius:3px;background:#E8DDCB}
+.qprog i.d{background:var(--gold-lo)}
+
+/* Checklist */
+.chk{display:flex;gap:14px;align-items:center;background:#fff;border:2px solid #E1D5C1;border-radius:14px;padding:12px 14px;margin-bottom:10px;min-height:62px;cursor:pointer;font-size:19px}
+.chk input{width:30px;height:30px;accent-color:var(--ok);flex:0 0 30px}
+
+/* Descargas */
+.dl{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fff;border:2px solid #E1D5C1;border-radius:14px;padding:14px 16px;min-height:64px;margin-bottom:10px;text-decoration:none;font-weight:600;font-size:19px;position:relative}
+.dl .pill{position:absolute;top:-11px;right:10px;margin:0}
+.dl .ic{font-size:16px;color:var(--gold-text);font-weight:700;white-space:nowrap}
+
+/* Brain (azul) */
+.brain{background:var(--navy);color:#fff;border-radius:18px;padding:24px 20px;margin:26px 0 18px;position:relative;overflow:hidden;border:1px solid #2a3b84}
+.brain::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:linear-gradient(90deg,var(--b1),var(--b2))}
+.brain h2{color:#fff;margin-bottom:8px}
+.brain h2 span{font-weight:700;background:linear-gradient(90deg,var(--b1),var(--b2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.brain p{color:#E6ECFF;font-size:21px}
+.brain .lock{display:flex;gap:12px;align-items:center;background:rgba(143,211,255,.12);border:1px solid rgba(143,211,255,.35);border-radius:12px;padding:14px;font-weight:600;color:#fff}
+.btn-blue{background:linear-gradient(90deg,var(--b1),var(--b2));color:#0B1640;border-color:#7FA6FF}
+
+.admis{background:var(--dark);color:#fff;border:0}
+.admis .eyebrow{color:#E9C98E}
+.admis h2{color:#fff;margin-bottom:10px}.admis h2 b{color:var(--gold-hi)}
+.admis p{color:#eee}
+.next{background:#EFE6D6;border:1px dashed #BFAE90}
+.next h3{color:var(--gold-text);margin-bottom:6px}
+
+footer{background:var(--dark);color:#cfc6b6;font-size:16px;line-height:1.5}
+footer .in{max-width:860px;margin:0 auto;padding:26px 16px 34px}
+footer a{color:#E9C98E;font-weight:600}
+footer p{margin-bottom:10px}
+
+@media (min-width:900px){
+  main{padding-top:36px}
+  .top img{height:46px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+  .two .card{margin:0}
+  .btn{width:auto;min-width:320px;display:inline-flex}
+  .btn + .btn{margin-top:0;margin-left:10px}
+  .entry .btn,.step-body .btn,.two .btn,.blk .btn,.lesson .btn{width:100%;margin-left:0}
+  .step-body .btn + .btn{margin-top:12px}
+  .day{min-height:84px;font-size:20px}
+  .day .d{font-size:28px}
+  .weekgrid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:360px){
+  .day{font-size:16px}.day .d{font-size:21px}
+}
+</style>
+</head>
+<body>
+
+
+<div class="ticker" id="ticker" role="marquee" aria-live="off" title="Toca para pausar"></div>
+
+<header class="top"><div class="top-in">
+  <img src="https://files.leadconnectorhq.com/file/6afafada9d4ebed1c84ad472/areavip-logo-metapro-area-vip.png" alt="MetaPro">
+  <div id="top-right" class="tag">Área VIP<br>Finanzas Pro</div>
+</div></header>
+
+<main id="app"></main>
+
+<footer><div class="in">
+  <p><b style="color:#fff">Aviso:</b> En MetaPro Academy no damos consejos de inversión. Todo el contenido de esta área tiene una finalidad exclusivamente educativa. Cada persona es responsable de sus propias decisiones de inversión.</p>
+  <p>¿Necesitas ayuda? Escríbenos a <a href="mailto:pregunta@metapro.academy">pregunta@metapro.academy</a></p>
+  <p style="margin:0"><a href="https://metapro.academy" target="_blank" rel="noopener">© MetaPro Academy</a></p>
+</div></footer>
+
+<script>
+const ICON_PLAY='<svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z" fill="#141414"/></svg>';
+const ICON_PLAY_W='<svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z" fill="#D9A564"/></svg>';
+const ICON_PAUSE='<svg viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="#141414"/></svg>';
+const PEND='';
+const WA_URL='https://sndflw.pro/i/LV5bcpkYNthFuKHTJU95';
+const ICON_WA='<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.9-3.9-1.9-6.1C4.9 9.8 9.9 5 16 5s11.1 4.8 11.1 10.8S22.1 26.4 16 26.4zm6.1-8c-.3-.2-2-1-2.3-1.1-.3-.1-.5-.2-.8.2-.2.3-.9 1.1-1.1 1.3-.2.2-.4.3-.7.1-.3-.2-1.4-.5-2.7-1.7-1-.9-1.7-2-1.9-2.3-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1.1-2.6c-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.7 5.8 5.1 2.9 1.1 3.4.9 4.1.8.6-.1 2-.8 2.3-1.6.3-.8.3-1.4.2-1.6-.1-.1-.3-.2-.6-.3z"/></svg>';
+const WA_BTN=()=>`<a class="btn btn-wa" href="${WA_URL}" target="_blank" rel="noopener">${ICON_WA}<span>Entrar al grupo VIP</span></a>`;
+const WA_TIP=`<div class="tagtip"><div class="ic" aria-hidden="true">@</div><div><p><b>Para preguntar a tu profesor asignado</b>, etiquétalo con «@»: así tu pregunta le llegará directamente.</p></div></div>`;
+function savedName(){try{return localStorage.getItem('vipName')||''}catch(e){return ''}}
+const SHOW_DAY6=false; /* el día 6 existe pero no se muestra hasta que lo activemos */
+const THUMB={dia6:'https://files.leadconnectorhq.com/file/6afafad8a30b968e3fc42c38/areavip-dia6.webp',dia1:'https://files.leadconnectorhq.com/file/6afafad87c3b573a627d36ac/areavip-dia1.webp',dia2:'https://files.leadconnectorhq.com/file/6afafad8893246071fbef910/areavip-dia2.webp',dia3:'https://files.leadconnectorhq.com/file/6afafad86b9476a3ac8a122e/areavip-dia3.webp',dia4:'https://files.leadconnectorhq.com/file/6afafad854a6494bd6c1e64f/areavip-dia4.webp',dia5:'https://files.leadconnectorhq.com/file/6afafad854a6494bd6c1e643/areavip-dia5.webp',vip1:'https://files.leadconnectorhq.com/file/6afafadafdf6b54fd76aac52/areavip-vip1.webp',vip2:'https://files.leadconnectorhq.com/file/6afafada6223b8139d5bbb19/areavip-vip2.webp',vip3:'https://files.leadconnectorhq.com/file/6afafada38d69cb41d30e4f9/areavip-vip3.webp',vip4:'https://files.leadconnectorhq.com/file/6afafada38d69cb41d30e4f8/areavip-vip4.webp'};
+
+
+const DAYS={
+ 1:{short:'Lun',wd:'lunes',num:16,long:'Lunes 16 de noviembre',title:'El nuevo mercado financiero',vip:'Instalación Setup inversión y 1ª práctica',live:'https://streamyard.com/watch/NpdthqJ2ppS6',zoom:'https://us06web.zoom.us/j/86175267309?pwd=nQoHBrZk8Pbq7mASxB5YQwmnoDfl8x.1',vipAt:'21:00',opinion:'https://empieza.metapro.academy/cuestionario-dia1',yt:'https://youtube.com/live/Od5Axuc3v-4',vipRec:'https://youtu.be/AymHr1HzLfA'},
+ 2:{short:'Mar',wd:'martes',num:17,long:'Martes 17 de noviembre',title:'Pon tu dinero a trabajar',vip:'Cómo montar un pool de liquidez',live:'https://streamyard.com/watch/eyMVBxUQ62Zc',zoom:'https://us06web.zoom.us/meeting/register/JVVDrE0xQ4evG_Jtd1ACHA',opinion:'https://empieza.metapro.academy/cuestionario-dia2',yt:'https://youtube.com/live/29ERUYEu14s',vipRec:'https://youtu.be/wxRuPY11riI'},
+ 3:{short:'Mié',wd:'miércoles',num:18,long:'Miércoles 18 de noviembre',title:'Financiación 2.0: cómo financiarte con DeFi',vip:'Préstamos',live:'https://streamyard.com/watch/FxN85N64FixX',zoom:'https://us06web.zoom.us/meeting/register/dygbcmE3Qj-u1x2eecVIRg',yt:'https://youtube.com/live/YU5-LyJt-4I'},
+ 4:{short:'Jue',wd:'jueves',num:19,long:'Jueves 19 de noviembre',title:'Activos financieros 2.0',vip:'Activos tokenizados',live:'https://streamyard.com/watch/k2hvWRhr59Qs',zoom:'https://us06web.zoom.us/meeting/register/IJlkm7wHQcSEG_MnEBazwA',yt:'https://youtube.com/live/yjioI1DcFcE'},
+ 5:{short:'Vie',wd:'viernes',num:20,long:'Viernes 20 de noviembre',title:'Gestiona mejor tu capital',vip:null,live:'https://streamyard.com/watch/T8ubWgWcp2qb',zoom:null,yt:'https://youtube.com/live/OE4pPDIbbV0'},
+ 6:{short:'Lun',wd:'lunes',num:23,long:'Lunes 23 de noviembre',title:'Invierte en directo con Ángel Pardo',vip:'Completa tu estrategia de inversión',live:'https://us06web.zoom.us/meeting/register/fxo7eQssQ9CrU9uI8vXiEQ',zoom:'https://us06web.zoom.us/meeting/register/S4TVRsKATlCTe9_6xJcgIg',vipAt:'21:00',hidden:true}
+};
+const NDAYS=()=>SHOW_DAY6?6:5;
+const STYLES={activo:'Activo',reflexivo:'Reflexivo',teorico:'Teórico',pragmatico:'Pragmático'};
+const ORDERS={
+ '':['audio','videos','ideas','test','descargas'],
+ activo:['videos','descargas','test','audio','ideas'],
+ reflexivo:['audio','test','ideas','videos','descargas'],
+ teorico:['ideas','audio','videos','test','descargas'],
+ pragmatico:['videos','checklist','descargas','test','audio','ideas']
+};
+
+/* ===== Kit diario («Lo imprescindible») =====
+   Se rellena cada día tras validar Ángel. Estructura:
+   KIT[n]={audio:'url mp3', yt:'idYouTube', videos:[{kind,t,d,s,e}], ideas:['html'], nota:['html'],
+           quiz:[{q,o:[..],c,why,v}], descargas:[{t,u}], checklist:['texto']} */
+const KIT={};
+/* ===== Ejemplo (solo modo revisión): día 1 de octubre ===== */
+const DEMO_D1={demo:true,
+ clase:{yt:'tXRfb63-LKQ',audio:'https://files.leadconnectorhq.com/file/6afb0c549d4ebed1c84c8e84/areavip-en4min-d1-clase.mp3',dur:'3:37',min:4,
+  videos:[
+   {kind:'Ángel Pardo · Patrimonio',t:'La fórmula de la seguridad patrimonial: tus gastos anuales × 25',d:'4,5 min',s:2635,e:2911},
+   {kind:'Ángel Pardo · Patrimonio',t:'De FIRE a DeFIRE: cómo reducir el capital que necesitas',d:'2 min',s:3055,e:3184},
+   {kind:'Jesús de Pablos · IA',t:'Qué es un agente de IA y cómo trabaja para ti',d:'3 min',s:3376,e:3570},
+   {kind:'Ángel Pardo · Nuevo mercado',t:'Las reglas del nuevo mercado: 24/7, global, transparente y con costes mínimos',d:'3,5 min',s:5426,e:5633},
+   {kind:'Ángel Pardo · Nuevo mercado',t:'Qué puedes hacer: pignorar, cobrar comisiones y tokenizar',d:'4 min',s:5633,e:5873}
+  ],
+  ordPractico:[4,3,2,0,1],
+  ideas:[
+   '<strong>No cambia lo que queremos de nuestro dinero</strong>: protegerlo, hacerlo crecer y dejar un legado. Lo que cambia es <span class="d">cómo accedemos al mercado</span>: abierto 24/7, global, transparente y con costes de céntimos, donde ya se operan oro, bonos, acciones y ETF tokenizados.',
+   '<strong>La fórmula de la seguridad patrimonial</strong>: tus gastos anuales × 25 es el capital que necesitas bien invertido para que el dinero deje de ser un problema (regla del 4 %). El objetivo de la semana es entender cómo las finanzas descentralizadas y la IA <span class="d">reducen ese múltiplo</span>: de FIRE a DeFIRE.',
+   '<strong>La IA potencia tu criterio, no lo sustituye</strong>. Un agente es como un colaborador al que le defines la misión, las herramientas, las reglas y el formato. Con los datos públicos de la blockchain te permite <span class="d">probar una estrategia antes de invertir</span> (backtesting).'
+  ],
+  nota:[
+   '<b>Tu cifra de referencia:</b> suma tus gastos de un mes, multiplícalos por 12 y después por 25. Anótala: trabajaremos con ella toda la semana.',
+   '<b>La rentabilidad que hoy te parece suficiente:</b> apúntala también. El viernes la revisaremos.',
+   '<b>Primero proteger, después rentabilizar:</b> al empezar a invertir, lo más difícil no es ganar, es no perder capital.',
+   '<b>Datos sensibles:</b> no compartas con una IA información personal o financiera identificable sin anonimizarla.'
+  ],
+  quiz:[
+   {q:'Según la fórmula de la seguridad patrimonial, ¿cómo calculas el capital que necesitas invertido?',o:['Tus ingresos anuales × 10','Tus gastos anuales × 25','Tus ahorros actuales × 4'],c:1,
+    why:'Se parte de lo que gastas al año (gasto mensual × 12) y se multiplica por 25. Con gastos de 100.000 € al año, en el sistema tradicional necesitarías 2,5 millones bien invertidos.',v:0},
+   {q:'¿De dónde sale el múltiplo 25?',o:['De la regla del 4 %: el 8 % bruto medio de la bolsa, menos inflación e impuestos','Es la rentabilidad mínima garantizada por los bancos','Es el número de años que dura una jubilación media'],c:0,
+    why:'La renta variable ofrece de media un 8 % bruto anual a largo plazo. Descontando inflación e impuestos queda en torno a un 4 % neto, y el 4 % de 25 veces tus gastos equivale a tus gastos de un año.',v:0},
+   {q:'¿Qué diferencia operativa tiene el nuevo mercado financiero frente a la banca tradicional?',o:['Solo opera en horario bancario, como la bolsa','Funciona 24/7 y una transferencia llega en segundos','Las comisiones dependen del importe de la operación'],c:1,
+    why:'En finanzas descentralizadas puedes operar cualquier día a cualquier hora, la transferencia llega en segundos y el coste es de céntimos, se envíe la cantidad que se envíe.',v:3},
+   {q:'¿Qué significa pignorar un activo?',o:['Venderlo para obtener liquidez','Dejarlo como garantía para pedir un préstamo sin venderlo','Transferirlo a otra persona'],c:1,
+    why:'Es lo que hacen los grandes patrimonios: no venden sus inversiones, las dejan como garantía y obtienen liquidez. Lo practicaremos el miércoles.',v:4},
+   {q:'Si un agente de IA te recomienda una inversión, ¿quién decide?',o:['La IA, porque maneja más datos','Tú: la IA te ayuda a analizar, pero el criterio final es tuyo','Nadie: el agente invierte de forma automática'],c:1,
+    why:'La IA es una herramienta muy potente para analizar y probar estrategias, pero el criterio y la decisión son siempre del inversor.',v:2}
+  ]
+ },
+ vip:{yt:'T0eNS189sSM',audio:'https://files.leadconnectorhq.com/file/6afb0c54fdf6b54fd76c6190/areavip-en4min-d1-vip.mp3',dur:'3:28',min:4,
+  videos:[
+   {kind:'Ángel Pardo · Contexto',t:'Por qué ahora: los activos de siempre, en un mercado abierto 24/7',d:'4 min',s:1600,e:1842},
+   {kind:'Ángel Pardo · Mentalidad',t:'Mentalidad inversora: prudencia y empezar con poco',d:'3 min',s:2830,e:3023},
+   {kind:'Carmen Blanco · Práctica',t:'Instala Rabby y guarda tu frase semilla',d:'6 min',s:3984,e:4369},
+   {kind:'Carmen Blanco · Práctica',t:'Compra tus primeros 50 € de ETH con MoonPay (red Base)',d:'4 min',s:4482,e:4720},
+   {kind:'Carmen Blanco · Práctica',t:'El gas: por qué necesitas ETH en la red de Base',d:'1,5 min',s:4818,e:4912}
+  ],
+  ordPractico:[2,3,4,0,1],
+  ideas:[
+   'Gracias a la blockchain, <strong>el dinero se ha digitalizado como antes la música</strong>: un mercado abierto 24 horas, los 7 días, donde una transferencia llega en segundos. Y ya no se limita a bitcoin o ether: <span class="d">acciones, fondos y oro también se pueden operar aquí</span>.',
+   '<strong>La inteligencia artificial potencia tu criterio</strong>: te ayuda a comprender información financiera, compararla y simular estrategias antes de invertir. Pero <span class="d">sin conocimiento se queda a medias</span>.',
+   'Mentalidad inversora: <strong>prudencia y paciencia</strong>. Se practica con poco, el equivalente a 50 €, y <span class="d">ante la duda, te abstienes</span>.'
+  ],
+  nota:[
+   '<b>Frase semilla:</b> 12 palabras, escritas en papel y en un sitio seguro. Nunca una foto. Nunca se dan a nadie.',
+   '<b>Rabby:</b> no la busques en el navegador (hay copias maliciosas). Usa solo el enlace oficial y pon el bloqueo automático en 10 minutos.',
+   '<b>MoonPay:</b> primero crea tu billetera en Rabby y pega su dirección. Compra ETH y envíalo por la red de Base.',
+   '<b>Comisiones:</b> MoonPay es más caro; sirve para la práctica de 50 €. Para importes mayores se usa un exchange con transferencia (en Europa, SEPA gratuita).'
+  ],
+  quiz:[
+   {q:'¿Cómo debes guardar las 12 palabras de tu frase semilla?',o:['Con una foto en el móvil, para no perderlas','Escritas en papel y guardadas en un sitio seguro','En un correo electrónico enviado a ti mismo'],c:1,
+    why:'Quien tenga esas 12 palabras puede instalar tu billetera en otro sitio y llevarse tus fondos. Nunca se fotografían ni se comparten, aunque te llame alguien que diga ser de atención al cliente.',v:2},
+   {q:'Al comprar ETH con MoonPay, ¿por qué red tienes que enviarlo a tu billetera Rabby?',o:['Por la red de Base','Por la red de Ethereum','Da igual: llega por cualquier red'],c:0,
+    why:'En la práctica trabajamos en la red de Base. MoonPay te ofrecerá muchas redes y es fácil equivocarse: elige ETH en la red de Base.',v:3},
+   {q:'¿Por qué compramos precisamente ETH para empezar?',o:['Porque es el activo con más rentabilidad garantizada','Porque MoonPay no permite comprar otros activos','Porque en Base el gas (el coste de cada operación) se paga con ETH'],c:2,
+    why:'Cada movimiento en la blockchain tiene un coste mínimo, el gas, que en la red de Base se paga con ETH. Sin ETH en la billetera no podrías mover tus activos.',v:4},
+   {q:'¿Qué dato de tu billetera sí puedes compartir sin riesgo?',o:['La contraseña','La dirección de la billetera, que funciona como tu IBAN','La frase semilla'],c:1,
+    why:'La dirección sirve para recibir fondos, igual que un número de cuenta. Es la que pegarás en MoonPay al comprar.',v:2},
+   {q:'¿Cuál es la forma segura de instalar Rabby?',o:['Buscar «Rabby» en Google y elegir el primer resultado','Usar solo el enlace oficial que te envía el equipo de MetaPro','Pedir a otro alumno que te pase su enlace'],c:1,
+    why:'Al buscar en el navegador pueden aparecer copias maliciosas, con una letra cambiada. Usa siempre el enlace que te enviamos.',v:2}
+  ],
+  enlaces:[
+   {t:'Instalar Rabby (billetera)',u:'https://rabby.io/'},
+   {t:'Comprar con MoonPay',u:'https://www.moonpay.com/es'}
+  ],
+  descargas:[
+   {t:'Guía · Instalar Rabby',u:'https://assets.cdn.filesafe.space/kfKaFrSWBIS0536cPtFb/media/6996d03520c0359188ee4e76.pdf'},
+   {t:'Guía · Comprar con MoonPay',u:'https://assets.cdn.filesafe.space/kfKaFrSWBIS0536cPtFb/media/6ab030efbdaa5e26a957844b.pdf'}
+  ],
+  checklist:['Rabby instalada desde el enlace oficial','Frase semilla escrita en papel y guardada','Cuenta de MoonPay verificada','Primera compra de ETH en la red de Base']
+ }
+};
+
+const BRAIN_URL='https://copilot.metaproacademy.app/';
+const SEC={}; function st(k){ return SEC[k]||(SEC[k]={video:0,vpicked:false,qi:0,ans:null,score:0,done:false,sent:false,miss:{}}); }
+function kitOf(k){ const [v,sec]=k.split('-'); return (KIT[+v]||{})[sec]||{}; }
+
+const API='https://script.google.com/macros/s/AKfycbzejeEWe38mKw7A0VbCzTCOiH56CCdF7n7rN4TLHlA1RBvgBwK521dyiPruztjyyRzI/exec';
+const LS={get(k){try{return localStorage.getItem(k)||''}catch(e){return ''}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+const S={inv:LS.get('vipInv'),informe:LS.get('vipInforme'),tel:LS.get('vipTel'),screen:'entrada',day:1,phase:'antes',tick:'antes',style:LS.get('vipStyle'),view:1,name:LS.get('vipName')||'',video:0,vpicked:false,speed:1,qi:0,ans:null,score:0,qdone:false,busy:false,lt:{i:0,a:[]}};
+function madridNow(){
+  const p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+  const g=t=>+p.find(x=>x.type===t).value; return {y:g('year'),m:g('month'),d:g('day'),h:g('hour')%24,mi:g('minute')};
+}
+function clock(){
+  const n=madridNow(); const t=n.h*60+n.mi; let day=1,phase='antes',tick='antes';
+  const key=n.y*10000+n.m*100+n.d;
+  const map={20261116:1,20261117:2,20261118:3,20261119:4,20261120:5};
+  if(map[key]){ day=map[key];
+    if(t<19*60){phase='antes';tick='antes';}
+    else { phase=hasKit(day)?'despues':'clase'; tick = t<21*60?'directo':(DAYS[day].vip&&t<23*60?'vip':'despues'); }
+  } else if(key>20261120){ day=5; phase=hasKit(5)?'despues':'clase'; tick='fin'; }
+  else { day=1; phase='antes'; tick='previo'; }
+  if(PREVIEW&&(S.ovDay||S.ovPh)){ if(S.ovDay) day=S.ovDay; const m={antes:['antes','antes'],directo:['clase','directo'],vip:['clase','vip'],despues:[hasKit(day)?'despues':'clase','despues']}[S.ovPh||'antes']; phase=m[0]; tick=m[1]; }
+  const ch=(S.day!==day||S.phase!==phase||S.tick!==tick); S.day=day; S.phase=phase; S.tick=tick; return ch;
+}
+const PREVIEW=new URLSearchParams(location.search).get('revision')==='mp33equipo';
+/* ===== Día 1 · Sesión VIP real (16 nov 2026) ===== */
+const D1_VIP={audio:'https://files.leadconnectorhq.com/file/6afb93a67c3b573a6290e6b7/areavip-en4min-d1-vip-real.mp3',dur:'2:32',min:4,
+  videos:[{kind:'Ángel Pardo · Mentalidad',t:'Prudencia: por qué empezamos con 50 € y sin prisa',d:'3 min',mp4:'https://files.leadconnectorhq.com/file/6afce4c4893246071ffa055d/vip1-c1-v2.mp4'},{kind:'Carmen Blanco · Práctica',t:'El recorrido del dinero: MoonPay, ETH en Base y tu billetera Rabby',d:'3 min',mp4:'https://files.leadconnectorhq.com/file/6afce4c53589612e68ab8ed3/vip1-c2-v2.mp4'},{kind:'Carmen Blanco · Práctica',t:'Instala Rabby desde el enlace oficial y crea tu billetera',d:'4 min',mp4:'https://files.leadconnectorhq.com/file/6afce4c73309cfeb5382892d/vip1-c3-v2.mp4'},{kind:'Carmen Blanco · Práctica',t:'La frase semilla y la dirección de tu billetera',d:'2 min',mp4:'https://files.leadconnectorhq.com/file/6afce4c8893246071ffa05dd/vip1-c4-v2.mp4'},{kind:'Carmen Blanco · Práctica',t:'Compra 50 € de ETH en la red de Base con MoonPay',d:'1,5 min',mp4:'https://files.leadconnectorhq.com/file/6afce4ca7c3b573a62b841cc/vip1-c5-v2.mp4'},{kind:'Carmen Blanco · Práctica',t:'Por qué la red de Base: el gas se paga con ETH',d:'1 min',mp4:'https://files.leadconnectorhq.com/file/6afce4cb3309cfeb53828966/vip1-c6-v2.mp4'}],
+  ideas:[
+   'Las tres emes: <strong>mentalidad, método y mentoría</strong>. Este mercado es muy accesible y por eso es fácil precipitarse u operar de más: <span class="d">aquí los errores se pagan con dinero</span>. Operar no garantiza ser rentable, ni siquiera con MetaPro Brain.',
+   '<strong>La prudencia es nuestra arma secreta.</strong> Como el joven que acaba de sacarse el carné: nadie le daría las llaves de un superdeportivo. Ángel perdió un millón de euros al empezar <span class="d">por no ser prudente</span>.',
+   'Las prácticas se hacen con <strong>el equivalente a unos 50 €</strong>: la rentabilidad es la misma que con más dinero y, si hay un error, <span class="d">la pérdida es pequeña</span>. Lo que veis en pantalla es lo mismo que conseguiréis en casa.',
+   'El recorrido del capital: <strong>MoonPay</strong> (pasarela que cambia tus euros o dólares por un activo digital y, como un banco, te pide identificarte) → <strong>ETH en la red de Base</strong> → tu billetera <strong>Rabby</strong>. Desde mañana, con esa billetera, <span class="d">os conectaréis a los protocolos</span>.',
+   'Descentralizado no es estar fuera del sistema: para entrar con euros o dólares hay que identificarse, y <strong>los beneficios tributan</strong>. Lo que aporta este mercado es <span class="d">eliminar intermediarios y acceder a operaciones que antes solo ofrecía la banca privada</span>.'
+  ],
+  nota:[
+   '<b>Frase semilla:</b> son 12 palabras y nadie te las puede recuperar. Nunca una foto ni en la nube: en papel en un sitio seguro o en un gestor de contraseñas cifrado.',
+   '<b>Bloqueo automático:</b> en Rabby, en la rueda de configuración, pon el tiempo de bloqueo en 10 minutos.',
+   '<b>Dirección de la billetera:</b> empieza por 0x y funciona como tu IBAN. Cópiala y pégala, nunca a mano: un carácter mal escrito envía el dinero a otra billetera.',
+   '<b>Red de Base:</b> compra ETH en la red de Base. Si lo envías por otra red (por ejemplo, Solana), puede que Rabby no lo muestre. Si ya lo tienes en Arbitrum, mañana os explicamos cómo pasarlo.',
+   '<b>Verificación en MoonPay:</b> escribe tu nombre exactamente como en tu documento y usa teléfono, documento y dirección del mismo país. Tarjeta de crédito, Apple Pay o PayPal son lo más sencillo; algunas tarjetas de débito no se aceptan, según el emisor.',
+   '<b>Si la compra no llega al momento:</b> espera unos minutos; el pago con tarjeta puede tardar un poco más.',
+   '<b>Si hoy no te da tiempo:</b> no pasa nada, no es un examen. Tienes la grabación y las guías en PDF. Las dudas, en el chat del Grupo VIP, etiquetando a Pablo, tu profesor asignado.'
+  ],
+  quiz:[
+   {q:'¿Por qué se hacen las prácticas con el equivalente a unos 50 €?',o:['Porque es el mínimo que exige MoonPay','Porque la rentabilidad es la misma y, si hay un error, la pérdida es pequeña','Porque Rabby no admite importes mayores'],c:1,
+    why:'El objetivo es aprender a operar. La rentabilidad porcentual es la misma con poco dinero y, ante un error, la pérdida es pequeña.'},
+   {q:'¿Qué ocurre si olvidas la contraseña y has perdido la frase semilla?',o:['El soporte de Rabby te la envía por email','Nadie puede recuperar la billetera: es descentralizada','MoonPay te la restablece con tu documento'],c:1,
+    why:'En una billetera descentralizada no hay nadie detrás. Las 12 palabras son la única forma de recuperarla: guárdalas en un sitio seguro.'},
+   {q:'¿Cómo debes introducir la dirección de tu billetera en MoonPay?',o:['Escribiéndola a mano, carácter por carácter','Copiándola desde Rabby y pegándola','Dictándola por voz al móvil'],c:1,
+    why:'Un solo carácter equivocado envía el dinero a otra billetera, y ahí no se recupera. Copia y pega siempre.'},
+   {q:'Al comprar ETH en MoonPay, ¿qué red tienes que elegir?',o:['La red de Base','La red de Solana','Cualquiera: todas llegan igual a Rabby'],c:0,
+    why:'Trabajamos en la red de Base, donde el gas (el coste de cada operación) se paga con ETH. Otras redes pueden no verse en tu billetera.'},
+   {q:'Según Ángel, ¿cuál es «nuestra arma secreta» como inversores?',o:['La prudencia','La rapidez para operar','El apalancamiento'],c:0,
+    why:'Un mercado tan accesible invita a precipitarse. La prudencia y la paciencia son las que permiten invertir de forma responsable y ser rentable.'}
+  ],
+  enlaces:[
+   {t:'Instalar Rabby (billetera)',u:'https://rabby.io/'},
+   {t:'Comprar con MoonPay',u:'https://www.moonpay.com/es'}
+  ],
+  descargas:[
+   {t:'Guía · Instalar Rabby',u:'https://assets.cdn.filesafe.space/kfKaFrSWBIS0536cPtFb/media/6996d03520c0359188ee4e76.pdf'},
+   {t:'Guía · Comprar con MoonPay',u:'https://assets.cdn.filesafe.space/kfKaFrSWBIS0536cPtFb/media/6ab030efbdaa5e26a957844b.pdf'}
+  ],
+  checklist:['Rabby instalada desde el enlace oficial','Frase semilla guardada en un sitio seguro','Bloqueo automático en 10 minutos','Cuenta de MoonPay verificada','Unos 50 € de ETH en la red de Base enviados a Rabby','Chat del Grupo VIP silenciado y dudas etiquetando a Pablo']
+};
+/* ===== Día 1 · Clase en directo real (16 nov 2026) ===== */
+const D1_CLASE={yt:'Od5Axuc3v-4',audio:'https://files.leadconnectorhq.com/file/6afc18b8a30b968e3fe66d5e/areavip-en4min-d1-clase-real.mp3',dur:'2:39',min:4,
+  videos:[
+   {kind:'Ángel Pardo · Patrimonio',t:'La fórmula de la seguridad patrimonial: tus gastos anuales × 25',d:'4 min',mp4:'https://files.leadconnectorhq.com/file/6afccf10893246071ff7a39c/d1-c1.mp4',s:2716,e:2957},
+   {kind:'Ángel Pardo · Patrimonio',t:'De FIRE a DeFIRE: del × 25 al × 8',d:'3 min',mp4:'https://files.leadconnectorhq.com/file/6afccfc9716ed595fda3c388/d1-c2.mp4',s:3025,e:3208},
+   {kind:'Jesús de Pablos · IA',t:'IA gratuita o IA con contexto: por qué importa al invertir',d:'4 min',mp4:'https://files.leadconnectorhq.com/file/6afcd0befdf6b54fd7a3bcfc/d1-c3.mp4',s:3322,e:3564},
+   {kind:'Ángel Pardo · Nuevo mercado',t:'Pignorar: obtener liquidez sin vender tus inversiones',d:'3 min',mp4:'https://files.leadconnectorhq.com/file/6afcd1853589612e68a9713e/d1-c4.mp4',s:4928,e:5124},
+   {kind:'Ángel Pardo · Nuevo mercado',t:'Hacer de market maker: cobrar comisiones como un bróker',d:'3 min',mp4:'https://files.leadconnectorhq.com/file/6afcd24b3589612e68a98a93/d1-c5.mp4',s:5124,e:5319},
+   {kind:'Ángel Pardo · Práctica',t:'Tu billetera: clave pública, clave privada, Rabby y MoonPay',d:'4,5 min',mp4:'https://files.leadconnectorhq.com/file/6afcd35c716ed595fda432f5/d1-c6.mp4',s:6031,e:6301}
+  ],
+  ordPractico:[5,3,4,0,1,2],
+  ideas:[
+   '<strong>No cambia lo que queremos de nuestro dinero</strong>: que no pierda valor, sacarle rentabilidad, vivir mejor y dar mejores oportunidades a nuestros hijos. Lo que cambia es <span class="d">cómo accedemos al mercado</span>, igual que pasamos del fax al email o del videoclub a Netflix.',
+   '<strong>La fórmula de la seguridad patrimonial</strong>: tus gastos mensuales × 12 × 25 es el capital que necesitas bien invertido para ser libre financieramente (regla del 4 %). Con las finanzas descentralizadas ese múltiplo <span class="d">baja de × 25 a × 8</span>: de FIRE a DeFIRE. Con 100.000 € de gastos al año, de 2,5 millones a 800.000 €.',
+   '<strong>Este mercado no es más rentable que el tradicional</strong>: es el mismo mercado, pero sin intermediarios que se queden parte de la rentabilidad. Es 24/7, global y transparente, y por eso <span class="d">se puede ganar y también perder a cualquier hora</span>: hay que operar de forma responsable.',
+   '<strong>Tres usos de las finanzas descentralizadas</strong>: pignorar (dejar tus activos como garantía y obtener liquidez sin vender), hacer de market maker (cobrar comisiones como un bróker) y la tokenización, que <span class="d">trae acciones, fondos, bonos, oro o inmuebles a este mercado</span>.',
+   '<strong>La IA potencia tu criterio, no decide por ti</strong>. La gratuita tiende a complacerte; con contexto (método, documentos, prudencia) es consistente. MetaPro Brain te permite <span class="d">probar una estrategia con datos del pasado, compararla con otras y seguir tu cartera</span>.'
+  ],
+  nota:[
+   '<b>Tu cifra de referencia:</b> gastos de un mes × 12 × 25. Apunta también cuánto tienes hoy para invertir y cuánto tiempo necesitarías para llegar con tu capacidad de ahorro.',
+   '<b>La rentabilidad que te gustaría conseguir:</b> apúntala. El viernes la revisaremos.',
+   '<b>Clave pública y clave privada:</b> la pública es tu dirección (como tu IBAN) y se puede compartir. La privada solo la tienes tú: quien la tenga puede llevarse tus fondos y una transferencia en blockchain no se puede revertir.',
+   '<b>Nadie de MetaPro te pedirá nunca</b> tus contraseñas, tu frase semilla ni gestionar tu dinero. Si alguien lo hace, no se lo des.',
+   '<b>Para la práctica de mañana:</b> instala Rabby (mejor en el ordenador) y envía entre 25 y 50 € con MoonPay; desde Latinoamérica puede ser menos. Si ya tienes un exchange (Bybit, Kraken, Binance…), puedes enviarlo desde ahí.',
+   '<b>Revisar no es operar:</b> revisa tus inversiones como mínimo una vez a la semana. Y recuerda que en este mercado todo queda registrado: las ganancias tributan.'
+  ],
+  quiz:[
+   {q:'Según la fórmula de la seguridad patrimonial, ¿cómo calculas el capital que necesitas invertido?',o:['Tus ingresos anuales × 10','Tus gastos anuales × 25','Tus ahorros actuales × 4'],c:1,
+    why:'Se parte de lo que gastas al año (gasto mensual × 12) y se multiplica por 25, que sale de la regla del 4 %: un 8 % bruto histórico menos inflación e impuestos.',v:0},
+   {q:'¿Por qué con las finanzas descentralizadas el múltiplo puede bajar de × 25 a × 8?',o:['Porque es un mercado con rentabilidades garantizadas','Porque es el mismo mercado, pero sin intermediarios que se queden parte de la rentabilidad','Porque no hay que pagar impuestos'],c:1,
+    why:'La rentabilidad que genera el mercado es la misma; la diferencia es que no hay banqueros, gestores ni brókers quedándose una parte, así que llega directamente al inversor.',v:1},
+   {q:'¿Qué significa pignorar un activo?',o:['Venderlo para obtener liquidez','Dejarlo como garantía para pedir un préstamo sin venderlo','Transferirlo a otra persona'],c:1,
+    why:'Es como una hipoteca: el activo queda como garantía, pero sigue siendo tuyo. Es lo que hacen los grandes patrimonios para no vender. Lo practicaremos el miércoles.',v:3},
+   {q:'¿Qué haces cuando actúas como market maker?',o:['Cobras comisiones cada vez que otros intercambian los activos que tú aportas','Compras y vendes muchas veces al día','Prestas dinero a un banco tradicional'],c:0,
+    why:'Haces lo mismo que un bróker o un exchange: cobras una pequeña comisión en cada intercambio, una capa extra de rentabilidad sobre la de tus activos. Lo veremos mañana con los pools de liquidez.',v:4},
+   {q:'¿Qué dato de tu billetera puedes compartir sin riesgo?',o:['La clave privada','La clave pública (tu dirección), que funciona como tu IBAN','Las dos, si es alguien de confianza'],c:1,
+    why:'La dirección sirve para recibir fondos. La clave privada solo la tienes tú: con ella cualquiera podría acceder a tu billetera y mover tu dinero.',v:5},
+   {q:'Si le preguntas a una IA gratuita si es buena idea invertir todo tu dinero en un solo activo, ¿qué riesgo hay?',o:['Ninguno: la IA siempre es objetiva','Que por complacencia te dé la razón si no tiene el contexto y las reglas de prudencia necesarios','Que no sepa qué es ese activo'],c:1,
+    why:'Las IA gratuitas tienden a complacer. Con contexto (método, documentos, prudencia) la respuesta es consistente. Y la decisión final siempre es tuya.',v:2}
+  ],
+  enlaces:[
+   {t:'Instalar Rabby (billetera)',u:'https://rabby.io/'},
+   {t:'Comprar con MoonPay',u:'https://www.moonpay.com/es'}
+  ],
+  descargas:[
+   {t:'Guía · Instalar Rabby',u:'https://assets.cdn.filesafe.space/kfKaFrSWBIS0536cPtFb/media/6996d03520c0359188ee4e76.pdf'},
+   {t:'Guía · Comprar con MoonPay',u:'https://assets.cdn.filesafe.space/kfKaFrSWBIS0536cPtFb/media/6ab030efbdaa5e26a957844b.pdf'}
+  ],
+  checklist:['Tu cifra de seguridad patrimonial calculada','La rentabilidad que te gustaría conseguir, apuntada','Test del perfil inversor hecho','Rabby instalada desde el enlace oficial','Entre 25 y 50 € enviados a tu billetera para la práctica de mañana']
+};
+/* Día 1 completo: clase en directo + sesión VIP */
+if(!KIT[1]){ KIT[1]={clase:D1_CLASE,vip:D1_VIP}; }
+const D2_CLASE={yt:'29ERUYEu14s',audio:'https://files.leadconnectorhq.com/file/6afccc05716ed595fda3526d/areavip-en4min-d2-clase.mp3',dur:'3:19',min:4,
+  videos:[
+   {kind:'Xavi Molleví · Ethereum',t:'Ethereum: la blockchain programable que hace posibles las finanzas descentralizadas',d:'2,5 min',mp4:'https://files.leadconnectorhq.com/file/6afcd405716ed595fda446b7/d2-c1.mp4'},
+   {kind:'Xavi Molleví · Nuevo mercado',t:'Deja de apostar: sé el dueño de la pista y cobra comisiones',d:'3 min',mp4:'https://files.leadconnectorhq.com/file/6afcd4c17c3b573a62b67b12/d2-c2.mp4'},
+   {kind:'Ángel y Xavi · Seguridad',t:'Los consejos para operar con seguridad',d:'4,5 min',mp4:'https://files.leadconnectorhq.com/file/6afcd5daa30b968e3ffde680/d2-c3.mp4'},
+   {kind:'Xavi Molleví · Pools',t:'Qué es un pool de liquidez: el negocio de los exchanges, ahora tuyo',d:'3,5 min',mp4:'https://files.leadconnectorhq.com/file/6afcd6b57c3b573a62b6c151/d2-c4.mp4'},
+   {kind:'Xavi Molleví · Práctica',t:'Entra en Uniswap y conecta tu billetera Rabby',d:'3 min',mp4:'https://files.leadconnectorhq.com/file/6afcd773fdf6b54fd7a48d8e/d2-c5.mp4'},
+   {kind:'Xavi Molleví · Práctica',t:'Cambia parte de tu ETH por USDC con un swap',d:'2,5 min',mp4:'https://files.leadconnectorhq.com/file/6afcd8106b0928827a3261fd/d2-c6.mp4'},
+   {kind:'Xavi Molleví · Práctica',t:'Crea la posición: elige el pool ETH/USDC',d:'4 min',mp4:'https://files.leadconnectorhq.com/file/6afcd9087c3b573a62b711a6/d2-c7.mp4'},
+   {kind:'Xavi Molleví · Práctica',t:'Define el rango, aporta la liquidez y empieza a cobrar',d:'4 min',mp4:'https://files.leadconnectorhq.com/file/6afcda057c3b573a62b72ccc/d2-c8.mp4'},
+   {kind:'Xavi Molleví · Práctica',t:'Retira liquidez cuando quieras',d:'3,5 min',mp4:'https://files.leadconnectorhq.com/file/6afcdae33309cfeb53818b63/d2-c9.mp4'},
+   {kind:'Xavi Molleví · Estrategias',t:'Estrategias mensual, semanal y diaria',d:'3,5 min',mp4:'https://files.leadconnectorhq.com/file/6afcdbbe716ed595fda5309c/d2-c10.mp4'},
+   {kind:'Ángel Pardo · Método',t:'Las cuatro etapas de un activo y cómo usarlas',d:'4 min',mp4:'https://files.leadconnectorhq.com/file/6afcdcba3309cfeb5381b756/d2-c11.mp4'}
+  ],
+  ordPractico:[4,5,6,7,8,3,1,9,2,0,10],
+  ideas:[
+   '<strong>Ethereum es una blockchain programable.</strong> Bitcoin nació para enviar valor sin intermediarios; Ethereum añadió los <span class="d">contratos inteligentes</span>, programas que se ejecutan solos. Sobre ellos funcionan las finanzas descentralizadas, y hoy ya no solo con criptoactivos: también con acciones, fondos u oro tokenizados.',
+   '<strong>Dejar de apostar y ser el dueño de la pista.</strong> Si juegas contra Alcaraz, pierdes casi siempre; si eres el dueño de la pista de tenis, cobras el alquiler gane quien gane. Haciendo de <span class="d">market maker</span> cobras comisiones tanto si el mercado sube como si baja.',
+   '<strong>Un pool de liquidez es una gran bolsa con dos activos</strong>, por ejemplo ETH y USDC. Cada intercambio paga una comisión (0,05 % en el pool de la práctica) que se reparte entre los proveedores de liquidez <span class="d">en proporción a lo que cada uno ha aportado</span>, y se cobra en los mismos activos del pool.',
+   '<strong>Como alquilar un piso:</strong> el valor del activo puede subir o bajar, pero mientras tanto cobras el alquiler. Puedes <span class="d">entrar y salir cuando quieras</span>, cada operación en Base cuesta menos de un céntimo y la rentabilidad en porcentaje es la misma con 50 $ que con miles.',
+   '<strong>Tres estrategias según el rango:</strong> mensual (rango amplio, poca gestión, en torno a un 2-4 % mensual), semanal (5-9 %) y diaria (rangos muy estrechos y gestión constante). Son cifras orientativas que dependen del mercado. Y el mensaje clave: <span class="d">el riesgo somos nosotros mismos</span>.'
+  ],
+  nota:[
+   '<b>Los cuatro consejos de seguridad:</b> instala y abre las aplicaciones solo desde el enlace oficial (nunca desde Google), usa un navegador o perfil dedicado a invertir, guarda la frase semilla en papel y practica de vez en cuando la recuperación de tu billetera.',
+   '<b>Uniswap no se instala:</b> se entra en app.uniswap.org y se conecta la billetera Rabby. No hay usuario ni contraseña.',
+   '<b>La primera vez verás dos firmas:</b> la autorización de gasto (aprobar el token) y la confirmación de la operación.',
+   '<b>Elige el pool con más liquidez y volumen</b> del par ETH/USDC en la red de Base, versión V3. La rentabilidad anual que muestra es una foto del momento, no una garantía.',
+   '<b>Si el precio sale del rango, dejas de cobrar comisiones.</b> Las comisiones nunca son negativas: lo que puede bajar es el valor de los activos.',
+   '<b>Apunta tu pool, el rango y la fecha</b> para seguir su evolución el resto de la semana.'
+  ],
+  quiz:[
+   {q:'¿Qué aportó Ethereum frente a Bitcoin?',o:['Contratos inteligentes: una blockchain programable','Un minado más rápido','Un precio estable ligado al dólar'],c:0,
+    why:'Ethereum permite programar operaciones con contratos inteligentes que se ejecutan solos. Sobre ellos funcionan las finanzas descentralizadas.'},
+   {q:'En un pool de liquidez, ¿de dónde sale tu rentabilidad?',o:['De que suba el precio del ETH','De las comisiones que pagan quienes intercambian los dos activos','De un interés fijo que paga Uniswap'],c:1,
+    why:'Cada intercambio paga una pequeña comisión que se reparte entre los proveedores de liquidez, en proporción a lo que cada uno ha aportado.'},
+   {q:'Si aportas 50 $ en lugar de 10.000 $ al mismo pool y con el mismo rango, ¿qué rentabilidad porcentual obtienes?',o:['La misma','Menor','Mayor'],c:0,
+    why:'El porcentaje es el mismo; lo que cambia es el importe que cobras, proporcional a tu liquidez. Por eso se practica con poco.'},
+   {q:'¿Cuándo dejas de cobrar comisiones en un pool?',o:['Cuando el precio sale del rango que has definido','Los fines de semana','Cuando el ETH baja de precio'],c:0,
+    why:'Mientras el precio está dentro de tu rango, cobras. Si sale por arriba o por abajo, dejas de cobrar hasta que vuelva o ajustes el rango.'},
+   {q:'¿Qué estrategia requiere menos gestión?',o:['La diaria','La semanal','La mensual'],c:2,
+    why:'La mensual usa un rango amplio: es poco probable que el precio salga y puedes revisarla con calma. A cambio, la rentabilidad es menor.'}
+  ],
+  enlaces:[
+   {t:'Uniswap (escribe la dirección en el navegador)',u:'https://app.uniswap.org/'}
+  ],
+  descargas:[
+   {t:'Guía Uniswap 1',u:'https://assets.cdn.filesafe.space/kfKaFrSWBIS0536cPtFb/media/69c2f360cf4f9a44871282b3.pdf'},
+   {t:'Guía Uniswap 2',u:'https://assets.cdn.filesafe.space/kfKaFrSWBIS0536cPtFb/media/699dec5631e2283c742ceac4.pdf'},
+   {t:'Guía Uniswap ETH/USDC',u:'https://assets.cdn.filesafe.space/kfKaFrSWBIS0536cPtFb/media/6ab246f64091fa65e6ca2c5d.pdf'},
+   {t:'Guía Uniswap BTC/ETH',u:'https://assets.cdn.filesafe.space/kfKaFrSWBIS0536cPtFb/media/6ab2248b4091fa65e6c6a4ce.pdf'},
+   {t:'Workbook Día 2',u:'https://assets.cdn.filesafe.space/kfKaFrSWBIS0536cPtFb/media/6a15f05c449f78709eda886b.pdf'}
+  ],
+  checklist:['Uniswap abierto desde app.uniswap.org','Rabby conectada en la red de Base','Parte del ETH cambiada a USDC con un swap','Posición ETH/USDC creada con unos 50 $','Pool, rango y fecha apuntados para seguirlo']
+};
+const D2_VIP={audio:'https://files.leadconnectorhq.com/file/6afccc05a30b968e3ffc83c0/areavip-en4min-d2-vip.mp3',dur:'2:47',min:4,
+  videos:[
+   {kind:'Xavi Molleví · Práctica',t:'Pasa tus fondos de la red de Ethereum a Base con un swap',d:'2 min',mp4:'https://files.leadconnectorhq.com/file/6afce4ccfdf6b54fd7a5f7c9/vip2-c1-v2.mp4'},
+   {kind:'Xavi Molleví · Pools',t:'La filosofía de los pools: haz trabajar tus activos',d:'4 min',mp4:'https://files.leadconnectorhq.com/file/6afce4ce893246071ffa068b/vip2-c2-v2.mp4'},
+   {kind:'Xavi Molleví · Práctica',t:'Comisión del 0,05 % o del 0,3 %: cómo elegir el pool',d:'4 min',mp4:'https://files.leadconnectorhq.com/file/6afce4d03309cfeb538289fa/vip2-c3-v2.mp4'},
+   {kind:'Xavi Molleví · Práctica',t:'Un rango más estrecho y la misma rentabilidad con 1 $ que con un millón',d:'2,5 min',mp4:'https://files.leadconnectorhq.com/file/6afce4d13589612e68ab8ff7/vip2-c4-v2.mp4'},
+   {kind:'Ángel Pardo · MetaPro Brain',t:'Cómo entrar al copiloto y qué preguntarle',d:'3,5 min',mp4:'https://files.leadconnectorhq.com/file/6afce4d3fdf6b54fd7a5f845/vip2-c5-v2.mp4'},
+   {kind:'Xavi Molleví · Práctica',t:'Del exchange (Kraken) a tu billetera Rabby',d:'2 min',mp4:'https://files.leadconnectorhq.com/file/6afce4d4716ed595fda623e6/vip2-c6-v2.mp4'},
+   {kind:'Ángel Pardo · Mentalidad',t:'Prudencia y paciencia: los pools más rentables y la liquidez en espera',d:'2 min',mp4:'https://files.leadconnectorhq.com/file/6afce4d6a30b968e3fff7e3b/vip2-c7-v2.mp4'}
+  ],
+  ordPractico:[0,2,3,5,4,1,6],
+  ideas:[
+   '<strong>Haz trabajar tus activos.</strong> Si compras acciones, bitcoin u oro y solo esperas a que suban, están parados. Con un piso lo alquilas mientras se revaloriza: <span class="d">eso es un pool de liquidez</span>.',
+   '<strong>Si el precio baja, tu inversión baja igual que en la billetera</strong>, pero mientras tanto sigues cobrando comisiones. Sin el pool, el valor habría bajado igual y <span class="d">no tendrías esas comisiones</span>.',
+   '<strong>Más comisión no siempre es más rentabilidad.</strong> En ETH/USDC, el pool del 0,3 % tenía mucho menos volumen que el del 0,05 %, y este último <span class="d">daba más rentabilidad</span>: importa el volumen y la liquidez con la que repartes.',
+   '<strong>El rango define la estrategia.</strong> Un rango de alrededor de un 3,5 % de amplitud sería una estrategia diaria; el de 1.600 a 2.000 del directo, semanal. Fijar rangos tiene su método, y <span class="d">la app de MetaPro te los indica según la estrategia</span>.',
+   '<strong>El copiloto es la versión lite de MetaPro Brain</strong>: datos de pools, etapas y activos tokenizados. Está limitado a propósito, como un kart capado, para que <span class="d">aprendas sin hacerte daño</span>.'
+  ],
+  nota:[
+   '<b>Dudas operativas</b> (MoonPay, billetera, tarjeta…): en el chat del Grupo VIP, etiquetando a Pablo.',
+   '<b>Los dos logos de un token en Uniswap:</b> el grande es el token y el pequeño, la red. Comprueba que el pequeño sea el de Base.',
+   '<b>Acceso al copiloto:</b> botón «Accede aquí» al final de esta Área VIP. Entras con tu teléfono y un PIN que eliges tú; si lo olvidas, lo recuperas con tu email.',
+   '<b>En el copiloto añade solo la dirección pública</b> de tu billetera (empieza por 0x). Nunca la frase semilla.',
+   '<b>Desde un exchange como Kraken:</b> Retirar → elige la red de Base → pega la dirección de tu Rabby. En pocos minutos lo verás en tu billetera.',
+   '<b>Haz el test del perfil inversor y el de cómo aprendes:</b> así adaptamos el contenido a ti.'
+  ],
+  quiz:[
+   {q:'En Uniswap, un token muestra dos logos. ¿Qué indica el pequeño?',o:['La red en la que está','El exchange de origen','La comisión del pool'],c:0,
+    why:'El logo grande es el token y el pequeño, la red. Trabajamos en Base: comprueba que el logo pequeño sea el de Base.'},
+   {q:'Entre un pool ETH/USDC del 0,05 % con mucho volumen y otro del 0,3 % con poco volumen, ¿cuál daba más rentabilidad?',o:['El del 0,05 %','El del 0,3 %','Los dos igual'],c:0,
+    why:'Aunque cobra menos por intercambio, el volumen es mucho mayor, y las comisiones se reparten entre menos liquidez en proporción.'},
+   {q:'¿Qué dato puedes añadir al copiloto para que te ayude a seguir tu operativa?',o:['La dirección pública de tu billetera','Tu frase semilla','La contraseña de Rabby'],c:0,
+    why:'La dirección pública es como tu IBAN: se puede compartir. La frase semilla y la contraseña nunca se dan a nadie.'},
+   {q:'Para enviar ETH desde Kraken a tu Rabby, ¿qué red eliges?',o:['Base','Cualquiera, todas llegan igual','Solana'],c:0,
+    why:'Trabajamos en la red de Base. Si lo envías por otra red, puede que no lo veas en Rabby o que tengas que moverlo después.'}
+  ]
+};
+if(!KIT[2]){ KIT[2]={clase:D2_CLASE,vip:D2_VIP}; }
+if(PREVIEW){ S.ovDay=+LS.get('pvDay')||0; S.ovPh=LS.get('pvPh')||''; }
+clock();
+S.view=S.day;
+if(S.tel) S.screen=S.style?'panel':'bienvenida';
+function apiJsonp(params,cb){
+  const fn='_vip'+Date.now()+Math.floor(Math.random()*1e4); const sc=document.createElement('script'); let done=false;
+  const fin=r=>{ if(done)return; done=true; try{delete window[fn]}catch(e){window[fn]=undefined} sc.remove(); cb&&cb(r); };
+  window[fn]=r=>fin(r||{ok:false}); setTimeout(()=>fin({ok:false,error:'tiempo'}),15000);
+  sc.onerror=()=>fin({ok:false,error:'red'});
+  sc.src=API+'?'+new URLSearchParams(Object.assign({},params,{callback:fn})).toString(); document.head.appendChild(sc);
+}
+function api(params,cb){
+  if(!API||API.indexOf('__')===0){ cb&&cb({ok:false,error:'sin_api'}); return; }
+  const url=API+'?'+new URLSearchParams(params).toString();
+  let done=false; const fin=r=>{ if(done)return; done=true; cb&&cb(r); };
+  const ctl=('AbortController' in window)?new AbortController():null; const to=setTimeout(()=>{ if(ctl)ctl.abort(); },15000);
+  fetch(url,{method:'GET',credentials:'omit',redirect:'follow',cache:'no-store',signal:ctl?ctl.signal:undefined})
+    .then(r=>r.json()).then(j=>{ clearTimeout(to); fin(j||{ok:false}); })
+    .catch(()=>{ clearTimeout(to); apiJsonp(params,fin); });
+}
+function track(evento,detalle){ if(S.tel) api({accion:'evento',tel:S.tel,evento:evento,dia:String(S.view||''),detalle:detalle||''}); }
+/* ===== Trazabilidad de visionado (v1 · 18/11/2026) =====
+   Envía al registro del Área VIP un evento por hito de tiempo REALMENTE visto (no cuenta saltos):
+   visto_clase / visto_vip / visto_capsula · detalle "<hito>|<título>" · hitos 10, 25, 50, 75, 90 %. */
+function trackDia(evento,dia,detalle){ if(S.tel) api({accion:'evento',tel:S.tel,evento:evento,dia:String(dia||''),detalle:detalle||''}); }
+const PROG_HITOS=[10,25,50,75,90], PROG={};
+function progNota(key,kind,dia,titulo,visto,dur){
+  if(!(dur>5)) return; const p=visto/dur*100, P=PROG[key]||(PROG[key]={});
+  PROG_HITOS.forEach(h=>{ if(p>=h && !P[h]){ P[h]=1; trackDia('visto_'+kind,dia,h+'|'+titulo); } });
+}
+function progSeg(k){ const P=PROG[k]||(PROG[k]={}); P._v=P._v||0; return P; }
+function progVideo(el,kind,dia,titulo){ if(!el) return; const key=kind+'|'+dia+'|'+titulo, P=progSeg(key); let last=null;
+  el.addEventListener('timeupdate',()=>{ const t=el.currentTime; if(!el.paused && !el.seeking && last!==null){ const d=t-last; if(d>0 && d<3) P._v+=d; } last=t; progNota(key,kind,dia,titulo,P._v,el.duration); });
+  el.addEventListener('seeking',()=>{ last=null; }); el.addEventListener('pause',()=>{ last=null; });
+}
+let YT_CBS=null;
+function ytApi(cb){ if(window.YT && YT.Player) return cb(); if(YT_CBS){ YT_CBS.push(cb); return; } YT_CBS=[cb];
+  const prev=window.onYouTubeIframeAPIReady; window.onYouTubeIframeAPIReady=function(){ try{ prev&&prev(); }catch(e){} const c=YT_CBS; YT_CBS=[]; c.forEach(f=>{ try{f();}catch(e){} }); };
+  const t=document.createElement('script'); t.src='https://www.youtube.com/iframe_api'; t.async=true; document.head.appendChild(t); }
+function progYT(ifr,kind,dia,titulo,ini,fin){ if(!ifr) return; const key=kind+'|'+dia+'|'+titulo, P=progSeg(key);
+  ytApi(()=>{ let last=null, timer=null, pl=null;
+    const estado=s=>{ if(s===1){ if(!timer) timer=setInterval(()=>{ try{
+          const t=pl.getCurrentTime(), tot=pl.getDuration()||0, a=ini||0, b=(fin&&fin>a)?Math.min(fin,tot||fin):tot;
+          if(last!==null){ const d=t-last; if(d>0 && d<3 && t>=a && t<=b+1) P._v+=d; } last=t;
+          progNota(key,kind,dia,titulo,P._v,b-a);
+        }catch(x){} },1000); }
+      else { last=null; if(timer){ clearInterval(timer); timer=null; } } };
+    try{ pl=new YT.Player(ifr,{events:{onReady:()=>{ try{ estado(pl.getPlayerState()); }catch(x){} },onStateChange:e=>estado(e.data)}}); }catch(x){} });
+}
+const YT_JS='&enablejsapi=1&origin='+encodeURIComponent(location.origin);
+function applyUser(r){
+  if(r.tel){S.tel=r.tel;LS.set('vipTel',r.tel);}
+  if(r.estilo){S.style=r.estilo;LS.set('vipStyle',r.estilo);}
+  if(r.perfil!==undefined){S.inv=r.perfil||'';LS.set('vipInv',S.inv);}
+  if(r.informe!==undefined){S.informe=r.informe||'';LS.set('vipInforme',S.informe);}
+}
+
+const $=s=>document.querySelector(s);
+function syncReview(){}
+
+function localTime(utc){
+  const d=new Date(utc); let tz;
+  try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){return ''}
+  if(!tz||tz==='Europe/Madrid')return '';
+  const t=new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit',timeZone:tz}).format(d);
+  const wd=new Intl.DateTimeFormat('es-ES',{weekday:'long',timeZone:tz}).format(d);
+  const wdMad=new Intl.DateTimeFormat('es-ES',{weekday:'long',timeZone:'Europe/Madrid'}).format(d);
+  const CITY={'America/Mexico_City':'Ciudad de México','America/Bogota':'Bogotá','America/Lima':'Lima','America/Santiago':'Santiago de Chile','America/Argentina/Buenos_Aires':'Buenos Aires','America/Buenos_Aires':'Buenos Aires','America/Montevideo':'Montevideo','America/Caracas':'Caracas','America/Guayaquil':'Ecuador','America/Costa_Rica':'Costa Rica','America/Panama':'Panamá','America/Santo_Domingo':'Santo Domingo','America/Guatemala':'Guatemala','America/El_Salvador':'El Salvador','America/Tegucigalpa':'Honduras','America/Managua':'Nicaragua','America/Asuncion':'Asunción','America/La_Paz':'La Paz','America/Puerto_Rico':'Puerto Rico','Atlantic/Canary':'Canarias','America/New_York':'Nueva York','America/Miami':'Miami','America/Los_Angeles':'Los Ángeles','America/Cancun':'Cancún','America/Monterrey':'Monterrey','America/Tijuana':'Tijuana'};
+  let name=tz.split('/').pop().replace(/_/g,' ');
+  if(CITY[tz]) name=CITY[tz]; else try{name=new Intl.DateTimeFormat('es-ES',{timeZone:tz,timeZoneName:'longGeneric'}).formatToParts(d).find(x=>x.type==='timeZoneName').value}catch(e){}
+  return 'En tu zona horaria ('+name+'): '+(wd!==wdMad?wd+' a las ':'')+t+' h';
+}
+function utcFor(day,h,m){ return '2026-11-'+DAYS[day].num+'T'+String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':00Z'; }
+
+/* ---------------- Pantallas ---------------- */
+function topRight(){
+  $('#top-right').innerHTML = (S.screen==='panel'||S.screen==='bienvenida'||S.screen==='test'||S.screen==='perfil')
+   ? '<button class="invbtn" onclick="go(\'perfil\')">Mi perfil<br>inversor</button><button class="out" onclick="logout()">Salir</button>'
+   : 'Área VIP<br>Finanzas Pro';
+}
+function logout(){ ['vipTel','vipStyle','vipInv','vipInforme'].forEach(k=>LS.del(k)); S.tel='';S.style='';S.inv='';S.informe=''; go('entrada'); }
+function go(s){S.screen=s; if(s==='panel')S.view=S.day; stopAudio(); render(); scrollTo(0,0);}
+
+const PREFIXES=[['España','+34'],['México','+52'],['Argentina','+54'],['Colombia','+57'],['Chile','+56'],['Perú','+51'],['Ecuador','+593'],['Uruguay','+598'],['Paraguay','+595'],['Bolivia','+591'],['Venezuela','+58'],['Costa Rica','+506'],['Panamá','+507'],['República Dominicana','+1'],['Puerto Rico','+1'],['Guatemala','+502'],['El Salvador','+503'],['Honduras','+504'],['Nicaragua','+505'],['Estados Unidos','+1'],['Otro país','']];
+function vEntrada(err){
+  return `<section class="entry">
+   <div class="eyebrow">Finanzas Pro · 16–20 de noviembre</div>
+   <h1>Accede a tu <b>Área VIP</b></h1>
+   <p class="lead">Usa <strong>el nombre y el teléfono</strong> con los que compraste tu Pase VIP.</p>
+   <form class="card" style="margin-top:18px" onsubmit="return login(event)">
+     ${err?`<div class="err" role="alert">No tenemos registrado este teléfono. Asegúrate de introducir el teléfono con el que hiciste la compra de tu acceso VIP.</div>`:''}
+     <div class="field"><label for="nm">Tu nombre</label>
+       <input id="nm" type="text" autocomplete="given-name" placeholder="Ej.: Carmen" value="${(S.formName||S.name||'').replace(/"/g,'&quot;')}"></div>
+     <div class="field"><label for="pf">País</label>
+       <select id="pf">${PREFIXES.map(([n,p])=>`<option value="${p}" ${p===(S.formPf||'+34')&&n===(S.formPn||'España')?'selected':''}>${n}${p?' ('+p+')':''}</option>`).join('')}</select></div>
+     <div class="field"><label for="tel">Tu teléfono</label>
+       <input id="tel" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="Ej.: 612 345 678" value="${(S.formTel||'').replace(/"/g,'&quot;')}"></div>
+     <button class="btn btn-gold" type="submit" ${S.busy?'disabled':''}>${S.busy?'Comprobando…':'Entrar'}</button>
+   </form>
+   ${err?`<form class="card" style="margin-top:14px" onsubmit="return loginMail(event)">
+     <h3 style="margin:0 0 6px">¿Prefieres entrar con tu email?</h3>
+     <p class="small" style="margin:0 0 12px">Usa el email con el que compraste tu acceso VIP.</p>
+     <div class="field"><label for="em">Tu email</label>
+       <input id="em" type="email" inputmode="email" autocomplete="email" placeholder="Ej.: carmen@email.com"></div>
+     <button class="btn btn-gold" type="submit" ${S.busy?'disabled':''}>${S.busy?'Comprobando…':'Entrar con mi email'}</button>
+   </form>`:''}
+   <p class="help">¿Eres VIP y no puedes acceder? Escríbenos a <a href="mailto:pregunta@metapro.academy">pregunta@metapro.academy</a></p>
+  </section>`;
+}
+function afterLogin(r,nm){
+  S.busy=false;
+  if(r&&r.ok){ applyUser(r); S.name=nm||r.nombre||S.name; LS.set('vipName',S.name); S.formTel=''; S.screen=S.style?'panel':'bienvenida'; S.view=S.day; }
+  else { S.screen='error'; }
+  render(); scrollTo(0,0);
+}
+function login(e){ e.preventDefault(); if(S.busy)return false;
+  const nm=($('#nm').value||'').trim(); const pfEl=$('#pf'); const pf=pfEl.value; const v=($('#tel').value||'').replace(/\D/g,'');
+  S.formName=nm; S.formTel=$('#tel').value; S.formPf=pf; S.formPn=pfEl.options[pfEl.selectedIndex].text.replace(/ \(.*$/,''); S.net=false;
+  if(v.length<7){ S.screen='error'; render(); return false; }
+  const name=nm?nm.charAt(0).toUpperCase()+nm.slice(1):'';
+  let full=v; const pd=pf.replace(/\D/g,''); if(pd && !v.startsWith(pd)) full=pd+v.replace(/^0+/,'');
+  S.busy=true; render();
+  api({accion:'check',tel:full,nombre:name},r=>afterLogin(r,name)); return false; }
+function loginMail(e){ e.preventDefault(); if(S.busy)return false; const v=($('#em').value||'').trim(); if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ $('#em').focus(); return false; }
+  const nm=S.formName?S.formName.charAt(0).toUpperCase()+S.formName.slice(1):''; S.busy=true; render();
+  api({accion:'check',email:v,nombre:nm},r=>afterLogin(r,nm)); return false; }
+function vBienvenida(){
+  const done=!!S.style;
+  return `<section>
+   <div class="hello"><h1>Hola, <b>${S.name}</b></h1></div>
+   <p class="lead" style="margin-top:12px">Bienvenido a tu Área VIP. <strong>Tres pasos y empezamos.</strong></p>
+   <div class="card step"><div class="step-head"><div class="num ${done?'done':''}">${done?'✓':'1'}</div><h3>Haz el test de cómo aprendes</h3></div><div class="step-body">
+     <p>Para adaptar la formación a <span class="d">tu perfil de aprendizaje</span>.</p>
+     ${done?`<div class="okline">Hecho. Tu forma de aprender: ${STYLES[S.style]}</div>`:
+       `<a class="btn btn-gold" href="javascript:go('test')">Hacer el test</a>
+        <a class="btn btn-line" href="javascript:skipTest()">Ahora no</a>
+        <p class="small" style="margin:10px 0 0">Puedes hacerlo después desde tu panel.</p>`}
+   </div></div>
+   <div class="card step"><div class="step-head"><div class="num">2</div><h3>¿Estás en el grupo VIP?</h3></div><div class="step-body">
+     <p>Si aún no estás, entra aquí:</p>
+     ${WA_BTN()}
+     ${WA_TIP}
+   </div></div>
+   <div class="card step"><div class="step-head"><div class="num">3</div><h3>Tu semana de formación</h3></div><div class="step-body">
+     <p>Accede a los directos, las sesiones VIP, todo el contenido de las clases y <strong>tu itinerario de aprendizaje personalizado</strong>.</p>
+     <a class="btn btn-gold" href="javascript:go('panel')">Ir a mi semana de formación</a>
+   </div></div>
+  </section>`;
+}
+function skipTest(){ go('panel'); }
+
+const LT=[
+["A","Me entusiasma probar herramientas o plataformas nuevas aunque todavía no las domine."],
+["R","Antes de decidir, sigo buscando información aunque eso me haga perder tiempo o alguna oportunidad."],
+["T","No aplico una estrategia hasta entender su lógica, aunque otros ya estén ganando con ella."],
+["P","Lo que aprendo tengo que poder aplicarlo enseguida en mi cartera o en mi vida."],
+["A","Aprendo más haciendo y equivocándome que leyendo sobre algo."],
+["R","Prefiero observar cómo lo hacen otros antes de intentarlo yo."],
+["T","Me gustan los modelos que explican cómo funciona algo en su conjunto."],
+["P","Me gustan las plantillas, las checklists y los pasos concretos."],
+["A","Cuando algo me interesa, me lanzo y voy ajustando sobre la marcha."],
+["R","Antes de elegir comparo las opciones con calma, aunque tarde más que los demás."],
+["T","Valoro más un razonamiento lógico que una opinión o una intuición."],
+["P","Prefiero que me enseñen directamente la técnica que funciona, sin repasar todas las alternativas."]
+];
+const LT_ORD=[0,5,10,3,4,9,2,7,8,1,6,11];
+const LT_ESC=["Nada de acuerdo","Poco de acuerdo","Ni sí ni no","Bastante de acuerdo","Totalmente de acuerdo"];
+const LT_KEY={A:'activo',R:'reflexivo',T:'teorico',P:'pragmatico'};
+function vTest(){
+  const i=S.lt.i, q=LT[LT_ORD[i]];
+  return `<section>
+   <div class="eyebrow">Test de cómo aprendes</div>
+   <h1>¿Cómo <b>aprendes mejor?</b></h1>
+   <div class="card" style="margin-top:16px">
+    <div class="qcount">Afirmación ${i+1} de ${LT.length}</div>
+    <div class="qprog">${LT.map((_,k)=>`<i class="${k<i?'d':''}"></i>`).join('')}</div>
+    <p class="q">${q[1]}</p>
+    ${LT_ESC.map((t,k)=>`<button class="opt ${S.lt.a[i]===k+1?'right':''}" onclick="ltAnswer(${k+1})">${t}</button>`).join('')}
+    ${i>0?`<button class="btn btn-line" style="margin-top:14px" onclick="S.lt.i--;render(true)">Anterior</button>`:''}
+   </div>
+   <p class="small" style="margin-top:14px">Test orientativo de preferencias de aprendizaje. No mide capacidad ni inteligencia: indica cómo prefieres aprender.</p>
+  </section>`;
+}
+function ltAnswer(v){ S.lt.a[S.lt.i]=v; if(S.lt.i<LT.length-1){ S.lt.i++; render(true); scrollTo(0,0); return; }
+  const sc={A:0,R:0,T:0,P:0}; LT_ORD.forEach((li,k)=>{ sc[LT[li][0]]+=(S.lt.a[k]||3); });
+  const pri={P:0,A:1,R:2,T:3}; const top=Object.keys(sc).sort((a,b)=>sc[b]-sc[a]||pri[a]-pri[b])[0];
+  setStyle(LT_KEY[top]); track('test_aprendizaje',JSON.stringify(sc));
+}
+const INV_BASE='https://empieza.metapro.academy/test-inversor?o=areavip';
+const invUrl=()=>INV_BASE+(S.tel?'&tel='+encodeURIComponent(S.tel):'');
+function vPerfil(){
+  const d=S.inv;
+  return `<section>
+   <div class="eyebrow">Tu perfil inversor</div>
+   ${d?`<h1>Tu perfil: <b>${d}</b></h1>
+     <p class="lead" style="margin-top:12px">Este es el resultado de tu test. Lo tendrás siempre aquí, en tu Área VIP.</p>
+     <div class="card" style="margin-top:18px">
+       ${S.informe?`<a class="btn btn-gold" href="${S.informe}" target="_blank" rel="noopener">Ver mi informe completo</a>`:''}
+       <a class="btn btn-line" href="${invUrl()}" onclick="track('test_inversor')" target="_blank" rel="noopener">Repetir el test</a>
+       <p class="small" style="margin:12px 0 0">Al final de la semana te pediremos que lo repitas para ver tu evolución como inversor.</p>
+     </div>`
+   :`<h1>Descubre tu <b>perfil inversor</b></h1>
+     <p class="lead" style="margin-top:12px">Un test breve para conocer cómo inviertes hoy. Guardaremos tu resultado aquí para que veas tu evolución durante la formación.</p>
+     <div class="card" style="margin-top:18px"><a class="btn btn-gold" href="${invUrl()}" onclick="track('test_inversor')" target="_blank" rel="noopener">Hacer el test del inversor</a></div>`}
+   <a class="btn btn-line" style="margin-top:16px" href="javascript:go('panel')">Volver a mi semana de formación</a>
+  </section>`;
+}
+function setStyle(k){S.style=k; LS.set('vipStyle',k); if(S.tel) api({accion:'guardar',tel:S.tel,estilo:k}); S.lt={i:0,a:[]}; go('bienvenida');}
+
+/* ---------- Panel ---------- */
+function phaseOf(v){ return v<S.day ? 'despues' : (v>S.day ? 'futuro' : (S.phase==='clase'?'antes':S.phase)); }
+function isDemo(){ return S.screen==='panel' && S.view===1 && phaseOf(1)==='despues'; }
+
+function vPanel(){
+  const today=S.day, v=S.view, D=DAYS[v], phase=phaseOf(v);
+  let h= isDemo() ? `` : '';
+  h+=`<section class="hello"><h1>Hola, <b>${S.name}</b></h1>`;
+  h+= S.style
+   ? ''
+   : `<a class="testmini" href="javascript:go('test')"><span><b>Test de cómo aprendes</b> · 2 minutos</span><span class="go">Hacerlo →</span></a>`;
+  if(!S.inv) h+=`<a class="testmini" href="${invUrl()}" target="_blank" rel="noopener" onclick="track('test_inversor')"><span><b>Test de tu perfil inversor</b> · 3 minutos</span><span class="go">Hacerlo →</span></a>`;
+  h+=`</section>`;
+
+  h+=`<h2 class="h-sec">Tu semana de <b>Finanzas Pro</b></h2><nav class="strip" aria-label="Días">`;
+  for(let i=1;i<=NDAYS();i++){
+    const d=DAYS[i]; const cls=['sd']; if(i===v)cls.push('sel'); if(i>today)cls.push('future');
+    const ck = i<today ? '✓ Vista' : (i===today?'Hoy':d.short+' '+d.num);
+    h+=`<button class="${cls.join(' ')}" onclick="setView(${i})" aria-current="${i===v?'date':'false'}"><img src="${THUMB['dia'+i]}" alt=""><span class="lb ${i===today?'hoy':''}">Día ${i} · ${ck}</span></button>`;
+  }
+  h+=`</nav>`;
+
+  h+=`<div id="dayhead" class="eyebrow" style="margin-bottom:12px">${v===today?'Hoy · ':''}${D.long}</div>`;
+  h+=lessonCard(v,phase)+vipCard(v,phase);
+
+  if(phase==='antes'||phase==='clase'){
+    h+=`<div class="card" style="margin-top:18px"><p style="margin:0"><strong>Después de la clase</strong>, aquí tendrás lo imprescindible del día: <span class="d">un audio de 4 minutos, la clase en vídeos cortos, las ideas clave y un test breve</span>.</p></div>`;
+  } else if(phase==='despues'){
+    h+=vDespues(v);
+  }
+
+  if(v>=3 && phase!=='futuro'){
+    h+=`<div class="card admis"><div class="eyebrow">Siguiente paso</div><h2>Proceso de admisión <b>a la academia</b></h2><p>Si quieres seguir formándote con nosotros, <strong style="color:#fff">solicita tu plaza</strong>. Revisaremos tu caso contigo.</p><a class="btn btn-gold" href="https://empieza.metapro.academy/admision-academia" target="_blank" rel="noopener">Entra en el proceso de admisión</a></div>`;
+  }
+
+  h+=vBrain(today);
+  return h;
+}
+function setView(i){S.view=i; resetQuiz(); stopAudio(); S.vpicked=false; render(); const el=$('#dayhead'); if(el)el.scrollIntoView({block:'start'});}
+
+function lessonCard(v,phase){
+  const D=DAYS[v];
+  const lt=localTime(utcFor(v,18,0));
+  let href='#',act='',lock='';
+  if(phase==='futuro'){ lock=`<div class="lockov"><span>🔒 Disponible el ${D.wd}</span></div>`; }
+  else if(phase==='antes'||phase==='clase'&&v===S.day&&S.tick==='directo'){ href=D.live; act=`<a class="btn btn-gold" href="${D.live}" target="_blank" rel="noopener" onclick="track('directo')">Entrar al directo</a>`; }
+  else if(ytId(D.yt)){ act=`<button class="btn btn-line" type="button" onclick="playLesson(${v})">Ver la grabación de la clase</button>`; }
+  else { href=D.yt||D.live; act=`<a class="btn btn-line" href="${href}" target="_blank" rel="noopener" onclick="track('grabacion_clase')">Ver la grabación de la clase</a>`; }
+  const emb = phase!=='futuro' && !act.includes('Entrar al directo') && ytId(D.yt);
+  const thumb = phase==='futuro'
+    ? `<div class="thumb" aria-hidden="true"><img src="${THUMB['dia'+v]}" alt="">${lock}</div>`
+    : emb ? `<button class="thumb" id="lthumb-${v}" type="button" onclick="playLesson(${v})" aria-label="Ver la clase: ${D.title}"><img src="${THUMB['dia'+v]}" alt=""><span class="lplay" aria-hidden="true">▶</span></button>`
+    : `<a class="thumb" href="${href}" target="_blank" rel="noopener" aria-label="${phase==='antes'?'Entrar al directo':'Ver la clase'}: ${D.title}"><img src="${THUMB['dia'+v]}" alt=""></a>`;
+  return `<div class="card lesson">${thumb}<div class="body">
+    <div class="kicker">Día ${v} · Clase en directo</div>
+    <h3>${D.title}</h3>
+    <div class="meta">${D.long} · 19:00 h (España)</div>
+    ${lt?`<div class="tz">${lt}</div>`:''}
+    ${act}
+    ${phase==='antes'?'<p class="small" style="margin:12px 0 0">Abre el enlace unos minutos antes de las 19:00 h.</p>':''}
+  </div></div>`;
+}
+function ytId(u){ const m=(u||'').match(/(?:live\/|v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{11})/); return m?m[1]:''; }
+function playLesson(v){ const id=ytId(DAYS[v].yt), el=document.getElementById('lthumb-'+v); if(!id||!el) return; stopAudio(); track('grabacion_clase','dia'+v);
+  const w=document.createElement('div'); w.className='thumb lframe'; w.id='lthumb-'+v; setTimeout(()=>progYT(w.querySelector('iframe'),'clase',v,'dia'+v),0);
+  w.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1${YT_JS}" title="Clase del día ${v}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  el.replaceWith(w); w.scrollIntoView({block:'center',behavior:'smooth'}); }
+function playVip(v){ const id=ytId(DAYS[v].vipRec), el=document.getElementById('vthumb-'+v); if(!id||!el) return; stopAudio(); track('grabacion_vip','dia'+v);
+  const w=document.createElement('div'); w.className='thumb lframe'; w.id='vthumb-'+v; setTimeout(()=>progYT(w.querySelector('iframe'),'vip',v,'dia'+v),0);
+  w.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1${YT_JS}" title="Sesión VIP del día ${v}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  el.replaceWith(w); w.scrollIntoView({block:'center',behavior:'smooth'}); }
+function vipCard(v,phase){
+  const D=DAYS[v];
+  if(!D.vip) return `<div class="card lesson novip"><div class="body"><div class="kicker">Sesión VIP</div><p style="margin:0">El viernes no hay sesión VIP: solo la clase en directo.</p></div></div>`;
+  const lz=localTime(D.vipAt?utcFor(v,+D.vipAt.slice(0,2)-1,+D.vipAt.slice(3)):utcFor(v,19,30));
+  let href=D.zoom, act='', lock='';
+  if(phase==='futuro'){ lock=`<div class="lockov"><span>🔒 Disponible el ${D.wd}</span></div>`; }
+  else if(phase==='antes'||phase==='clase'&&v===S.day&&(S.tick==='directo'||S.tick==='vip')){ act=`<a class="btn btn-dark" href="${D.zoom}" target="_blank" rel="noopener" onclick="track('sesion_vip')">Entrar en la sesión VIP</a>`; }
+  else if(ytId(D.vipRec)){ href=null; act=`<button class="btn btn-dark" type="button" onclick="playVip(${v})">Ver la sesión VIP completa</button>`; }
+  else if(D.vipRec){ href=D.vipRec; act=`<a class="btn btn-dark" href="${D.vipRec}" target="_blank" rel="noopener">Ver la sesión VIP completa</a>`; }
+  else { href=null; act=`<p class="small" style="margin:8px 0 0">La grabación de la sesión VIP estará disponible aquí en unas horas.</p>`; }
+  const thumb = phase==='futuro'
+    ? `<div class="thumb" aria-hidden="true"><img src="${THUMB['vip'+v]}" alt="">${lock}</div>`
+    : (phase!=='futuro'&&!act.includes('Entrar en la sesión VIP')&&ytId(D.vipRec)) ? `<button class="thumb" id="vthumb-${v}" type="button" onclick="playVip(${v})" aria-label="Ver la sesión VIP: ${D.vip}"><img src="${THUMB['vip'+v]}" alt=""><span class="lplay" aria-hidden="true">▶</span></button>`
+    : href ? `<a class="thumb" href="${href}" target="_blank" rel="noopener" aria-label="Sesión VIP: ${D.vip}"><img src="${THUMB['vip'+v]}" alt=""></a>` : `<div class="thumb" aria-hidden="true"><img src="${THUMB['vip'+v]}" alt=""></div>`;
+  return `<div class="card lesson vip">${thumb}<div class="body">
+    <div class="kicker">Sesión VIP por Zoom · al acabar la clase</div>
+    <h3>${D.vip}</h3>
+    <div class="meta">${D.vipAt?D.vipAt+' h':'Hacia las 20:30 h'} (España) · solo VIP</div>
+    ${lz?`<div class="tz">${D.vipAt?lz:lz.replace(/: (?:\S+ a las )?/,': hacia las ')}</div>`:''}
+    ${act}
+  </div></div>`;
+}
+function vWeek(){
+  let h=`<h2 class="h-sec">Todas tus <b>clases</b></h2><div class="weekgrid">`;
+  for(let i=1;i<=5;i++){
+    const D=DAYS[i], ph=phaseOf(i), locked=ph==='futuro';
+    h+=`<button class="wk ${i===S.view?'sel':''} ${locked?'locked':''}" onclick="setView(${i})">
+      <div class="pair"><img src="${THUMB['dia'+i]}" alt="">${D.vip?`<img src="${THUMB['vip'+i]}" alt="">`:`<div class="novipimg">Sin sesión VIP</div>`}</div>
+      <div class="cap"><b>Día ${i} · ${D.title}</b><span>${D.long}${D.vip?' · Sesión VIP: '+D.vip:''}${locked?' · 🔒 Disponible el '+D.wd:''}</span></div></button>`;
+  }
+  return h+`</div>`;
+}
+
+function hasKit(v){ const K=KIT[v]; return !!(K&&(K.clase||K.vip)); }
+function vDespues(v){
+  const order=ORDERS[S.style||''];
+  let h=`<div class="section-title"><h2>Lo imprescindible <b>${v===S.day?'de hoy':'del día '+v}</b></h2></div>`;
+  if(PREVIEW&&KIT[v]&&KIT[v].demo) h+=`<div class="demo-tag" style="margin:0 0 12px">Ejemplo con el contenido de octubre</div>`;
+  h+= S.style ? `<p class="order-note">Ordenado según tu forma de aprender: <b>${STYLES[S.style]}</b>.</p>`
+             : `<p class="order-note">El orden de estos bloques se adapta a tu forma de aprender cuando haces el test.</p>`;
+  if(!hasKit(v)){
+    h+=`<div class="card"><p style="margin:0">Estamos preparando el resumen de la clase y de la sesión VIP: <span class="d">un audio breve, los vídeos cortos, las ideas clave y un test</span>. Estará disponible aquí por la mañana.</p></div>`;
+  } else {
+    [['clase','La clase en directo',DAYS[v].title],['vip','La sesión VIP',DAYS[v].vip]].forEach(([sec,lab,tit])=>{
+      const K=(KIT[v]||{})[sec]; if(!K) return; const k=v+'-'+sec;
+      const has={audio:!!K.audio,videos:(K.videos||[]).length>0,ideas:(K.ideas||[]).length>0,test:(K.quiz||[]).length>0,descargas:(K.descargas||[]).length>0||(K.enlaces||[]).length>0,checklist:(K.checklist||[]).length>0};
+      h+=`<section class="sec sec-${sec}"><div class="sec-head"><div class="sec-num">${sec==='clase'?'1':'2'}</div><div><div class="kicker">${lab}</div><h3>${tit||''}</h3></div></div>`;
+      let n=0; order.filter(b=>has[b]).forEach(b=>{ n++; h+=BLOCKS[b](k,n,K).replace('class="card blk"','class="card blk '+(n%2?'alt-a':'alt-b')+'"'); });
+      if(!n) h+=`<div class="card"><p style="margin:0">Estamos preparando este resumen. Estará disponible aquí por la mañana.</p></div>`;
+      h+=`</section>`;
+    });
+  }
+  if(DAYS[v].opinion){
+    h+=`<div class="card blk"><h3>Danos tu opinión y entra en el sorteo</h3><p>Responde al cuestionario del día ${v}: cuéntanos qué te ha parecido y envíanos tus preguntas. Al responderlo, participas en el sorteo.</p><a class="btn btn-gold" href="${DAYS[v].opinion}" target="_blank" rel="noopener">Responder y entrar en el sorteo</a></div>`;
+  }
+  return h;
+}
+const BLOCKS={
+ audio:(k,n,K)=>{ const on=AUD_KEY===k&&AUD&&!AUD.paused; return `<div class="card blk"><h3><span class="n">${n}.</span> En ${K.min||4} minutos: lo importante</h3>
+   <div class="player"><button class="play" id="aplay-${k}" onclick="toggleAudio('${k}')" aria-label="Reproducir audio">${on?ICON_PAUSE:ICON_PLAY}</button>
+   <div class="bar"><div class="track" onclick="seekAudio(event,'${k}')"><div class="fill" id="afill-${k}"></div></div><div class="times"><span id="acur-${k}">0:00</span><span id="adur-${k}">${K.dur||'4:00'}</span></div></div></div>
+   <button class="speed" onclick="cycleSpeed('${k}')" id="aspeed-${k}">Velocidad: ${String(S.speed).replace('.',',')}x</button>
+   <p class="voices">Una conversación a dos voces con <strong>lo más importante de la sesión</strong>.</p></div>`; },
+ videos:(k,n,K)=>{
+   const T=st(k), V=K.videos, ord=(K.ordPractico&&(S.style==='activo'||S.style==='pragmatico'))?K.ordPractico:V.map((_,i)=>i);
+   if(!T.vpicked) T.video=ord[0];
+   const cur=V[T.video];
+   return `<div class="card blk"><h3><span class="n">${n}.</span> La sesión en vídeos cortos</h3>
+   <p class="small">Lo importante, en vídeos de pocos minutos. <strong>Cada uno empieza en el minuto exacto.</strong></p>
+   <div class="vframe" id="vframe-${k}"><div class="poster"><div class="pk">${cur.kind} · ${cur.d}</div><div class="pt">${cur.t}</div></div><button class="bigplay" onclick="playVideo('${k}')" aria-label="Ver vídeo: ${cur.t}">${ICON_PLAY}</button></div>
+   <ul class="vlist">${ord.map(i=>{const x=V[i];return `<li><button class="vitem ${i===T.video?'on':''}" onclick="pickVideo('${k}',${i})"><span class="pi">${ICON_PLAY_W}</span><span><span class="kind">${x.kind}</span>${x.t}</span><span class="dur">${x.d}</span></button></li>`}).join('')}</ul></div>`;
+ },
+ ideas:(k,n,K)=>`<div class="card blk"><h3><span class="n">${n}.</span> Las ideas clave</h3>
+   <ul class="ideas">${(K.ideas||[]).map(x=>`<li>${x}</li>`).join('')}</ul>
+   ${(K.nota||[]).length?`<div class="note"><h3>A tener en cuenta</h3><ul>${K.nota.map(x=>`<li>${x}</li>`).join('')}</ul></div>`:''}</div>`,
+ test:(k,n,K)=>{
+   const T=st(k), Qs=K.quiz, V=K.videos||[];
+   const rep=i=>V[i]?`<a href="javascript:pickVideo('${k}',${i},true)" style="font-weight:600;color:var(--gold-text)">${V[i].t}</a>`:'';
+   let h=`<div class="card blk" id="quiz-${k}"><h3><span class="n">${n}.</span> Comprueba lo que has aprendido</h3>`;
+   if(T.done){
+     const miss=Object.keys(T.miss).map(Number);
+     h+=`<p class="q">Has acertado ${T.score} de ${Qs.length}.</p>`; if(!T.sent){T.sent=true; track('test_'+k,T.score+'/'+Qs.length);}
+     h+= miss.length ? `<p>Te recomendamos repasar:</p><ul style="margin:0 0 14px;padding-left:22px">${[...new Set(miss.map(i=>Qs[i].v))].filter(x=>x!==undefined&&V[x]).map(x=>`<li style="margin-bottom:6px">${rep(x)}</li>`).join('')}</ul>` : `<p>Muy bien: tienes claros los conceptos.</p>`;
+     h+=`<button class="btn btn-line" onclick="resetQuiz('${k}')">Repetir el test</button>`;
+   } else {
+     const Q=Qs[T.qi];
+     h+=`<div class="qcount">Pregunta ${T.qi+1} de ${Qs.length}</div><div class="qprog">${Qs.map((_,i)=>`<i class="${i<T.qi||(i===T.qi&&T.ans!==null)?'d':''}"></i>`).join('')}</div><p class="q">${Q.q}</p>`;
+     Q.o.forEach((o,i)=>{ let c=''; if(T.ans!==null){ if(i===Q.c)c='right'; else if(i===T.ans)c='wrong'; }
+       h+=`<button class="opt ${c}" ${T.ans!==null?'disabled':''} onclick="answer('${k}',${i})">${o}</button>`; });
+     if(T.ans!==null){
+       h+= T.ans===Q.c ? `<div class="fb ok"><b>Correcto.</b> ${Q.why}</div>`
+         : `<div class="fb ko"><b>No es correcto.</b> ${Q.why}${V[Q.v]?'<br>Repasa: '+rep(Q.v):''}</div>`;
+       h+=`<button class="btn btn-gold" onclick="nextQ('${k}')">${T.qi<Qs.length-1?'Siguiente pregunta':'Ver resultado'}</button>`;
+     }
+   }
+   return h+`</div>`;
+ },
+ descargas:(k,n,K)=>`<div class="card blk"><h3><span class="n">${n}.</span> ${(K.enlaces||[]).length?'Enlaces oficiales y descargas':'Descargas'}</h3>
+   ${(K.enlaces||[]).length?`<p class="small">Usa siempre estos enlaces oficiales: <strong>no busques las aplicaciones en Google</strong>, pueden aparecer copias falsas.</p>`:''}
+   ${(K.enlaces||[]).map(d=>`<a class="dl lnk" href="${d.u}" target="_blank" rel="noopener" onclick="track('enlace',${JSON.stringify(d.t).replace(/"/g,'&quot;')})"><span>${d.t}<span class="durl">${d.u.replace(/^https?:\/\//,'').replace(/\/$/,'')}</span></span><span class="ic">Abrir ↗</span></a>`).join('')}
+   ${(K.descargas||[]).map(d=>`<a class="dl" href="${d.u}" target="_blank" rel="noopener" onclick="track('descarga',${JSON.stringify(d.t).replace(/"/g,'&quot;')})"><span>${d.t}</span><span class="ic">PDF ↓</span></a>`).join('')}</div>`,
+ checklist:(k,n,K)=>`<div class="card blk"><h3><span class="n">${n}.</span> Tu lista de comprobación</h3>
+   ${(K.checklist||[]).map(x=>`<label class="chk"><input type="checkbox"> ${x}</label>`).join('')}</div>`
+};
+
+function vBrain(today){
+  const open=today>=2&&BRAIN_URL;
+  return `<div class="brain"><h2>Tu copiloto: <span>MetaPro Brain</span></h2>
+   <p>La IA que te ayuda a invertir.</p>
+   ${open?`<a class="btn btn-blue" href="${BRAIN_URL}" target="_blank" rel="noopener" onclick="track('brain')">Accede aquí</a>`
+         :`<div class="lock"><span aria-hidden="true" style="font-size:26px">🔒</span><span>${today>=2?'Muy pronto, aquí mismo':'Disponible desde mañana, martes'}</span></div>`}</div>`;
+}
+
+/* ---------- Cinta: próxima clase ---------- */
+function shortLocal(utc){
+  const d=new Date(utc); let tz; try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){return ''}
+  if(!tz||tz==='Europe/Madrid')return '';
+  const t=new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit',timeZone:tz}).format(d);
+  const wd=new Intl.DateTimeFormat('es-ES',{weekday:'long',timeZone:tz}).format(d);
+  const wdMad=new Intl.DateTimeFormat('es-ES',{weekday:'long',timeZone:'Europe/Madrid'}).format(d);
+  const lt=localTime(utc); const m=lt.match(/\((.*?)\)/); const city=m?m[1]:tz;
+  return ' ('+(wd!==wdMad?wd+' ':'')+t+' h en '+city+')';
+}
+function tickerMsgs(){
+  const d=S.day, D=DAYS[d], tk=S.tick;
+  if(tk==='previo') return ['Empezamos el lunes 16 de noviembre a las 19:00 h (hora España)'+shortLocal(utcFor(1,18,0)),'Día 1: '+DAYS[1].title];
+  if(tk==='antes'){
+    return ['Nos vemos hoy a las 19:00 h (hora España)'+shortLocal(utcFor(d,18,0))+' en el directo',
+            D.vip?'Sesión VIP al acabar la clase'+(D.vipAt?', a las '+D.vipAt+' h'+shortLocal(utcFor(d,+D.vipAt.slice(0,2)-1,+D.vipAt.slice(3))):', hacia las 20:30 h'+shortLocal(utcFor(d,19,30))):'Hoy no hay sesión VIP: solo la clase en directo',
+            'Día '+d+': '+D.title];
+  }
+  if(tk==='directo') return D.vip?['Ahora: clase en directo','A continuación, sesión VIP por Zoom: '+D.vip]:['Ahora: clase en directo','Hoy no hay sesión VIP'];
+  if(tk==='vip') return ['Ahora: sesión VIP por Zoom · '+D.vip,'Entra desde tu Área VIP'];
+  if(tk!=='fin' && d<5){ const N=DAYS[d+1];
+    return ['Mañana '+N.wd+', 19:00 h (hora España)'+shortLocal(utcFor(d+1,18,0))+': '+N.title,
+            N.vip?'Sesión VIP al acabar la clase: '+N.vip:'Último día de la semana'];
+  }
+  return ['La semana que viene: sesión extra para acabar de implementar las estrategias','Te avisaremos de la fecha en el grupo VIP de WhatsApp'];
+}
+function renderTicker(){
+  const el=$('#ticker'); if(!el) return;
+  const msgs=tickerMsgs();
+  const grp='<span class="tk-grupo">'+msgs.map(m=>'<span class="tk">'+m+'</span><span class="tk-sep" aria-hidden="true">✦</span>').join('')+'</span>';
+  el.setAttribute('aria-label',msgs.join('. '));
+  el.innerHTML='<div class="tk-pista">'+grp+grp.replace('class="tk-grupo"','class="tk-grupo" aria-hidden="true"')+'</div>';
+  const pista=el.firstChild; requestAnimationFrame(()=>{ const w=pista.scrollWidth/2; pista.style.setProperty('--tkdur',Math.max(30,w/55)+'s'); });
+}
+document.addEventListener('click',e=>{ const t=e.target.closest('#ticker'); if(t) t.classList.toggle('paused'); });
+
+/* ---------- Interacciones ---------- */
+function fmt(s){s=Math.floor(s||0);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+let AUD=null, AUD_KEY='';
+function ensureAudio(k){
+  if(AUD&&AUD_KEY===k) return AUD;
+  if(AUD){ AUD.pause(); const b=document.getElementById('aplay-'+AUD_KEY); if(b)b.innerHTML=ICON_PLAY; }
+  AUD_KEY=k; AUD=new Audio(kitOf(k).audio); AUD.preload='metadata';
+  AUD.addEventListener('timeupdate',()=>{const f=document.getElementById('afill-'+k),c=document.getElementById('acur-'+k); if(f&&AUD.duration){f.style.width=(AUD.currentTime/AUD.duration*100)+'%'; c.textContent=fmt(AUD.currentTime);}});
+  AUD.addEventListener('loadedmetadata',()=>{const d=document.getElementById('adur-'+k); if(d)d.textContent=fmt(AUD.duration);});
+  AUD.addEventListener('ended',()=>{const b=document.getElementById('aplay-'+k); if(b)b.innerHTML=ICON_PLAY;});
+  return AUD;
+}
+function toggleAudio(k){ const a=ensureAudio(k); a.playbackRate=S.speed; const b=document.getElementById('aplay-'+k); if(a.paused){a.play(); b.innerHTML=ICON_PAUSE; if(!st(k).asent){st(k).asent=1;track('audio_'+k);}} else {a.pause(); b.innerHTML=ICON_PLAY;} }
+function stopAudio(){ if(AUD&&!AUD.paused)AUD.pause(); }
+function seekAudio(e,k){ const a=ensureAudio(k); const r=e.currentTarget.getBoundingClientRect(); const go=()=>{a.currentTime=(e.clientX-r.left)/r.width*a.duration;}; if(a.duration)go(); else a.addEventListener('loadedmetadata',go,{once:true}); }
+function cycleSpeed(k){ const sp=[1,1.25,0.75]; S.speed=sp[(sp.indexOf(S.speed)+1)%sp.length]; if(AUD)AUD.playbackRate=S.speed; document.querySelectorAll('[id^="aspeed-"]').forEach(x=>x.textContent='Velocidad: '+String(S.speed).replace('.',',')+'x'); }
+function pickVideo(k,i,scroll){ const T=st(k); T.video=i; T.vpicked=true; const y=scrollY; render(true); scrollTo(0,y); const f=document.getElementById('vframe-'+k); if(f) f.scrollIntoView({block:'center',behavior:'smooth'}); }
+function playVideo(k){ const K=kitOf(k), x=K.videos[st(k).video]; stopAudio(); track('video_'+k,x.t); const fr=document.getElementById('vframe-'+k); fr.innerHTML= x.mp4 ? `<video src="${x.mp4}" controls autoplay playsinline preload="metadata" style="width:100%;height:100%;background:#000"></video>` : `<iframe src="https://www.youtube-nocookie.com/embed/${x.yt||K.yt}?start=${x.s}&end=${x.e}&autoplay=1&rel=0${YT_JS}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${x.t}"></iframe>`;
+  const capT=String(k).replace(/^\d+-?/,'')+': '+x.t, capD=parseInt(k,10)||S.view;
+  if(x.mp4) progVideo(fr.querySelector('video'),'capsula',capD,capT); else progYT(fr.querySelector('iframe'),'capsula',capD,capT,+x.s||0,+x.e||0); }
+function resetQuiz(k){ if(k===undefined){ Object.keys(SEC).forEach(x=>delete SEC[x]); return; } const T=st(k); Object.assign(T,{qi:0,ans:null,score:0,done:false,sent:false,miss:{}}); rerenderQuiz(); }
+function answer(k,i){ const T=st(k), Q=kitOf(k).quiz[T.qi]; T.ans=i; if(i===Q.c)T.score++; else T.miss[T.qi]=1; rerenderQuiz(); }
+function nextQ(k){ const T=st(k); if(T.qi<kitOf(k).quiz.length-1){T.qi++;T.ans=null;} else T.done=true; rerenderQuiz(); }
+function rerenderQuiz(){ const y=scrollY; render(true); scrollTo(0,y); }
+
+function pvBar(){
+  if(!PREVIEW) return;
+  let b=document.getElementById('pvbar'); if(!b){ b=document.createElement('div'); b.id='pvbar'; document.body.prepend(b); }
+  b.style.cssText='background:#2E2B27;color:#F2D29A;font:14px Poppins,sans-serif;padding:8px 12px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center';
+  const sel=(id,opts,val)=>`<select id="${id}" style="font:14px Poppins;padding:3px">${opts.map(([v,t])=>`<option value="${v}" ${String(v)===String(val)?'selected':''}>${t}</option>`).join('')}</select>`;
+  b.innerHTML=`<b>Modo revisión (solo equipo)</b>
+   <label>Día ${sel('pvd',[[0,'Real (hora actual)'],[1,'Lun 16'],[2,'Mar 17'],[3,'Mié 18'],[4,'Jue 19'],[5,'Vie 20']],S.ovDay||0)}</label>
+   <label>Momento ${sel('pvp',[['antes','Antes de la clase'],['directo','Durante la clase'],['vip','Durante la VIP'],['despues','Después']],S.ovPh||'antes')}</label>
+   <label>Perfil inversor ${sel('pvi',[['','Sin hacer'],['Halcón','Halcón'],['Toro','Toro'],['Ardilla','Ardilla'],['Oveja','Oveja'],['Avestruz','Avestruz']],S.inv)}</label>
+   <label>Estilo ${sel('pvs',[['','Sin test'],['activo','Activo'],['reflexivo','Reflexivo'],['teorico','Teórico'],['pragmatico','Pragmático']],S.style)}</label>
+   <button onclick="logout()" style="font:14px Poppins;padding:3px 10px">Volver a la entrada</button>`;
+  b.querySelector('#pvd').onchange=e=>{S.ovDay=+e.target.value;LS.set('pvDay',S.ovDay);clock();S.view=S.day;render();};
+  b.querySelector('#pvp').onchange=e=>{S.ovPh=e.target.value;LS.set('pvPh',S.ovPh);clock();S.view=S.day;render();};
+  b.querySelector('#pvi').onchange=e=>{S.inv=e.target.value;render();};
+  b.querySelector('#pvs').onchange=e=>{S.style=e.target.value;LS.set('vipStyle',S.style);render();};
+}
+function render(keep){
+  pvBar();
+  syncReview(); topRight(); if(!keep) renderTicker();
+  const app=$('#app');
+  if(S.screen==='entrada') app.innerHTML=vEntrada(false);
+  else if(S.screen==='error') app.innerHTML=vEntrada(true);
+  else if(S.screen==='bienvenida') app.innerHTML=vBienvenida();
+  else if(S.screen==='test') app.innerHTML=vTest();
+  else if(S.screen==='perfil') app.innerHTML=vPerfil();
+  else app.innerHTML=vPanel();
+  if(AUD && AUD_KEY){ const f=document.getElementById('afill-'+AUD_KEY); if(f&&AUD.duration){ f.style.width=(AUD.currentTime/AUD.duration*100)+'%'; document.getElementById('acur-'+AUD_KEY).textContent=fmt(AUD.currentTime); document.getElementById('adur-'+AUD_KEY).textContent=fmt(AUD.duration); } const b=document.getElementById('aplay-'+AUD_KEY); if(b) b.innerHTML=AUD.paused?ICON_PLAY:ICON_PAUSE; }
+}
+render();
+if(S.tel) api({accion:'check',tel:S.tel},r=>{ if(r&&r.ok){ applyUser(r); render(true); } });
+setInterval(()=>{ if(clock()) render(); },60000);
+</script>
+</body>
+</html>
